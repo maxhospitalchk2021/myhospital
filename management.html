@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ম্যাক্স হাসপাতাল লি: (চকরিয়া শাখা) | আপনার সুস্থতাই আমাদের অঙ্গীকার</title>
+    
+    <!-- Google Fonts: Hind Siliguri -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0077b6;
+            --secondary: #00b894;
+            --dark: #0a192f;
+            --light: #ffffff;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8fbff;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 12px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        header.scrolled .logo { color: var(--primary); }
+        .logo i { font-size: 2rem; color: var(--secondary); }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 10px 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        header.scrolled .nav-link { color: var(--dark); }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover { transform: scale(1.05); color: var(--secondary) !important; }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            padding: 10px 20px;
+            display: block;
+            color: var(--dark);
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .dropdown a:hover {
+            background: #f0f7ff;
+            color: var(--primary);
+            padding-left: 25px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.7)), 
+                        url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 0 25px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .btn-group { display: flex; gap: 20px; justify-content: center; }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.3);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 119, 182, 0.5);
+        }
+
+        /* --- Emergency Strip --- */
+        .emergency-strip {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .pulse {
+            display: inline-block;
+            background: white;
+            color: #ff416c;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-left: 15px;
+            animation: pulse-animation 2s infinite;
+            text-decoration: none;
+        }
+
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        /* --- Services --- */
+        .section-padding { padding: 100px 25px; max-width: 1300px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary); }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow);
+            border-color: var(--secondary);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- Doctors --- */
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .doctor-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .doctor-card:hover .doctor-img { transform: scale(1.1); }
+
+        .doctor-info { padding: 25px; }
+        .doctor-info h4 { color: var(--primary); font-size: 1.3rem; margin-bottom: 5px; }
+        .doctor-info p { color: var(--secondary); font-weight: 600; margin-bottom: 15px; }
+
+        /* --- Stats --- */
+        .stats {
+            background: var(--dark);
+            color: white;
+            padding: 80px 25px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .stat-card h3 { font-size: 3rem; color: var(--secondary); }
+
+        /* --- Footer --- */
+        footer {
+            background: linear-gradient(135deg, #0a192f, #05101f);
+            color: #a8b2d1;
+            padding: 80px 25px 30px;
+        }
+
+        .footer-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 50px;
+        }
+
+        .footer-col h4 { color: white; margin-bottom: 25px; font-size: 1.2rem; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #a8b2d1; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--secondary); padding-left: 10px; }
+
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; color: white; transition: 0.3s;
+        }
+        .social-icons a:hover { background: var(--primary); transform: translateY(-5px); box-shadow: 0 0 15px var(--primary); }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+
+        .back-to-top.show { opacity: 1; visibility: visible; }
+
+        /* Mobile Nav Toggle */
+        .mobile-btn {
+            display: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .mobile-btn { display: block; }
+            header.scrolled .mobile-btn { color: var(--dark); }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 100px 40px;
+                transition: 0.5s;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active { right: 0; }
+            .nav-link { color: var(--dark); }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-hand-holding-medical"></i>
+                ম্যাক্স হাসপাতাল লি:
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">হোম</a></li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">আমাদের সম্পর্কে <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="about hospital.html">হাসপাতাল পরিচিতি</a>
+                        <a href="management.html">ম্যানেজমেন্ট পরিচিতি</a>
+                        <a href="staff.html">স্টাফ পরিচিতি</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">সেবা সমূহ <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="#">সকল সেবা</a>
+                        <a href="#">জরুরী সেবা</a>
+                        <a href="#">ডায়াগনস্টিক</a>
+                        <a href="#">অ্যাম্বুলেন্স</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">বিভাগ সমূহ <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="#">কার্ডিওলজি</a>
+                        <a href="#">নিউরোলজি</a>
+                        <a href="#">শিশু বিভাগ</a>
+                        <a href="#">চর্মরোগ</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link">ডাক্তারের তালিকা</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">গ্যালারি</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">যোগাযোগ</a></li>
+            </ul>
+
+            <div class="mobile-btn"><i class="fas fa-bars"></i></div>
+        </nav>
+    </header>
+
+    
+
+
+<!-- 🌟 HERO SECTION (BODY ONLY) -->
+
+<section class="hero-management" style="position: relative; height: 50vh; background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('management-hero.jpg') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
+<div class="hero-content" data-aos="fade-up">
+<h1 style="font-size: 3.5rem; margin-bottom: 15px; font-weight: 700;">ম্যানেজমেন্ট পরিচিতি</h1>
+<p style="font-size: 1.5rem; opacity: 0.9; font-weight: 300;">অভিজ্ঞ নেতৃত্বে উন্নত স্বাস্থ্যসেবা নিশ্চিতকরণ</p>
+<div style="width: 100px; height: 4px; background: #00b894; margin: 25px auto; border-radius: 10px;"></div>
+</div>
+</section>
+
+<!-- 🏢 SECTION 1: পরিচালনা পর্ষদ পরিচিতি -->
+
+<section style="padding: 100px 0; background: #ffffff;">
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; gap: 60px; align-items: center; flex-wrap: wrap;">
+<div style="flex: 1; min-width: 300px;" data-aos="fade-right">
+<h2 style="color: #0077b6; font-size: 2.2rem; margin-bottom: 25px;">পরিচালনা পর্ষদ পরিচিতি</h2>
+<p style="line-height: 1.8; color: #444; font-size: 1.1rem; margin-bottom: 20px;">
+ম্যাক্স হাসপাতাল লিমিটেড (চকরিয়া শাখা) একঝাঁক স্বপ্নদ্রষ্টা ও অভিজ্ঞ উদ্যোক্তাদের সমন্বয়ে পরিচালিত। আমাদের পরিচালনা পর্ষদ চকরিয়া অঞ্চলের স্বাস্থ্যসেবায় আমূল পরিবর্তনের লক্ষ্যে কাজ করে যাচ্ছে।
+</p>
+<p style="line-height: 1.8; color: #444; font-size: 1.1rem;">
+দীর্ঘদিনের কর্পোরেট অভিজ্ঞতা এবং স্বাস্থ্যসেবা খাতের গভীর জ্ঞানকে পুঁজি করে আমাদের নেতৃত্ব একটি স্বচ্ছ, জবাবদিহিমূলক এবং রোগী-বান্ধব পরিবেশ নিশ্চিত করে। আধুনিক প্রযুক্তি ও দক্ষ জনবল নিয়োগের মাধ্যমে আমরা দক্ষিণ চট্টগ্রামের চিকিৎসা ব্যবস্থাকে আন্তর্জাতিক মানে উন্নীত করতে প্রতিশ্রুতিবদ্ধ।
+</p>
+</div>
+<div style="flex: 1; min-width: 300px;" data-aos="fade-left">
+<div style="width: 100%; height: 400px; background: #f0f7ff; border-radius: 30px; border: 2px dashed #0077b6; display: flex; align-items: center; justify-content: center; color: #0077b6; position: relative; overflow: hidden;">
+<span>[পরিচালনা পর্ষদের গ্রুপ ফটো / বোর্ড মিটিং ছবি]</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 👨‍⚕️ SECTION 2: প্রধান ব্যবস্থাপনা দল (Grid Layout) -->
+
+<section style="padding: 100px 0; background: #f8fbff;">
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+<h2 style="text-align: center; color: #0077b6; margin-bottom: 60px; font-size: 2.5rem;" data-aos="fade-up">প্রধান ব্যবস্থাপনা দল</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+
+        <!-- Card 1 -->
+        <div class="management-card" style="background: rgba(255,255,255,0.8); padding: 40px 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.4s; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);" data-aos="fade-up">
+            <div style="width: 150px; height: 150px; background: #ddd; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; border: 5px solid #00b894;">
+                <img src="md-placeholder.jpg" alt="MD" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <h4 style="color: #0a192f; font-size: 1.4rem; margin-bottom: 5px;">ডা. [নাম]</h4>
+            <p style="color: #0077b6; font-weight: 600; margin-bottom: 15px;">ব্যবস্থাপনা পরিচালক</p>
+            <p style="color: #666; font-size: 0.95rem;">স্বাস্থ্যসেবা প্রশাসনে ২০ বছরের অধিক অভিজ্ঞতা সম্পন্ন।</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="management-card" style="background: rgba(255,255,255,0.8); padding: 40px 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.4s; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);" data-aos="fade-up" data-aos-delay="100">
+            <div style="width: 150px; height: 150px; background: #ddd; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; border: 5px solid #00b894;">
+                <img src="ceo-placeholder.jpg" alt="CEO" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <h4 style="color: #0a192f; font-size: 1.4rem; margin-bottom: 5px;">জনাব [নাম]</h4>
+            <p style="color: #0077b6; font-weight: 600; margin-bottom: 15px;">প্রধান নির্বাহী কর্মকর্তা (CEO)</p>
+            <p style="color: #666; font-size: 0.95rem;">হাসপাতাল অপারেশন এবং কৌশলগত ব্যবস্থাপনায় বিশেষজ্ঞ।</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="management-card" style="background: rgba(255,255,255,0.8); padding: 40px 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.4s; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);" data-aos="fade-up" data-aos-delay="200">
+            <div style="width: 150px; height: 150px; background: #ddd; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; border: 5px solid #00b894;">
+                <img src="medical-director.jpg" alt="Medical Director" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <h4 style="color: #0a192f; font-size: 1.4rem; margin-bottom: 5px;">ডা. [নাম]</h4>
+            <p style="color: #0077b6; font-weight: 600; margin-bottom: 15px;">মেডিকেল ডিরেক্টর</p>
+            <p style="color: #666; font-size: 0.95rem;">চিকিৎসা সেবার মান ও ডাক্তারদের টিমের তদারকি করেন।</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- 🎯 SECTION 3: আমাদের নেতৃত্বের দর্শন -->
+
+<section style="padding: 100px 0; background: #ffffff;">
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+<h2 style="text-align: center; color: #0077b6; margin-bottom: 60px; font-size: 2.2rem;" data-aos="fade-up">আমাদের নেতৃত্বের দর্শন</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+<div style="padding: 30px; background: #f0f7ff; border-radius: 20px; text-align: center;">
+<i class="fas fa-user-nurse" style="font-size: 2.5rem; color: #00b894; margin-bottom: 15px;"></i>
+<h4 style="margin-bottom: 10px;">রোগীকেন্দ্রিক ব্যবস্থাপনা</h4>
+<p style="font-size: 0.9rem; color: #555;">প্রতিটি সিদ্ধান্তের কেন্দ্রবিন্দুতে থাকে রোগীর সুস্থতা।</p>
+</div>
+<div style="padding: 30px; background: #f0f7ff; border-radius: 20px; text-align: center;">
+<i class="fas fa-handshake" style="font-size: 2.5rem; color: #00b894; margin-bottom: 15px;"></i>
+<h4 style="margin-bottom: 10px;">স্বচ্ছতা ও জবাবদিহিতা</h4>
+<p style="font-size: 0.9rem; color: #555;">প্রশাসনিক প্রতিটি কাজে আমরা স্বচ্ছতা বজায় রাখি।</p>
+</div>
+<div style="padding: 30px; background: #f0f7ff; border-radius: 20px; text-align: center;">
+<i class="fas fa-microchip" style="font-size: 2.5rem; color: #00b894; margin-bottom: 15px;"></i>
+<h4 style="margin-bottom: 10px;">আধুনিক ব্যবস্থাপনা</h4>
+<p style="font-size: 0.9rem; color: #555;">ডিজিটাল হেলথ রেকর্ড ও স্মার্ট হসপিটাল ম্যানেজমেন্ট।</p>
+</div>
+<div style="padding: 30px; background: #f0f7ff; border-radius: 20px; text-align: center;">
+<i class="fas fa-users-cog" style="font-size: 2.5rem; color: #00b894; margin-bottom: 15px;"></i>
+<h4 style="margin-bottom: 10px;">দক্ষতা উন্নয়ন</h4>
+<p style="font-size: 0.9rem; color: #555;">টিমওয়ার্ক এবং কর্মীদের নিয়মিত প্রশিক্ষণ প্রদান।</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 📊 SECTION 4: ম্যানেজমেন্ট স্ট্রাকচার -->
+
+<section style="padding: 100px 0; background: #f4f8fb;">
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
+<h2 style="color: #0077b6; margin-bottom: 50px; font-size: 2.2rem;" data-aos="fade-up">ম্যানেজমেন্ট স্ট্রাকচার</h2>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;" data-aos="zoom-in">
+<div style="padding: 20px 40px; background: #0a192f; color: white; border-radius: 10px; width: fit-content; font-weight: 700;">বোর্ড অব ডিরেক্টরস (Board of Directors)</div>
+<div style="width: 2px; height: 30px; background: #0077b6;"></div>
+<div style="padding: 15px 35px; background: #0077b6; color: white; border-radius: 10px; width: fit-content; font-weight: 600;">এক্সিকিউটিভ ম্যানেজমেন্ট (CEO/MD)</div>
+<div style="width: 2px; height: 30px; background: #0077b6;"></div>
+<div style="display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;">
+<div style="padding: 15px 25px; background: white; border: 1px solid #0077b6; border-radius: 10px;">মেডিকেল বিভাগ (Medical)</div>
+<div style="padding: 15px 25px; background: white; border: 1px solid #0077b6; border-radius: 10px;">প্রশাসনিক বিভাগ (Administrative)</div>
+<div style="padding: 15px 25px; background: white; border: 1px solid #0077b6; border-radius: 10px;">নার্সিং ও সাপোর্ট স্টাফ</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 🏥 SECTION 5: অর্জন ও নেতৃত্বের সাফল্য (Stats) -->
+
+<section style="padding: 80px 0; background: #0a192f; color: white;">
+<div class="container" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; text-align: center;">
+<div data-aos="zoom-in">
+<h3 style="font-size: 3.5rem; color: #00b894; margin-bottom: 10px;">১০+</h3>
+<p style="font-size: 1.2rem; opacity: 0.8;">পরিচালনার অভিজ্ঞতা (বছর)</p>
+</div>
+<div data-aos="zoom-in" data-aos-delay="100">
+<h3 style="font-size: 3.5rem; color: #00b894; margin-bottom: 10px;">৯৮%</h3>
+<p style="font-size: 1.2rem; opacity: 0.8;">রোগী সন্তুষ্টির হার</p>
+</div>
+<div data-aos="zoom-in" data-aos-delay="200">
+<h3 style="font-size: 3.5rem; color: #00b894; margin-bottom: 10px;">১৫+</h3>
+<p style="font-size: 1.2rem; opacity: 0.8;">নতুন বিভাগ সংযোজন</p>
+</div>
+</div>
+</section>
+
+<!-- 💬 SECTION 6: চেয়ারম্যান/ডিরেক্টরের বার্তা -->
+
+<section style="padding: 100px 0; background: #ffffff;">
+<div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+<div style="background: white; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); padding: 50px; display: flex; gap: 40px; align-items: center; flex-wrap: wrap; border: 1px solid #eee;" data-aos="fade-up">
+<div style="flex: 1; min-width: 250px; text-align: center;">
+<div style="width: 220px; height: 220px; background: #ddd; border-radius: 20px; overflow: hidden; margin-bottom: 15px; border: 5px solid #f0f7ff;">
+<img src="chairman-portrait.jpg" alt="Chairman" style="width:100%; height:100%; object-fit:cover;">
+</div>
+<h4 style="color: #0077b6; margin-bottom: 5px;">[নাম]</h4>
+<p style="color: #777;">চেয়ারম্যান, ম্যাক্স হাসপাতাল লি:</p>
+</div>
+<div style="flex: 1.5; min-width: 300px;">
+<h3 style="color: #0a192f; margin-bottom: 20px; position: relative;">চেয়ারম্যানের বার্তা <span style="position: absolute; bottom: -8px; left: 0; width: 50px; height: 3px; background: #00b894;"></span></h3>
+<p style="line-height: 1.8; color: #555; font-style: italic; margin-bottom: 15px;">
+"আমাদের লক্ষ্য কেবল আধুনিক ভবন বা যন্ত্রপাতির মধ্যে সীমাবদ্ধ নয়, বরং চকরিয়া ও দক্ষিণ চট্টগ্রামের মানুষের অন্তরে বিশ্বাসযোগ্যতা তৈরি করা। আমরা চাই এমন একটি হাসপাতাল যেখানে প্রতিটি রোগী যেন নিজেকে নিরাপদ এবং আপন মনে করেন।"
+</p>
+<p style="line-height: 1.8; color: #555;">
+ভবিষ্যতে আমরা এই হাসপাতালকে একটি পূর্ণাঙ্গ ডিজিটাল হেলথকেয়ার মডেলে রূপান্তর করতে চাই যেখানে সেবার মান হবে আপসহীন।
+</p>
+<div style="margin-top: 25px; font-weight: bold; color: #0a192f;">— জনাব [নাম]</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 🤝 SECTION 7: কর্পোরেট মূল্যবোধ -->
+
+<section style="padding: 100px 0; background: #f8fbff;">
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
+<h2 style="color: #0077b6; margin-bottom: 60px; font-size: 2.2rem;" data-aos="fade-up">কর্পোরেট মূল্যবোধ</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+<div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03);">
+<i class="fas fa-shield-alt" style="font-size: 2rem; color: #00b894; margin-bottom: 15px;"></i>
+<h4 style="margin-bottom: 10px;">সততা ও স্বচ্ছতা</h4>
+<p style="font-size: 0.9rem; color: #666;">আমরা প্রশাসনিক ও আর্থিক স্বচ্ছতায় বিশ্বাস করি।</p>
+</div>
+<div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03);">
+<i class="fas fa-heartbeat" style="font-size: 2rem; color: #00b894; margin-bottom: 15px;"></i>
+<h4 style="margin-bottom: 10px;">রোগীর প্রতি দায়িত্ববোধ</h4>
+<p style="font-size: 0.9rem; color: #666;">সেবাই আমাদের প্রধান ধর্ম ও নৈতিকতা।</p>
+</div>
+<div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03);">
+<i class="fas fa-award" style="font-size: 2rem; color: #00b894; margin-bottom: 15px;"></i>
+<h4 style="margin-bottom: 10px;">মানসম্মত চিকিৎসা</h4>
+<p style="font-size: 0.9rem; color: #666;">সেবার মানে আমরা কোনো আপস করি না।</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 📞 SECTION 8: CALL TO ACTION -->
+
+<section style="padding: 100px 0; background: linear-gradient(135deg, #0077b6, #00b894); text-align: center; color: white;">
+<div class="container" data-aos="zoom-in">
+<h2 style="font-size: 2.2rem; margin-bottom: 25px;">আমাদের ম্যানেজমেন্ট টিমের সাথে যোগাযোগ করুন</h2>
+<div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+<a href="#" style="padding: 15px 40px; background: white; color: #0077b6; text-decoration: none; border-radius: 50px; font-weight: 700; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">যোগাযোগ করুন</a>
+<a href="#" style="padding: 15px 40px; background: transparent; color: white; text-decoration: none; border-radius: 50px; font-weight: 700; border: 2px solid white; transition: 0.3s;">অ্যাপয়েন্টমেন্ট নিন</a>
+</div>
+</div>
+</section>
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 style="color: var(--secondary)">ম্যাক্স হাসপাতাল লি:</h4>
+                <p>চকরিয়ার শ্রেষ্ঠ চিকিৎসা সেবা নিশ্চিত করাই আমাদের একমাত্র লক্ষ্য। অভিজ্ঞ ডাক্তার ও আধুনিক প্রযুক্তির সমন্বয়ে আমরা আছি আপনার পাশে।</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>গুরুত্বপূর্ণ লিংক</h4>
+                <ul class="footer-links">
+                    <li><a href="#">আমাদের সেবা</a></li>
+                    <li><a href="#">ডাক্তারের সিরিয়াল</a></li>
+                    <li><a href="#">অনলাইন রিপোর্ট</a></li>
+                    <li><a href="#">হেলথ প্যাকেজ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>যোগাযোগ</h4>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> মেইন রোড, চকরিয়া, কক্সবাজার।</li>
+                    <li><i class="fas fa-phone"></i> ০১৮৭৬-XXXXXX</li>
+                    <li><i class="fas fa-envelope"></i> info@maxhospital.com</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; padding-top: 30px; font-size: 0.9rem;">&copy; ২০২৪ ম্যাক্স হাসপাতাল লিমিটেড। সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <a href="#" class="back-to-top" id="topBtn"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- JS Logic -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({ duration: 1000, once: true });
+
+        // Header Scroll Logic
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const topBtn = document.getElementById('topBtn');
+            if(window.scrollY > 50) {
+                header.classList.add('scrolled');
+                topBtn.classList.add('show');
+            } else {
+                header.classList.remove('scrolled');
+                topBtn.classList.remove('show');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.querySelector('.mobile-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        mobileBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileBtn.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const target = +entry.target.getAttribute('data-target');
+                    let count = 0;
+                    const updateCount = () => {
+                        const inc = target / 100;
+                        if(count < target) {
+                            count += inc;
+                            entry.target.innerText = Math.ceil(count) + (target > 100 ? '+' : '');
+                            setTimeout(updateCount, 20);
+                        } else {
+                            entry.target.innerText = target + (target > 100 ? '+' : '');
+                        }
+                    };
+                    updateCount();
+                    countObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(c => countObserver.observe(c));
+
+    </script>
+</body>
+</html>
