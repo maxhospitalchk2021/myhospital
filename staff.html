@@ -1,719 +1,660 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max Hospital Ltd. | Your Health, Our Priority</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Animate.css for scroll reveals -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
-    <style>
-        :root {
-            --primary: #0056b3;
-            --secondary: #00b894;
-            --dark: #2d3436;
-            --light: #f8f9fa;
-            --white: #ffffff;
-            --accent: #e1f5fe;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>স্টাফ তালিকা | Max Hospital Ltd. - Chakaria Branch</title>
+  
+  <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts, AOS Animation -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --secondary: #0f172a;
+      --accent: #ef4444;
+      --bg-light: #f8fafc;
+      --text-main: #334155;
+      --glass-bg: rgba(255, 255, 255, 0.95);
+    }
 
-        body {
-            overflow-x: hidden;
-            background-color: var(--white);
-            color: var(--dark);
-            line-height: 1.6;
-        }
+    body {
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-light);
+      overflow-x: hidden;
+    }
 
-        /* --- Preloader --- */
-        #preloader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--white);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 9999;
-        }
-        .spinner {
-            width: 50px; height: 50px;
-            border: 5px solid var(--accent);
-            border-top: 5px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    /* Top Info Bar */
+    .top-info-bar {
+      background: var(--secondary);
+      color: #94a3b8;
+      font-size: 0.85rem;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .top-info-bar a { color: #e2e8f0; text-decoration: none; }
+    .top-info-bar a:hover { color: #38bdf8; }
 
-        /* --- Top Bar --- */
-        .top-bar {
-            background: var(--primary);
-            color: var(--white);
-            padding: 8px 5%;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
-        .top-info span { margin-right: 20px; }
-        .top-info i { margin-right: 8px; color: var(--secondary); }
+    /* Sticky Header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .brand-logo-text { font-weight: 800; line-height: 1.1; color: var(--secondary); }
+    .brand-sub { font-size: 0.75rem; color: var(--primary); letter-spacing: 1px; font-weight: 700; }
 
-        /* --- Navigation --- */
-        header {
-            background: var(--white);
-            transition: var(--transition);
-            z-index: 1000;
-            position: relative;
-        }
-        header.sticky {
-            position: fixed;
-            top: 0; width: 100%;
-            box-shadow: var(--shadow);
-            animation: slideDown 0.5s;
-        }
-        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+    .nav-link {
+      font-weight: 600;
+      color: var(--secondary) !important;
+      font-size: 0.95rem;
+      padding: 12px 16px !important;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-item.dropdown:hover > .nav-link { color: var(--primary) !important; }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-        }
-        .logo h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .logo span { color: var(--secondary); }
+    /* Desktop Mega Menu */
+    @media (min-width: 992px) {
+      .nav-link { padding: 20px 12px !important; }
+      .dropdown-menu.mega-menu {
+        width: 100vw;
+        max-width: 1140px;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(10px);
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        padding: 24px;
+        background: #ffffff;
+        opacity: 0;
+        visibility: hidden;
+        display: block;
+        transition: all 0.3s ease;
+      }
+      .nav-item.dropdown:hover .dropdown-menu.mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      .mobile-bottom-nav { display: none; }
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        .nav-item { position: relative; padding: 10px 15px; }
-        .nav-item a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        .nav-item:hover > a { color: var(--primary); }
+    /* Mobile Responsive Navigation */
+    @media (max-width: 991.98px) {
+      .floating-actions { display: none; }
+      
+      .navbar-collapse {
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 15px 10px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        margin-top: 10px;
+      }
 
-        /* Dropdown */
-        .dropdown {
-            position: absolute;
-            top: 100%; left: 0;
-            background: var(--white);
-            min-width: 220px;
-            box-shadow: var(--shadow);
-            opacity: 0; visibility: hidden;
-            transform: translateY(15px);
-            transition: var(--transition);
-            border-radius: 8px;
-            border-top: 3px solid var(--primary);
-            padding: 10px 0;
-        }
-        .nav-item:hover .dropdown {
-            opacity: 1; visibility: visible;
-            transform: translateY(0);
-        }
-        .dropdown li { list-style: none; }
-        .dropdown a {
-            display: block;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-        }
-        .dropdown a:hover { background: var(--accent); }
+      .dropdown-menu.mega-menu {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 10px 15px !important;
+        margin-top: 5px;
+      }
 
-        .btn-appointment {
-            background: var(--secondary);
-            color: var(--white) !important;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
-        }
-        .btn-appointment:hover { transform: translateY(-3px); }
+      .nav-item.dropdown .dropdown-toggle::after {
+        float: right;
+        margin-top: 8px;
+      }
 
-        /* Mobile Menu */
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+      .mobile-lang-switcher {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 10px;
+      }
+    }
 
-        /* --- Hero Section --- */
-        .hero {
-            position: relative;
-            height: 85vh;
-            overflow: hidden;
-        }
-        .slider-container {
-            height: 100%;
-            display: flex;
-            transition: transform 0.7s ease-in-out;
-        }
-        .slide {
-            min-width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            position: relative;
-        }
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.7), transparent);
-        }
-        .hero-text {
-            position: relative;
-            color: var(--white);
-            max-width: 600px;
-            z-index: 10;
-        }
-        .hero-text h2 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
-        .hero-text p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
+    .mega-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .mega-menu-item:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+    .mega-menu-item i { width: 20px; color: var(--primary); text-align: center; }
 
-        /* --- Feature Cards --- */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 0 5%;
-            margin-top: -60px;
-            position: relative;
-            z-index: 20;
-        }
-        .f-card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        .f-card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--secondary); }
-        .f-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
-        .f-card h3 { margin-bottom: 15px; font-size: 1.2rem; }
+    /* Page Banner Section */
+    .page-banner {
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.85) 0%, rgba(2, 132, 199, 0.75) 100%), url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 80px 0;
+      color: #ffffff;
+    }
 
-        /* --- About Section --- */
-        .about { padding: 100px 10%; display: flex; align-items: center; gap: 50px; }
-        .about-img { flex: 1; position: relative; }
-        .about-img img { width: 100%; border-radius: 20px; box-shadow: var(--shadow); }
-        .about-content { flex: 1; }
-        .section-title { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--secondary); margin-top: 10px; }
-        
-        /* --- Services Grid --- */
-        .services { background: var(--light); padding: 80px 10%; text-align: center; }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px; margin-top: 50px;
-        }
-        .s-item {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        .s-item:hover { background: var(--primary); color: var(--white); }
-        .s-item i { font-size: 2rem; color: var(--secondary); margin-bottom: 15px; }
-        .s-item:hover i { color: var(--white); }
+    .section-padding { padding: 70px 0; }
 
-        /* --- Stats --- */
-        .stats {
-            background: linear-gradient(rgba(0,86,179,0.9), rgba(0,86,179,0.9)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80');
-            background-attachment: fixed;
-            padding: 80px 10%;
-            display: flex;
-            justify-content: space-around;
-            color: var(--white);
-            text-align: center;
-        }
-        .stat-item h2 { font-size: 3rem; margin-bottom: 5px; }
+    /* Staff Table Styling */
+    .staff-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
 
-        /* --- Notice Section --- */
-        .notices { padding: 80px 10%; }
-        .notice-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .n-card {
-            border-left: 5px solid var(--primary);
-            padding: 20px;
-            background: var(--light);
-            border-radius: 0 10px 10px 0;
-            transition: var(--transition);
-        }
-        .n-card:hover { transform: scale(1.02); background: var(--accent); }
-        .n-date { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+    .table-staff {
+      margin-bottom: 0;
+    }
+    .table-staff thead {
+      background: var(--secondary);
+      color: #ffffff;
+    }
+    .table-staff th {
+      font-weight: 600;
+      padding: 16px 20px;
+      border: none;
+      white-space: nowrap;
+    }
+    .table-staff td {
+      padding: 14px 20px;
+      vertical-align: middle;
+      border-color: #f1f5f9;
+    }
 
-        /* --- Gallery --- */
-        .gallery { padding: 80px 10%; background: var(--white); text-align: center; }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px; margin-top: 40px;
-        }
-        .gallery-item {
-            height: 250px; overflow: hidden; border-radius: 10px; cursor: pointer;
-        }
-        .gallery-item img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .gallery-item:hover img { transform: scale(1.1); }
+    .staff-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
 
-        /* --- CTA --- */
-        .cta {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            padding: 80px 10%;
-            text-align: center;
-            color: var(--white);
-        }
-        .btn-lg {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 40px;
-            background: var(--white);
-            color: var(--primary);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-        .btn-lg:hover { background: var(--dark); color: var(--white); }
+    /* Floating Sidebar Action Buttons */
+    .floating-actions {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1020;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .float-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .float-btn:hover { transform: scale(1.1); color: #fff; }
 
-        /* --- Footer --- */
-        footer { background: #1e272e; color: #d2dae2; padding: 80px 10% 20px; }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-        }
-        .footer-col h4 { color: var(--white); margin-bottom: 25px; font-size: 1.2rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 12px; }
-        .footer-col a { color: #d2dae2; text-decoration: none; transition: 0.3s; }
-        .footer-col a:hover { color: var(--secondary); padding-left: 5px; }
-        .social-links { margin-top: 20px; }
-        .social-links a { font-size: 1.5rem; margin-right: 15px; }
+    /* Footer Styling */
+    footer { background: var(--secondary); color: #94a3b8; font-size: 0.9rem; }
+    footer h5, footer h6 { color: #ffffff; }
+    footer a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #38bdf8; }
 
-        .scroll-top {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 45px; height: 45px; background: var(--primary);
-            color: var(--white); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            cursor: pointer; visibility: hidden; opacity: 0;
-            transition: var(--transition); z-index: 1000;
-        }
-        .scroll-top.active { visibility: visible; opacity: 1; }
-
-        /* --- Mobile Responsive --- */
-        @media (max-width: 992px) {
-            .nav-links {
-                position: fixed;
-                top: 0; right: -100%;
-                width: 80%; height: 100vh;
-                background: var(--white);
-                flex-direction: column;
-                padding: 80px 40px;
-                transition: 0.5s;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-            }
-            .nav-links.active { right: 0; }
-            .menu-toggle { display: block; z-index: 1001; }
-            .dropdown {
-                position: static;
-                opacity: 1; visibility: visible;
-                transform: none; box-shadow: none;
-                display: none; padding-left: 20px;
-            }
-            .nav-item.active .dropdown { display: block; }
-            .about { flex-direction: column; text-align: center; }
-            .hero-text h2 { font-size: 2.2rem; }
-            .top-bar { display: none; }
-        }
-    </style>
+    /* Mobile Bottom Sticky Bar */
+    .mobile-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1030;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    }
+    .mobile-nav-item { text-align: center; color: var(--text-main); font-size: 0.75rem; text-decoration: none; font-weight: 600; }
+    .mobile-nav-item i { font-size: 1.2rem; display: block; margin-bottom: 2px; }
+  </style>
 </head>
 <body>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="top-info">
-            <span><i class="fas fa-phone"></i> +88 01713-998201</span>
-            <span><i class="fas fa-envelope"></i> maxhospitalchk2021@gmail.com</span>
-            <span><i class="fas fa-map-marker-alt"></i> Thana Rastar Matha, Chakaria, Cox's Bazar, Bangladesh</span>
-        </div>
-        <div class="top-social">
-            <a href="https://www.facebook.com/maxchk25" style="color: white; margin-left: 15px;"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" style="color: white; margin-left: 15px;"><i class="fab fa-twitter"></i></a>
-        </div>
-    </div>
-
-    <!-- Header & Nav -->
-    <header id="header">
-        <nav>
-            <div class="logo">
-                <h1>MAX<span>HOSPITAL</span></h1>
-            </div>
-            
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-
-            <ul class="nav-links">
-                <li class="nav-item"><a href="#home">Home</a></li>
-                <li class="nav-item">
-                    <a href="#">Our Introduction <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                    <ul class="dropdown">
-                        <li><a href="about hospital.html">Hospital Overview</a></li>
-                        <li><a href="mission.html">Mission & Vision</a></li>
-                        <li><a href="management.html">Management Team</a></li>
-                        <li><a href="staff.html">Staff Information</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Our Services <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                    <ul class="dropdown">
-                        <li><a href="#">Emergency (24/7)</a></li>
-                        <li><a href="#">OPD & IPD</a></li>
-                        <li><a href="#">Laboratory</a></li>
-                        <li><a href="#">Ultrasound & Imaging</a></li>
-                        <li><a href="#">ICU & OT</a></li>
-                        <li><a href="#">Pharmacy</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Gallery <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                    <ul class="dropdown">
-                        <li><a href="#">Photo Gallery</a></li>
-                        <li><a href="#">Video Gallery</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="notice.html">Notice Board</a></li>
-                <li class="nav-item"><a href="#">Contact</a></li>
-                <li class="nav-item"><a href="#appointment" class="btn-appointment">Appointment</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Staff Information Section -->
-<section class="staff-section" id="staff">
-    <h2 class="section-title">Staff Information</h2>
-
-    <!-- Search Box -->
-    <div style="text-align:center; margin:20px 0;">
-        <input type="text" id="staffSearch" placeholder="Search staff by name..."
-            style="padding:12px 20px; width:60%; max-width:400px; border:1px solid #ccc; border-radius:30px; outline:none;">
-    </div>
-
-    <!-- Table Wrapper -->
-    <div style="overflow-x:auto; padding:0 5%;">
-        <table id="staffTable" style="width:100%; border-collapse:collapse; background:var(--white); box-shadow:var(--shadow); border-radius:10px; overflow:hidden;">
-            
-            <thead style="background:var(--primary); color:white;">
-                <tr>
-                    <th style="padding:15px;">SL</th>
-                    <th style="padding:15px;">Photo</th>
-                    <th style="padding:15px;">Name</th>
-                    <th style="padding:15px;">Designation</th>
-                    <th style="padding:15px;">Mobile</th>
-                    <th style="padding:15px;">Social</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td style="padding:12px;">1</td>
-                    <td><img src="https://randomuser.me/api/portraits/men/11.jpg" width="45" style="border-radius:50%;"></td>
-                    <td>MD. Moin Uddin</td>
-                    <td>Manager</td>
-                    <td>+88 01843-83 63 20</td>
-                    <td>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td><img src="https://randomuser.me/api/portraits/women/22.jpg" width="45" style="border-radius:50%;"></td>
-                    <td>Dr. Emily Watson</td>
-                    <td>Neurologist</td>
-                    <td>+1 234 567 222</td>
-                    <td>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td><img src="https://randomuser.me/api/portraits/men/33.jpg" width="45" style="border-radius:50%;"></td>
-                    <td>Dr. Michael Brown</td>
-                    <td>Orthopedic Surgeon</td>
-                    <td>+1 234 567 333</td>
-                    <td>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><img src="https://randomuser.me/api/portraits/men/33.jpg" width="45" style="border-radius:50%;"></td>
-                    <td>Dr. Michael Brown</td>
-                    <td>Orthopedic Surgeon</td>
-                    <td>+1 234 567 333</td>
-                    <td>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><img src="https://randomuser.me/api/portraits/men/33.jpg" width="45" style="border-radius:50%;"></td>
-                    <td>Dr. Michael Brown</td>
-                    <td>Orthopedic Surgeon</td>
-                    <td>+1 234 567 333</td>
-                    <td>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><img src="https://randomuser.me/api/portraits/men/33.jpg" width="45" style="border-radius:50%;"></td>
-                    <td>Dr. Michael Brown</td>
-                    <td>Orthopedic Surgeon</td>
-                    <td>+1 234 567 333</td>
-                    <td>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<!-- Search Script -->
-<script>
-document.getElementById("staffSearch").addEventListener("keyup", function () {
-    let value = this.value.toLowerCase();
-    let rows = document.querySelectorAll("#staffTable tbody tr");
-
-    rows.forEach(row => {
-        let name = row.cells[2].innerText.toLowerCase();
-        row.style.display = name.includes(value) ? "" : "none";
-    });
-});
-</script>
-
-<!-- Staff Table Styling -->
-<style>
-.staff-section {
-    padding: 80px 10%;
-    background: #f8f9fa;
-    text-align: center;
-}
-
-#staffTable th, #staffTable td {
-    border-bottom: 1px solid #eee;
-    text-align: center;
-}
-
-#staffTable tbody tr:hover {
-    background: var(--accent);
-    transition: 0.3s;
-}
-
-#staffTable a {
-    margin: 0 5px;
-    color: var(--primary);
-    font-size: 1.1rem;
-}
-
-#staffTable a:hover {
-    color: var(--secondary);
-}
-</style>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo"><h1 style="color: white;">MAX<span>HOSPITAL</span></h1></div>
-                <p style="margin-top: 20px;">Leading the way in medical excellence. Trusted by thousands of families for over two decades.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Team</a></li>
-                    <li><a href="#">Notice Board</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#">Emergency 24/7</a></li>
-                    <li><a href="#">Pathology Lab</a></li>
-                    <li><a href="#">ICU Services</a></li>
-                    <li><a href="#">General Surgery</a></li>
-                    <li><a href="#">Pharmacy</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact Us</h4>
-                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
-                <p><i class="fas fa-envelope"></i> info@maxhospital.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Health Ave, Medical District, NY 1001</p>
-            </div>
-        </div>
-        <div class="copyright" style="text-align: center; padding-top: 50px; font-size: 0.9rem;">
-            <p>&copy; 2023 Max Hospital Ltd. All Rights Reserved. Designed for Excellence.</p>
-        </div>
-    </footer>
-
-    <!-- Scroll Top Button -->
-    <div class="scroll-top" id="scrollTop">
-        <i class="fas fa-chevron-up"></i>
-    </div>
-
-    <script>
-        // --- Preloader ---
-        window.addEventListener('load', () => {
-            document.getElementById('preloader').style.display = 'none';
-        });
-
-        // --- Sticky Navbar ---
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            const scrollTop = document.getElementById('scrollTop');
-            
-            if (window.scrollY > 100) {
-                header.classList.add('sticky');
-                scrollTop.classList.add('active');
-            } else {
-                header.classList.remove('sticky');
-                scrollTop.classList.remove('active');
-            }
-        });
-
-        // --- Mobile Menu Toggle ---
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        const navItems = document.querySelectorAll('.nav-item');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenu.querySelector('i').classList.toggle('fa-bars');
-            mobileMenu.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Dropdowns for Mobile
-        navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                if (window.innerWidth <= 992) {
-                    item.classList.toggle('active');
-                }
-            });
-        });
-
-        // --- Hero Slider ---
-        const slider = document.getElementById('slider');
-        let slideIndex = 0;
+  <!-- TOP INFORMATION BAR -->
+  <div class="top-info-bar d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fa-solid fa-location-dot me-1 text-info"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="tel:01729325489"><i class="fa-solid fa-phone me-1 text-success"></i> ০১৭২৯৩২৫৪৮ ৯</a>
+        <a href="https://wa.me/8801729325489"><i class="fa-brands fa-whatsapp me-1 text-success"></i> WhatsApp</a>
+        <span class="badge bg-danger"><i class="fa-solid fa-triangle-exclamation me-1"></i> জরুরি সেবা ২৪/৭</span>
         
-        function showSlides() {
-            slideIndex++;
-            if (slideIndex >= 2) slideIndex = 0;
-            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-            setTimeout(showSlides, 5000); 
-        }
-        showSlides();
+        <!-- Language Switcher -->
+        <div class="btn-group btn-group-sm">
+          <button class="btn btn-outline-light py-0 px-2 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+          <button class="btn btn-outline-light py-0 px-2 lang-en-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        // --- Counter Animation ---
-        const counters = document.querySelectorAll('.counter');
-        const counterSection = document.querySelector('.stats');
-        let animated = false;
+  <!-- MAIN HEADER & RESPONSIVE NAVBAR -->
+  <header class="sticky-header">
+    <nav class="navbar navbar-expand-lg py-2">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
+          <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+            <i class="fa-solid fa-hospital fa-lg"></i>
+          </div>
+          <div>
+            <div class="brand-logo-text">MAX HOSPITAL LTD.</div>
+            <div class="brand-sub">CHAKARIA BRANCH</div>
+          </div>
+        </a>
 
-        function startCount() {
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const increment = target / 50;
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars fa-xl text-primary"></i>
+        </button>
 
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(startCount, 20);
-                } else {
-                    counter.innerText = target + "+";
-                }
-            });
-        }
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <div class="mobile-lang-switcher d-lg-none">
+            <span class="fw-semibold text-secondary">Language / ভাষা</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-primary py-1 px-3 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+              <button class="btn btn-outline-primary py-1 px-3 lang-en-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+          </div>
 
-        // --- Scroll Reveal ---
-        window.addEventListener('scroll', () => {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(reveal => {
-                const windowHeight = window.innerHeight;
-                const revealTop = reveal.getBoundingClientRect().top;
-                const revealPoint = 100;
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html" data-bn="হোম" data-en="Home">হোম</a>
+            </li>
 
-                if (revealTop < windowHeight - revealPoint) {
-                    reveal.classList.add('animate__animated', 'animate__fadeInUp');
-                    reveal.style.opacity = "1";
-                }
-            });
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="aboutDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="about.html"><i class="fa-solid fa-hospital-user"></i> About Hospital</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="chairman.html"><i class="fa-solid fa-user-tie"></i> Chairman Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="managing-director.html"><i class="fa-solid fa-user-gear"></i> MD Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="management.html"><i class="fa-solid fa-users"></i> Hospital Management</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="mission-vision.html"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="facilities.html"><i class="fa-solid fa-building-circle-check"></i> Facilities</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="awards.html"><i class="fa-solid fa-award"></i> Awards</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="accreditation.html"><i class="fa-solid fa-certificate"></i> Accreditation</a></div>
+                </div>
+              </div>
+            </li>
 
-            // Start counter when in view
-            const rect = counterSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight && !animated) {
-                startCount();
-                animated = true;
-            }
-        });
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="doctorsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="ডাক্তার ও স্টাফ" data-en="Doctors & Staff">ডাক্তার ও স্টাফ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="doctorsDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctors.html"><i class="fa-solid fa-user-doctor"></i> All Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="specialist-doctors.html"><i class="fa-solid fa-stethoscope"></i> Specialist Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctor-schedule.html"><i class="fa-solid fa-calendar-days"></i> Doctor Schedule</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="find-doctor.html"><i class="fa-solid fa-magnifying-glass"></i> Find a Doctor</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="staff.html"><i class="fa-solid fa-users-gear"></i> Staff List</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="nursing-team.html"><i class="fa-solid fa-user-nurse"></i> Nursing Team</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="administrative-staff.html"><i class="fa-solid fa-briefcase"></i> Admin Staff</a></div>
+                </div>
+              </div>
+            </li>
 
-        // --- Scroll to Top ---
-        document.getElementById('scrollTop').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="deptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="বিভাগসমূহ" data-en="Departments">বিভাগসমূহ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="deptDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="medicine.html"><i class="fa-solid fa-capsules"></i> Medicine</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="surgery.html"><i class="fa-solid fa-scalpel"></i> Surgery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="cardiology.html"><i class="fa-solid fa-heart-pulse"></i> Cardiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gynecology.html"><i class="fa-solid fa-person-pregnant"></i> Gynecology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="pediatrics.html"><i class="fa-solid fa-baby"></i> Pediatrics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="orthopedics.html"><i class="fa-solid fa-bone"></i> Orthopedics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ent.html"><i class="fa-solid fa-ear-listen"></i> ENT</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="departments.html"><i class="fa-solid fa-ellipsis"></i> All Departments</a></div>
+                </div>
+              </div>
+            </li>
 
-        // --- Smooth Scrolling ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="সেবাসমূহ" data-en="Services">সেবাসমূহ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="emergency.html"><i class="fa-solid fa-truck-medical"></i> Emergency</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="laboratory.html"><i class="fa-solid fa-microscope"></i> Laboratory</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-x-ray"></i> Imaging / Radiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-bed"></i> ICU & NICU</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-pills"></i> Pharmacy</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ambulance.html"><i class="fa-solid fa-ambulance"></i> Ambulance</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="patientDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="পেশেন্ট কেয়ার" data-en="Patient Care">পেশেন্ট কেয়ার</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="patientDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="appointment.html"><i class="fa-solid fa-calendar-check"></i> Online Appointment</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="admission.html"><i class="fa-solid fa-hospital-user"></i> Admission Info</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="patient-guide.html"><i class="fa-solid fa-book-medical"></i> Patient Guide</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="visiting-hours.html"><i class="fa-solid fa-clock"></i> Visiting Hours</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="স্বাস্থ্য ও মিডিয়া" data-en="Health & Media">স্বাস্থ্য ও মিডিয়া</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="mediaDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="health-tips.html"><i class="fa-solid fa-lightbulb"></i> Health Tips</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="news.html"><i class="fa-solid fa-newspaper"></i> Hospital News</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gallery.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="events.html"><i class="fa-solid fa-calendar-events"></i> Events</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+            <a href="appointment.html" class="btn btn-primary w-100 w-lg-auto rounded-pill px-3 py-2 fw-semibold btn-sm text-center shadow-sm"><i class="fa-solid fa-calendar-plus me-1"></i> Book Appointment</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- PAGE HEADER BANNER -->
+  <section class="page-banner">
+    <div class="container text-center" data-aos="fade-up">
+      <h1 class="display-5 fw-bold mb-2" data-bn="কর্মকর্তা ও কর্মচারী তালিকা" data-en="Staff Directory">কর্মকর্তা ও কর্মচারী তালিকা</h1>
+      <p class="lead opacity-90 mb-3" data-bn="ম্যাক্স হাসপাতাল লিমিটেড, চকরিয়া শাখার নিবেদিতপ্রাণ কর্মীবৃন্দ" data-en="Dedicated staff of Max Hospital Ltd., Chakaria Branch">ম্যাক্স হাসপাতাল লিমিটেড, চকরিয়া শাখার নিবেদিতপ্রাণ কর্মীবৃন্দ</p>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center m-0">
+          <li class="breadcrumb-item"><a href="home.html" class="text-white text-decoration-none">হোম</a></li>
+          <li class="breadcrumb-item"><a href="doctors.html" class="text-white text-decoration-none">ডাক্তার ও স্টাফ</a></li>
+          <li class="breadcrumb-item active text-info" aria-current="page">স্টাফ তালিকা</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- STAFF TABLE SECTION -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      
+      <!-- Search Box -->
+      <div class="row mb-4 justify-content-between align-items-center" data-aos="fade-up">
+        <div class="col-md-5">
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+            <input type="text" id="staffSearch" class="form-control bg-light border-start-0" placeholder="নাম, পদবী বা মোবাইল নং অনুসন্ধান করুন...">
+          </div>
+        </div>
+        <div class="col-md-4 text-md-end mt-2 mt-md-0">
+          <span class="text-muted small">মোট স্টাফ সংখ্যা: <strong class="text-primary">০৫ জন</strong></span>
+        </div>
+      </div>
+
+      <!-- Staff Table Card -->
+      <div class="staff-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="table-responsive">
+          <table class="table table-staff table-hover align-middle mb-0" id="staffTable">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 80px;">ক্র.নং</th>
+                <th class="text-center" style="width: 100px;">ছবি</th>
+                <th>নাম</th>
+                <th>পদবী</th>
+                <th>যোগদানের তারিখ</th>
+                <th>মোবাইল নং</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Staff Member 1 -->
+              <tr class="staff-row">
+                <td class="text-center fw-bold text-secondary">০১</td>
+                <td class="text-center">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="রুকসানা আক্তার" class="staff-avatar">
+                </td>
+                <td>
+                  <h6 class="fw-bold mb-0 text-secondary">রুকসানা আক্তার</h6>
+                  <small class="text-muted">ID: MHCl-101</small>
+                </td>
+                <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6 font-monospace fw-semibold">হেড নার্স</span></td>
+                <td class="fw-semibold text-secondary"><i class="fa-regular fa-calendar-check me-1 text-primary"></i> ১৫ জানুয়ারি, ২০২০</td>
+                <td>
+                  <a href="tel:01711122334" class="text-decoration-none text-secondary fw-semibold">
+                    <i class="fa-solid fa-phone me-1 text-success"></i> 01711122334
+                  </a>
+                </td>
+              </tr>
+
+              <!-- Staff Member 2 -->
+              <tr class="staff-row">
+                <td class="text-center fw-bold text-secondary">০২</td>
+                <td class="text-center">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="মোঃ ইসমাইল হোসেন" class="staff-avatar">
+                </td>
+                <td>
+                  <h6 class="fw-bold mb-0 text-secondary">মোঃ ইসমাইল হোসেন</h6>
+                  <small class="text-muted">ID: MHCL-102</small>
+                </td>
+                <td><span class="badge bg-info-subtle text-info-emphasis border border-info-subtle fs-6 font-monospace fw-semibold">ল্যাব ইনচার্জ</span></td>
+                <td class="fw-semibold text-secondary"><i class="fa-regular fa-calendar-check me-1 text-primary"></i> 0১ মার্চ, ২০২১</td>
+                <td>
+                  <a href="tel:01822233445" class="text-decoration-none text-secondary fw-semibold">
+                    <i class="fa-solid fa-phone me-1 text-success"></i> 01822233445
+                  </a>
+                </td>
+              </tr>
+
+              <!-- Staff Member 3 -->
+              <tr class="staff-row">
+                <td class="text-center fw-bold text-secondary">০৩</td>
+                <td class="text-center">
+                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="সাদিয়া আফরিন" class="staff-avatar">
+                </td>
+                <td>
+                  <h6 class="fw-bold mb-0 text-secondary">সাদিয়া আফরিন</h6>
+                  <small class="text-muted">ID: MHCL-103</small>
+                </td>
+                <td><span class="badge bg-success-subtle text-success border border-success-subtle fs-6 font-monospace fw-semibold">সিনিয়র রিসেপশনিস্ট</span></td>
+                <td class="fw-semibold text-secondary"><i class="fa-regular fa-calendar-check me-1 text-primary"></i> ১০ জুন, ২০২১</td>
+                <td>
+                  <a href="tel:01933344556" class="text-decoration-none text-secondary fw-semibold">
+                    <i class="fa-solid fa-phone me-1 text-success"></i> 01933344556
+                  </a>
+                </td>
+              </tr>
+
+              <!-- Staff Member 4 -->
+              <tr class="staff-row">
+                <td class="text-center fw-bold text-secondary">০৪</td>
+                <td class="text-center">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="কামরুল হাসান" class="staff-avatar">
+                </td>
+                <td>
+                  <h6 class="fw-bold mb-0 text-secondary">কামরুল হাসান</h6>
+                  <small class="text-muted">ID: MHCL-104</small>
+                </td>
+                <td><span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle fs-6 font-monospace fw-semibold">ফার্মাসিস্ট</span></td>
+                <td class="fw-semibold text-secondary"><i class="fa-regular fa-calendar-check me-1 text-primary"></i> 0১ সেপ্টেম্বর, ২০২২</td>
+                <td>
+                  <a href="tel:01644455667" class="text-decoration-none text-secondary fw-semibold">
+                    <i class="fa-solid fa-phone me-1 text-success"></i> 01644455667
+                  </a>
+                </td>
+              </tr>
+
+              <!-- Staff Member 5 -->
+              <tr class="staff-row">
+                <td class="text-center fw-bold text-secondary">০৫</td>
+                <td class="text-center">
+                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80" alt="মোঃ রফিক উদ্দিন" class="staff-avatar">
+                </td>
+                <td>
+                  <h6 class="fw-bold mb-0 text-secondary">মোঃ রফিক উদ্দিন</h6>
+                  <small class="text-muted">ID: MHCL-105</small>
+                </td>
+                <td><span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle fs-6 font-monospace fw-semibold">অ্যাকাউন্টস অফিসার</span></td>
+                <td class="fw-semibold text-secondary"><i class="fa-regular fa-calendar-check me-1 text-primary"></i> ১৫ জানুয়ারি, ২০২৩</td>
+                <td>
+                  <a href="tel:01555566778" class="text-decoration-none text-secondary fw-semibold">
+                    <i class="fa-solid fa-phone me-1 text-success"></i> 01555566778
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER SECTION -->
+  <footer class="pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h5 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-2 text-primary"></i>MAX HOSPITAL LTD.</h5>
+          <p class="small text-muted mb-3">চকরিয়া শাখা। আধুনিক প্রযুক্তি, দক্ষ চিকিৎসক ও সার্বক্ষণিক মানবিক সেবায় আমরা আপনার পাশে আছি।</p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="fw-bold mb-3">গুরুত্বপূর্ণ লিংক</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li class="mb-2"><a href="doctors.html">ডাক্তারদের তালিকা</a></li>
+            <li class="mb-2"><a href="services.html">সেবাসমূহ</a></li>
+            <li class="mb-2"><a href="news.html">সর্বশেষ সংবাদ</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <h6 class="fw-bold mb-3">রোগী পরিষেবা</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="appointment.html">অনলাইন অ্যাপয়েন্টমেন্ট</a></li>
+            <li class="mb-2"><a href="patient-guide.html">রোগী নির্দেশিকা</a></li>
+            <li class="mb-2"><a href="visiting-hours.html">দর্শনার্থীদের সময়সূচী</a></li>
+            <li class="mb-2"><a href="contact.html">জরুরি যোগাযোগ</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <h6 class="fw-bold mb-3">যোগাযোগ করুন</h6>
+          <p class="small mb-2"><i class="fa-solid fa-location-dot me-2 text-primary"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার</p>
+          <p class="small mb-2"><i class="fa-solid fa-phone me-2 text-success"></i> ০১৭২৯৩২৫৪৮ ৯</p>
+          <p class="small mb-0"><i class="fa-solid fa-envelope me-2 text-warning"></i> info@maxhospitalchakaria.com</p>
+        </div>
+      </div>
+
+      <hr class="border-secondary">
+
+      <!-- COPYRIGHT & IT TEAM CREDIT -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small pt-2 gap-2 text-center text-md-start">
+        <div>
+          &copy; 2026 Max Hospital Ltd. All Rights Reserved.
+        </div>
+        <div class="text-info fw-semibold">
+          Designed & Maintained by: <span class="text-white">IT Team - MAX Hospital Ltd., Chakaria Branch</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING SIDEBAR ACTION BUTTONS -->
+  <div class="floating-actions">
+    <a href="tel:01729325489" class="float-btn bg-danger" title="Call Emergency"><i class="fa-solid fa-phone"></i></a>
+    <a href="https://wa.me/8801729325489" class="float-btn bg-success" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="appointment.html" class="float-btn bg-primary" title="Book Appointment"><i class="fa-solid fa-calendar-check"></i></a>
+  </div>
+
+  <!-- MOBILE BOTTOM STICKY BAR -->
+  <div class="mobile-bottom-nav">
+    <a href="tel:01729325489" class="mobile-nav-item text-danger"><i class="fa-solid fa-phone"></i> কল করুন</a>
+    <a href="https://wa.me/8801729325489" class="mobile-nav-item text-success"><i class="fa-brands fa-whatsapp"></i> হোয়াটসঅ্যাপ</a>
+    <a href="appointment.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-calendar-check"></i> বুকিং</a>
+    <a href="doctors.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-user-doctor"></i> ডাক্তারগণ</a>
+  </div>
+
+  <!-- Scripts: Bootstrap 5 JS, AOS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // Initialize AOS Animation
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Language Switcher Functionality
+    function switchLanguage(lang) {
+      document.querySelectorAll('.lang-bn-btn').forEach(b => b.classList.toggle('active', lang === 'bn'));
+      document.querySelectorAll('.lang-en-btn').forEach(b => b.classList.toggle('active', lang === 'en'));
+      
+      document.querySelectorAll('[data-bn]').forEach(el => {
+        el.innerText = el.getAttribute(`data-${lang}`);
+      });
+      localStorage.setItem('pref_lang', lang);
+    }
+
+    // Dynamic Real-time Table Search Functionality
+    document.getElementById('staffSearch').addEventListener('keyup', function() {
+      const value = this.value.toLowerCase().trim();
+      const rows = document.querySelectorAll('#staffTable tbody tr');
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(value) ? '' : 'none';
+      });
+    });
+
+    // Auto Load Saved Language Preference
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('pref_lang') || 'bn';
+      switchLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>
