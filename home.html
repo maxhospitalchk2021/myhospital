@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Max Hospital Ltd. | Chakaria Branch</title>
   
-  <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts (Inter & Hind Siliguri) -->
+  <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -27,6 +27,11 @@
       color: var(--text-main);
       background-color: var(--bg-light);
       overflow-x: hidden;
+      padding-bottom: 60px; /* Mobile bottom nav space */
+    }
+
+    @media (min-width: 992px) {
+      body { padding-bottom: 0; }
     }
 
     /* Top Info Bar */
@@ -40,7 +45,7 @@
     .top-info-bar a { color: #e2e8f0; text-decoration: none; }
     .top-info-bar a:hover { color: #38bdf8; }
 
-    /* Sticky Header & Mega Menu */
+    /* Sticky Header */
     .sticky-header {
       position: sticky;
       top: 0;
@@ -57,32 +62,77 @@
       font-weight: 600;
       color: var(--secondary) !important;
       font-size: 0.95rem;
-      padding: 20px 12px !important;
+      padding: 12px 16px !important;
       transition: color 0.2s;
     }
-    .nav-link:hover, .nav-item.dropdown:hover .nav-link { color: var(--primary) !important; }
 
-    /* Mega Menu Styling */
-    .dropdown-menu.mega-menu {
-      width: 100vw;
-      max-width: 1140px;
-      left: 50% !important;
-      transform: translateX(-50%) translateY(10px);
-      border: 1px solid rgba(0,0,0,0.08);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-radius: 12px;
-      padding: 24px;
-      background: #ffffff;
-      opacity: 0;
-      visibility: hidden;
-      display: block;
-      transition: all 0.3s ease;
+    /* Desktop Navigation & Hover Effects */
+    @media (min-width: 992px) {
+      .nav-link { padding: 20px 12px !important; }
+      .nav-link:hover, .nav-item.dropdown:hover .nav-link { color: var(--primary) !important; }
+
+      .dropdown-menu.mega-menu {
+        width: 100vw;
+        max-width: 1140px;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(10px);
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        padding: 24px;
+        background: #ffffff;
+        opacity: 0;
+        visibility: hidden;
+        display: block;
+        transition: all 0.3s ease;
+      }
+      .nav-item.dropdown:hover .dropdown-menu.mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
     }
-    .nav-item.dropdown:hover .dropdown-menu.mega-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
+
+    /* Mobile Responsive Navigation (Expandable / Collapsible Menu) */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        max-height: 80vh;
+        overflow-y: auto;
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-top: 10px;
+      }
+      
+      .dropdown-menu.mega-menu {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin-top: 5px;
+        display: none; /* Collapsed by default, toggled via Bootstrap JS */
+      }
+
+      .dropdown-menu.mega-menu.show {
+        display: block;
+      }
+
+      .dropdown-toggle::after {
+        float: right;
+        margin-top: 8px;
+        transition: transform 0.2s ease;
+      }
+
+      .dropdown-toggle[aria-expanded="true"]::after {
+        transform: rotate(180deg);
+      }
     }
+
     .mega-menu-item {
       display: flex;
       align-items: center;
@@ -96,7 +146,7 @@
       transition: all 0.2s;
     }
     .mega-menu-item:hover {
-      background: #f1f5f9;
+      background: #e2e8f0;
       color: var(--primary);
       transform: translateX(4px);
     }
@@ -147,8 +197,8 @@
       padding: 70px 0;
     }
 
-    /* Section Component Styling */
-    .section-padding { padding: 90px 0; }
+    /* Section Styling */
+    .section-padding { padding: 80px 0; }
     .section-title { font-weight: 700; color: var(--secondary); margin-bottom: 12px; }
     .section-subtitle { color: var(--primary); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -247,13 +297,12 @@
     }
     @media (max-width: 991px) {
       .floating-actions { display: none; }
-      .mega-menu { position: static !important; transform: none !important; width: 100% !important; opacity: 1 !important; visibility: visible !important; box-shadow: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ================= 5. TOP INFORMATION BAR ================= -->
+  <!-- ================= TOP INFORMATION BAR ================= -->
   <div class="top-info-bar d-none d-lg-block">
     <div class="container d-flex justify-content-between align-items-center">
       <div>
@@ -272,11 +321,10 @@
     </div>
   </div>
 
-  <!-- ================= 6. MAIN HEADER & 7. MENUS ================= -->
+  <!-- ================= MAIN HEADER & EXPANDABLE MOBILE MENU ================= -->
   <header class="sticky-header">
     <nav class="navbar navbar-expand-lg py-2">
       <div class="container">
-        <!-- Logo Placeholder & Brand -->
         <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
           <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
             <i class="fa-solid fa-hospital fa-xl"></i>
@@ -287,11 +335,21 @@
           </div>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
+          <!-- Mobile Language Switcher -->
+          <div class="d-lg-none d-flex justify-content-between align-items-center my-2 p-2 bg-light rounded">
+            <span class="fw-semibold small">ভাষা / Language:</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-primary py-0 px-2" onclick="switchLanguage('bn')">বাংলা</button>
+              <button class="btn btn-outline-primary py-0 px-2" onclick="switchLanguage('en')">English</button>
+            </div>
+          </div>
+
           <ul class="navbar-nav mx-auto">
             <!-- Menu 01: Home -->
             <li class="nav-item">
@@ -300,91 +358,103 @@
 
             <!-- Menu 02: About Us -->
             <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="about.html" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
-              <div class="dropdown-menu mega-menu">
+              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="আমাদের সম্পর্কে" data-en="About Us">
+                আমাদের সম্পর্কে
+              </a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="aboutDropdown">
                 <div class="row g-2">
-                  <div class="col-md-3"><a class="mega-menu-item" href="about.html"><i class="fa-solid fa-hospital-user"></i> About Hospital</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="chairman.html"><i class="fa-solid fa-user-tie"></i> Chairman Message</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="managing-director.html"><i class="fa-solid fa-user-gear"></i> MD Message</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="management.html"><i class="fa-solid fa-users"></i> Hospital Management</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="mission-vision.html"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="facilities.html"><i class="fa-solid fa-building-circle-check"></i> Facilities</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="awards.html"><i class="fa-solid fa-award"></i> Awards</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="accreditation.html"><i class="fa-solid fa-certificate"></i> Accreditation</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="about.html"><i class="fa-solid fa-hospital-user"></i> About Hospital</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="chairman.html"><i class="fa-solid fa-user-tie"></i> Chairman Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="managing-director.html"><i class="fa-solid fa-user-gear"></i> MD Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="management.html"><i class="fa-solid fa-users"></i> Hospital Management</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="mission-vision.html"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="facilities.html"><i class="fa-solid fa-building-circle-check"></i> Facilities</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="awards.html"><i class="fa-solid fa-award"></i> Awards</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="accreditation.html"><i class="fa-solid fa-certificate"></i> Accreditation</a></div>
                 </div>
               </div>
             </li>
 
             <!-- Menu 03: Doctors & Staff -->
             <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="doctors.html" data-bn="ডাক্তার ও স্টাফ" data-en="Doctors & Staff">ডাক্তার ও স্টাফ</a>
-              <div class="dropdown-menu mega-menu">
+              <a class="nav-link dropdown-toggle" href="#" id="doctorsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="ডাক্তার ও স্টাফ" data-en="Doctors & Staff">
+                ডাক্তার ও স্টাফ
+              </a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="doctorsDropdown">
                 <div class="row g-2">
-                  <div class="col-md-3"><a class="mega-menu-item" href="doctors.html"><i class="fa-solid fa-user-doctor"></i> All Doctors</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="specialist-doctors.html"><i class="fa-solid fa-stethoscope"></i> Specialist Doctors</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="doctor-schedule.html"><i class="fa-solid fa-calendar-days"></i> Doctor Schedule</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="find-doctor.html"><i class="fa-solid fa-magnifying-glass"></i> Find a Doctor</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="staff.html"><i class="fa-solid fa-users-gear"></i> Staff List</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="nursing-team.html"><i class="fa-solid fa-user-nurse"></i> Nursing Team</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="administrative-staff.html"><i class="fa-solid fa-briefcase"></i> Admin Staff</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctors.html"><i class="fa-solid fa-user-doctor"></i> All Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="specialist-doctors.html"><i class="fa-solid fa-stethoscope"></i> Specialist Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctor-schedule.html"><i class="fa-solid fa-calendar-days"></i> Doctor Schedule</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="find-doctor.html"><i class="fa-solid fa-magnifying-glass"></i> Find a Doctor</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="staff.html"><i class="fa-solid fa-users-gear"></i> Staff List</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="nursing-team.html"><i class="fa-solid fa-user-nurse"></i> Nursing Team</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="administrative-staff.html"><i class="fa-solid fa-briefcase"></i> Admin Staff</a></div>
                 </div>
               </div>
             </li>
 
             <!-- Menu 04: Departments -->
             <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="departments.html" data-bn="বিভাগসমূহ" data-en="Departments">বিভাগসমূহ</a>
-              <div class="dropdown-menu mega-menu">
+              <a class="nav-link dropdown-toggle" href="#" id="deptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="বিভাগসমূহ" data-en="Departments">
+                বিভাগসমূহ
+              </a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="deptDropdown">
                 <div class="row g-2">
-                  <div class="col-md-3"><a class="mega-menu-item" href="medicine.html"><i class="fa-solid fa-capsules"></i> Medicine</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="surgery.html"><i class="fa-solid fa-scalpel"></i> Surgery</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="cardiology.html"><i class="fa-solid fa-heart-pulse"></i> Cardiology</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="gynecology.html"><i class="fa-solid fa-person-pregnant"></i> Gynecology</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="pediatrics.html"><i class="fa-solid fa-baby"></i> Pediatrics</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="orthopedics.html"><i class="fa-solid fa-bone"></i> Orthopedics</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="ent.html"><i class="fa-solid fa-ear-listen"></i> ENT</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="departments.html"><i class="fa-solid fa-ellipsis"></i> All Departments</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="medicine.html"><i class="fa-solid fa-capsules"></i> Medicine</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="surgery.html"><i class="fa-solid fa-scalpel"></i> Surgery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="cardiology.html"><i class="fa-solid fa-heart-pulse"></i> Cardiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gynecology.html"><i class="fa-solid fa-person-pregnant"></i> Gynecology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="pediatrics.html"><i class="fa-solid fa-baby"></i> Pediatrics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="orthopedics.html"><i class="fa-solid fa-bone"></i> Orthopedics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ent.html"><i class="fa-solid fa-ear-listen"></i> ENT</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="departments.html"><i class="fa-solid fa-ellipsis"></i> All Departments</a></div>
                 </div>
               </div>
             </li>
 
             <!-- Menu 05: Services -->
             <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="services.html" data-bn="সেবাসমূহ" data-en="Services">সেবাসমূহ</a>
-              <div class="dropdown-menu mega-menu">
+              <a class="nav-link dropdown-toggle" href="#" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="সেবাসমূহ" data-en="Services">
+                সেবাসমূহ
+              </a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="serviceDropdown">
                 <div class="row g-2">
-                  <div class="col-md-3"><a class="mega-menu-item" href="emergency.html"><i class="fa-solid fa-truck-medical"></i> Emergency</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="laboratory.html"><i class="fa-solid fa-microscope"></i> Laboratory</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-x-ray"></i> Imaging / Radiology</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-bed"></i> ICU & NICU</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-pills"></i> Pharmacy</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="ambulance.html"><i class="fa-solid fa-ambulance"></i> Ambulance</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="emergency.html"><i class="fa-solid fa-truck-medical"></i> Emergency</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="laboratory.html"><i class="fa-solid fa-microscope"></i> Laboratory</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-x-ray"></i> Imaging / Radiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-bed"></i> ICU & NICU</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-pills"></i> Pharmacy</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ambulance.html"><i class="fa-solid fa-ambulance"></i> Ambulance</a></div>
                 </div>
               </div>
             </li>
 
             <!-- Menu 06: Patient Care -->
             <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="patient-guide.html" data-bn="পেশেন্ট কেয়ার" data-en="Patient Care">পেশেন্ট কেয়ার</a>
-              <div class="dropdown-menu mega-menu">
+              <a class="nav-link dropdown-toggle" href="#" id="patientDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="পেশেন্ট কেয়ার" data-en="Patient Care">
+                পেশেন্ট কেয়ার
+              </a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="patientDropdown">
                 <div class="row g-2">
-                  <div class="col-md-3"><a class="mega-menu-item" href="appointment.html"><i class="fa-solid fa-calendar-check"></i> Online Appointment</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="admission.html"><i class="fa-solid fa-hospital-user"></i> Admission Info</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="patient-guide.html"><i class="fa-solid fa-book-medical"></i> Patient Guide</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="visiting-hours.html"><i class="fa-solid fa-clock"></i> Visiting Hours</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="appointment.html"><i class="fa-solid fa-calendar-check"></i> Online Appointment</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="admission.html"><i class="fa-solid fa-hospital-user"></i> Admission Info</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="patient-guide.html"><i class="fa-solid fa-book-medical"></i> Patient Guide</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="visiting-hours.html"><i class="fa-solid fa-clock"></i> Visiting Hours</a></div>
                 </div>
               </div>
             </li>
 
             <!-- Menu 07: Health & Media -->
             <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="health-tips.html" data-bn="স্বাস্থ্য ও মিডিয়া" data-en="Health & Media">স্বাস্থ্য ও মিডিয়া</a>
-              <div class="dropdown-menu mega-menu">
+              <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="স্বাস্থ্য ও মিডিয়া" data-en="Health & Media">
+                স্বাস্থ্য ও মিডিয়া
+              </a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="mediaDropdown">
                 <div class="row g-2">
-                  <div class="col-md-3"><a class="mega-menu-item" href="health-tips.html"><i class="fa-solid fa-lightbulb"></i> Health Tips</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="news.html"><i class="fa-solid fa-newspaper"></i> Hospital News</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="gallery.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></div>
-                  <div class="col-md-3"><a class="mega-menu-item" href="events.html"><i class="fa-solid fa-calendar-events"></i> Events</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="health-tips.html"><i class="fa-solid fa-lightbulb"></i> Health Tips</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="news.html"><i class="fa-solid fa-newspaper"></i> Hospital News</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gallery.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="events.html"><i class="fa-solid fa-calendar-events"></i> Events</a></div>
                 </div>
               </div>
             </li>
@@ -396,14 +466,14 @@
           </ul>
 
           <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
-            <a href="appointment.html" class="btn btn-primary rounded-pill px-3 py-2 fw-semibold btn-sm"><i class="fa-solid fa-calendar-plus me-1"></i> Book Appointment</a>
+            <a href="appointment.html" class="btn btn-primary rounded-pill w-100 w-lg-auto px-3 py-2 fw-semibold btn-sm"><i class="fa-solid fa-calendar-plus me-1"></i> Book Appointment</a>
           </div>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- ================= 9. HERO SECTION ================= -->
+  <!-- ================= HERO SECTION ================= -->
   <section class="hero-section text-center text-lg-start">
     <div class="container">
       <div class="row align-items-center g-5">
@@ -421,7 +491,7 @@
     </div>
   </section>
 
-  <!-- ================= 10. FLOATING QUICK ACCESS PANEL ================= -->
+  <!-- ================= FLOATING QUICK ACCESS PANEL ================= -->
   <div class="container floating-access-panel">
     <div class="row g-3">
       <div class="col-md-3 col-6">
@@ -455,7 +525,7 @@
     </div>
   </div>
 
-  <!-- ================= 11. HOSPITAL INTRODUCTION ================= -->
+  <!-- ================= HOSPITAL INTRODUCTION ================= -->
   <section class="section-padding">
     <div class="container">
       <div class="row align-items-center g-5">
@@ -478,7 +548,7 @@
     </div>
   </section>
 
-  <!-- ================= 12. HOSPITAL STATISTICS ================= -->
+  <!-- ================= HOSPITAL STATISTICS ================= -->
   <section class="stats-section">
     <div class="container">
       <div class="row g-4 text-center">
@@ -510,7 +580,7 @@
     </div>
   </section>
 
-  <!-- ================= 13. EMERGENCY SECTION ================= -->
+  <!-- ================= EMERGENCY SECTION ================= -->
   <section class="container my-5">
     <div class="emergency-banner text-center text-md-start d-md-flex align-items-center justify-content-between">
       <div>
@@ -523,7 +593,7 @@
     </div>
   </section>
 
-  <!-- ================= 14. OUR SERVICES ================= -->
+  <!-- ================= OUR SERVICES ================= -->
   <section class="section-padding bg-white">
     <div class="container">
       <div class="text-center mb-5">
@@ -563,7 +633,7 @@
     </div>
   </section>
 
-  <!-- ================= 16. FEATURED DOCTORS ================= -->
+  <!-- ================= FEATURED DOCTORS ================= -->
   <section class="section-padding">
     <div class="container">
       <div class="d-flex justify-content-between align-items-end mb-4">
@@ -611,7 +681,7 @@
     </div>
   </section>
 
-  <!-- ================= 20. ONLINE APPOINTMENT FORM ================= -->
+  <!-- ================= ONLINE APPOINTMENT FORM ================= -->
   <section class="section-padding bg-white">
     <div class="container max-w-900">
       <div class="glass-card p-4 p-md-5">
@@ -652,7 +722,7 @@
     </div>
   </section>
 
-  <!-- ================= 29. CONTACT SECTION ================= -->
+  <!-- ================= CONTACT SECTION ================= -->
   <section class="section-padding">
     <div class="container">
       <div class="row g-4">
@@ -668,7 +738,6 @@
         </div>
         <div class="col-lg-7">
           <div class="rounded-4 overflow-hidden shadow-sm h-100 min-vh-300 bg-light d-flex align-items-center justify-content-center">
-            <!-- Google Map Embed Placeholder -->
             <iframe src="https://maps.google.com/maps?q=Chakaria,Bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
         </div>
@@ -676,7 +745,7 @@
     </div>
   </section>
 
-  <!-- ================= 31. FOOTER ================= -->
+  <!-- ================= FOOTER ================= -->
   <footer class="pt-5 pb-3">
     <div class="container">
       <div class="row g-4 mb-5">
@@ -715,7 +784,7 @@
     </div>
   </footer>
 
-  <!-- ================= 32. FLOATING ACTION BUTTONS ================= -->
+  <!-- ================= FLOATING ACTION BUTTONS ================= -->
   <div class="floating-actions">
     <a href="tel:01729325489" class="float-btn bg-danger" title="Emergency Call"><i class="fa-solid fa-phone"></i></a>
     <a href="https://wa.me/8801729325489" class="float-btn bg-success" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
@@ -730,14 +799,44 @@
     <a href="doctors.html" class="mobile-nav-item"><i class="fa-solid fa-user-doctor"></i> Doctors</a>
   </div>
 
-  <!-- Scripts: Bootstrap 5 JS -->
+  <!-- Scripts: Bootstrap 5 Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // Mobile Accordion-style Submenu Toggle JS logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdownToggles = document.querySelectorAll('.nav-item.dropdown .dropdown-toggle');
+      
+      dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+          if (window.innerWidth < 992) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const currentMenu = this.nextElementSibling;
+            const isOpen = currentMenu.classList.contains('show');
+
+            // Close all other submenus for clean accordion behaviour on mobile
+            document.querySelectorAll('.dropdown-menu.mega-menu').forEach(menu => {
+              menu.classList.remove('show');
+            });
+            document.querySelectorAll('.dropdown-toggle').forEach(btn => {
+              btn.setAttribute('aria-expanded', 'false');
+            });
+
+            if (!isOpen) {
+              currentMenu.classList.add('show');
+              this.setAttribute('aria-expanded', 'true');
+            }
+          }
+        });
+      });
+    });
+
     // Language Toggle Functionality
     function switchLanguage(lang) {
-      document.getElementById('lang-bn').classList.toggle('active', lang === 'bn');
-      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      document.getElementById('lang-bn')?.classList.toggle('active', lang === 'bn');
+      document.getElementById('lang-en')?.classList.toggle('active', lang === 'en');
       
       document.querySelectorAll('[data-bn]').forEach(el => {
         el.innerText = el.getAttribute(`data-${lang}`);
@@ -745,7 +844,7 @@
       localStorage.setItem('pref_lang', lang);
     }
 
-    // Interactive Animated Counters
+    // Animated Counters
     const counters = document.querySelectorAll('.counter');
     const animateCounters = () => {
       counters.forEach(counter => {
@@ -765,7 +864,6 @@
       });
     };
 
-    // Intersection Observer for Scroll Trigger Counter
     let counterTriggered = false;
     window.addEventListener('scroll', () => {
       const statsSec = document.querySelector('.stats-section');
@@ -778,14 +876,12 @@
       }
     });
 
-    // Appointment Form Submission Handler
     function handleAppointment(e) {
       e.preventDefault();
       alert('ধন্যবাদ! আপনার অ্যাপয়েন্টমেন্টের আবেদন সফলভাবে গ্রহণ করা হয়েছে। আমাদের প্রতিনিধি শীঘ্রই যোগাযোগ করবেন।');
       document.getElementById('appointmentForm').reset();
     }
 
-    // Auto Language Preference Restore
     window.addEventListener('DOMContentLoaded', () => {
       const savedLang = localStorage.getItem('pref_lang') || 'bn';
       switchLanguage(savedLang);
