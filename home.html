@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Max Hospital Ltd. | Chakaria Branch</title>
   
-  <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts -->
+  <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts, AOS Animation, Swiper JS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
   <style>
     :root {
@@ -18,7 +20,7 @@
       --accent: #ef4444;
       --bg-light: #f8fafc;
       --text-main: #334155;
-      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-bg: rgba(255, 255, 255, 0.95);
       --glass-border: rgba(255, 255, 255, 0.3);
     }
 
@@ -27,11 +29,6 @@
       color: var(--text-main);
       background-color: var(--bg-light);
       overflow-x: hidden;
-      padding-bottom: 60px; /* Mobile bottom nav space */
-    }
-
-    @media (min-width: 992px) {
-      body { padding-bottom: 0; }
     }
 
     /* Top Info Bar */
@@ -65,12 +62,11 @@
       padding: 12px 16px !important;
       transition: color 0.2s;
     }
+    .nav-link:hover, .nav-item.dropdown:hover > .nav-link { color: var(--primary) !important; }
 
-    /* Desktop Navigation & Hover Effects */
+    /* Desktop Mega Menu */
     @media (min-width: 992px) {
       .nav-link { padding: 20px 12px !important; }
-      .nav-link:hover, .nav-item.dropdown:hover .nav-link { color: var(--primary) !important; }
-
       .dropdown-menu.mega-menu {
         width: 100vw;
         max-width: 1140px;
@@ -91,20 +87,23 @@
         visibility: visible;
         transform: translateX(-50%) translateY(0);
       }
+      .mobile-bottom-nav { display: none; }
     }
 
-    /* Mobile Responsive Navigation (Expandable / Collapsible Menu) */
+    /* Mobile Responsive Navigation Fixes */
     @media (max-width: 991.98px) {
+      .floating-actions { display: none; }
+      
       .navbar-collapse {
         max-height: 80vh;
         overflow-y: auto;
+        padding: 15px 10px;
         background: #ffffff;
-        padding: 15px;
         border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         margin-top: 10px;
       }
-      
+
       .dropdown-menu.mega-menu {
         position: static !important;
         transform: none !important;
@@ -113,23 +112,22 @@
         border: none !important;
         background: #f8fafc;
         border-radius: 8px;
-        padding: 10px 15px;
+        padding: 10px 15px !important;
         margin-top: 5px;
-        display: none; /* Collapsed by default, toggled via Bootstrap JS */
       }
 
-      .dropdown-menu.mega-menu.show {
-        display: block;
-      }
-
-      .dropdown-toggle::after {
+      .nav-item.dropdown .dropdown-toggle::after {
         float: right;
         margin-top: 8px;
-        transition: transform 0.2s ease;
       }
 
-      .dropdown-toggle[aria-expanded="true"]::after {
-        transform: rotate(180deg);
+      .mobile-lang-switcher {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 10px;
       }
     }
 
@@ -137,7 +135,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 10px 12px;
+      padding: 8px 12px;
       border-radius: 8px;
       color: var(--text-main);
       text-decoration: none;
@@ -146,35 +144,38 @@
       transition: all 0.2s;
     }
     .mega-menu-item:hover {
-      background: #e2e8f0;
+      background: #f1f5f9;
       color: var(--primary);
       transform: translateX(4px);
     }
     .mega-menu-item i { width: 20px; color: var(--primary); text-align: center; }
 
-    /* Hero Section */
-    .hero-section {
+    /* Hero Section Carousel */
+    .hero-slider .swiper-slide {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
       position: relative;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.82), rgba(2, 132, 199, 0.7)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-      padding: 120px 0 160px;
-      color: #ffffff;
+      color: #fff;
     }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      padding: 6px 16px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+    .hero-slider .swiper-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.85) 0%, rgba(2, 132, 199, 0.6) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     /* Floating Access Panel */
     .floating-access-panel {
-      margin-top: -80px;
+      margin-top: -60px;
       position: relative;
-      z-index: 10;
+      z-index: 20;
     }
     .glass-card {
       background: var(--glass-bg);
@@ -182,71 +183,114 @@
       border: 1px solid var(--glass-border);
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
     }
     .glass-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(2, 132, 199, 0.15);
     }
 
-    /* Statistics Section */
+    /* Section Global Styling */
+    .section-padding { padding: 90px 0; }
+    .section-title { font-weight: 800; color: var(--secondary); margin-bottom: 15px; }
+    .section-subtitle { color: var(--primary); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; }
+
+    /* Feature & Service Cards */
+    .service-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px 24px;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    
+    .card-icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    /* Doctor Card Modern Styling */
+    .doctor-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+    .doctor-card:hover {
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+      transform: translateY(-5px);
+    }
+    .doctor-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 260px;
+    }
+    .doctor-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .doctor-card:hover .doctor-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    /* Emergency Callout Banner */
+    .emergency-banner {
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      border-radius: 20px;
+      color: #ffffff;
+      padding: 50px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Stats Section */
     .stats-section {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
       padding: 70px 0;
     }
 
-    /* Section Styling */
-    .section-padding { padding: 80px 0; }
-    .section-title { font-weight: 700; color: var(--secondary); margin-bottom: 12px; }
-    .section-subtitle { color: var(--primary); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* Interactive Cards */
-    .feature-card {
+    /* Testimonial Section */
+    .testimonial-card {
       background: #ffffff;
-      border-radius: 12px;
-      padding: 24px;
-      border: 1px solid #e2e8f0;
-      transition: all 0.3s;
-      height: 100%;
-    }
-    .feature-card:hover {
-      border-color: var(--primary);
-      box-shadow: 0 12px 24px rgba(2, 132, 199, 0.08);
-      transform: translateY(-4px);
-    }
-    .card-icon-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      background: rgba(2, 132, 199, 0.1);
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-    }
-
-    /* Emergency Pulse Banner */
-    .emergency-banner {
-      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      padding: 30px;
       border-radius: 16px;
-      color: #ffffff;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    .pulse-btn {
-      animation: pulse-animation 2s infinite;
-    }
-    @keyframes pulse-animation {
-      0% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.6); }
-      100% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
     }
 
-    /* Floating Action Sidebar Buttons */
+    /* Floating Sidebar Action Buttons */
     .floating-actions {
       position: fixed;
       right: 20px;
@@ -255,28 +299,29 @@
       z-index: 1020;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
     .float-btn {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       text-decoration: none;
       transition: transform 0.2s;
     }
     .float-btn:hover { transform: scale(1.1); color: #fff; }
 
-    /* Footer */
+    /* Footer Modern Styling */
     footer { background: var(--secondary); color: #94a3b8; font-size: 0.9rem; }
+    footer h5, footer h6 { color: #ffffff; }
     footer a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: #38bdf8; }
 
-    /* Mobile Sticky Bottom Bar */
+    /* Mobile Bottom Sticky Bar */
     .mobile-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -286,48 +331,44 @@
       border-top: 1px solid #e2e8f0;
       display: flex;
       justify-content: space-around;
-      padding: 8px 0;
+      padding: 10px 0;
       z-index: 1030;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
     }
-    .mobile-nav-item { text-align: center; color: var(--text-main); font-size: 0.75rem; text-decoration: none; }
+    .mobile-nav-item { text-align: center; color: var(--text-main); font-size: 0.75rem; text-decoration: none; font-weight: 600; }
     .mobile-nav-item i { font-size: 1.2rem; display: block; margin-bottom: 2px; }
-
-    @media (min-width: 992px) {
-      .mobile-bottom-nav { display: none; }
-    }
-    @media (max-width: 991px) {
-      .floating-actions { display: none; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- ================= TOP INFORMATION BAR ================= -->
+  <!-- TOP INFORMATION BAR -->
   <div class="top-info-bar d-none d-lg-block">
     <div class="container d-flex justify-content-between align-items-center">
       <div>
-        <i class="fa-solid fa-location-dot me-1 text-info"></i> Parvez Tower, Thana Road Head, Chakaria, Cox’s Bazar
+        <i class="fa-solid fa-location-dot me-1 text-info"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার
       </div>
       <div class="d-flex align-items-center gap-3">
-        <a href="tel:01729325489"><i class="fa-solid fa-phone me-1 text-success"></i> 01729325489</a>
+        <a href="tel:01729325489"><i class="fa-solid fa-phone me-1 text-success"></i> ০১৭২৯৩২৫৪৮৯</a>
         <a href="https://wa.me/8801729325489"><i class="fa-brands fa-whatsapp me-1 text-success"></i> WhatsApp</a>
-        <span class="badge bg-danger"><i class="fa-solid fa-triangle-exclamation me-1"></i> Emergency 24/7</span>
+        <span class="badge bg-danger"><i class="fa-solid fa-triangle-exclamation me-1"></i> জরুরি সেবা ২৪/৭</span>
+        
         <!-- Language Switcher -->
         <div class="btn-group btn-group-sm">
-          <button class="btn btn-outline-light py-0 px-2 active" id="lang-bn" onclick="switchLanguage('bn')">বাংলা</button>
-          <button class="btn btn-outline-light py-0 px-2" id="lang-en" onclick="switchLanguage('en')">English</button>
+          <button class="btn btn-outline-light py-0 px-2 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+          <button class="btn btn-outline-light py-0 px-2 lang-en-btn" onclick="switchLanguage('en')">English</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ================= MAIN HEADER & EXPANDABLE MOBILE MENU ================= -->
+  <!-- MAIN HEADER & RESPONSIVE NAVBAR -->
   <header class="sticky-header">
     <nav class="navbar navbar-expand-lg py-2">
       <div class="container">
+        <!-- Brand Logo -->
         <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
           <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-            <i class="fa-solid fa-hospital fa-xl"></i>
+            <i class="fa-solid fa-hospital fa-lg"></i>
           </div>
           <div>
             <div class="brand-logo-text">MAX HOSPITAL LTD.</div>
@@ -335,18 +376,18 @@
           </div>
         </a>
 
-        <!-- Mobile Menu Toggle Button -->
+        <!-- Mobile Navbar Toggler -->
         <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <i class="fa-solid fa-bars fa-xl text-primary"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
-          <!-- Mobile Language Switcher -->
-          <div class="d-lg-none d-flex justify-content-between align-items-center my-2 p-2 bg-light rounded">
-            <span class="fw-semibold small">ভাষা / Language:</span>
+          <!-- Language Selector for Mobile View -->
+          <div class="mobile-lang-switcher d-lg-none">
+            <span class="fw-semibold text-secondary">Language / ভাষা</span>
             <div class="btn-group btn-group-sm">
-              <button class="btn btn-primary py-0 px-2" onclick="switchLanguage('bn')">বাংলা</button>
-              <button class="btn btn-outline-primary py-0 px-2" onclick="switchLanguage('en')">English</button>
+              <button class="btn btn-primary py-1 px-3 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+              <button class="btn btn-outline-primary py-1 px-3 lang-en-btn" onclick="switchLanguage('en')">English</button>
             </div>
           </div>
 
@@ -357,12 +398,10 @@
             </li>
 
             <!-- Menu 02: About Us -->
-            <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="আমাদের সম্পর্কে" data-en="About Us">
-                আমাদের সম্পর্কে
-              </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
               <div class="dropdown-menu mega-menu" aria-labelledby="aboutDropdown">
-                <div class="row g-2">
+                <div class="row g-1">
                   <div class="col-lg-3"><a class="mega-menu-item" href="about.html"><i class="fa-solid fa-hospital-user"></i> About Hospital</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="chairman.html"><i class="fa-solid fa-user-tie"></i> Chairman Message</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="managing-director.html"><i class="fa-solid fa-user-gear"></i> MD Message</a></div>
@@ -376,12 +415,10 @@
             </li>
 
             <!-- Menu 03: Doctors & Staff -->
-            <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="#" id="doctorsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="ডাক্তার ও স্টাফ" data-en="Doctors & Staff">
-                ডাক্তার ও স্টাফ
-              </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="doctorsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="ডাক্তার ও স্টাফ" data-en="Doctors & Staff">ডাক্তার ও স্টাফ</a>
               <div class="dropdown-menu mega-menu" aria-labelledby="doctorsDropdown">
-                <div class="row g-2">
+                <div class="row g-1">
                   <div class="col-lg-3"><a class="mega-menu-item" href="doctors.html"><i class="fa-solid fa-user-doctor"></i> All Doctors</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="specialist-doctors.html"><i class="fa-solid fa-stethoscope"></i> Specialist Doctors</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="doctor-schedule.html"><i class="fa-solid fa-calendar-days"></i> Doctor Schedule</a></div>
@@ -394,12 +431,10 @@
             </li>
 
             <!-- Menu 04: Departments -->
-            <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="#" id="deptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="বিভাগসমূহ" data-en="Departments">
-                বিভাগসমূহ
-              </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="deptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="বিভাগসমূহ" data-en="Departments">বিভাগসমূহ</a>
               <div class="dropdown-menu mega-menu" aria-labelledby="deptDropdown">
-                <div class="row g-2">
+                <div class="row g-1">
                   <div class="col-lg-3"><a class="mega-menu-item" href="medicine.html"><i class="fa-solid fa-capsules"></i> Medicine</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="surgery.html"><i class="fa-solid fa-scalpel"></i> Surgery</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="cardiology.html"><i class="fa-solid fa-heart-pulse"></i> Cardiology</a></div>
@@ -413,12 +448,10 @@
             </li>
 
             <!-- Menu 05: Services -->
-            <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="#" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="সেবাসমূহ" data-en="Services">
-                সেবাসমূহ
-              </a>
-              <div class="dropdown-menu mega-menu" aria-labelledby="serviceDropdown">
-                <div class="row g-2">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="সেবাসমূহ" data-en="Services">সেবাসমূহ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                <div class="row g-1">
                   <div class="col-lg-3"><a class="mega-menu-item" href="emergency.html"><i class="fa-solid fa-truck-medical"></i> Emergency</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="laboratory.html"><i class="fa-solid fa-microscope"></i> Laboratory</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-x-ray"></i> Imaging / Radiology</a></div>
@@ -430,12 +463,10 @@
             </li>
 
             <!-- Menu 06: Patient Care -->
-            <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="#" id="patientDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="পেশেন্ট কেয়ার" data-en="Patient Care">
-                পেশেন্ট কেয়ার
-              </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="patientDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="পেশেন্ট কেয়ার" data-en="Patient Care">পেশেন্ট কেয়ার</a>
               <div class="dropdown-menu mega-menu" aria-labelledby="patientDropdown">
-                <div class="row g-2">
+                <div class="row g-1">
                   <div class="col-lg-3"><a class="mega-menu-item" href="appointment.html"><i class="fa-solid fa-calendar-check"></i> Online Appointment</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="admission.html"><i class="fa-solid fa-hospital-user"></i> Admission Info</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="patient-guide.html"><i class="fa-solid fa-book-medical"></i> Patient Guide</a></div>
@@ -445,12 +476,10 @@
             </li>
 
             <!-- Menu 07: Health & Media -->
-            <li class="nav-item dropdown position-static">
-              <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="স্বাস্থ্য ও মিডিয়া" data-en="Health & Media">
-                স্বাস্থ্য ও মিডিয়া
-              </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="স্বাস্থ্য ও মিডিয়া" data-en="Health & Media">স্বাস্থ্য ও মিডিয়া</a>
               <div class="dropdown-menu mega-menu" aria-labelledby="mediaDropdown">
-                <div class="row g-2">
+                <div class="row g-1">
                   <div class="col-lg-3"><a class="mega-menu-item" href="health-tips.html"><i class="fa-solid fa-lightbulb"></i> Health Tips</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="news.html"><i class="fa-solid fa-newspaper"></i> Hospital News</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="gallery.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></div>
@@ -466,214 +495,427 @@
           </ul>
 
           <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
-            <a href="appointment.html" class="btn btn-primary rounded-pill w-100 w-lg-auto px-3 py-2 fw-semibold btn-sm"><i class="fa-solid fa-calendar-plus me-1"></i> Book Appointment</a>
+            <a href="appointment.html" class="btn btn-primary w-100 w-lg-auto rounded-pill px-3 py-2 fw-semibold btn-sm text-center shadow-sm"><i class="fa-solid fa-calendar-plus me-1"></i> Book Appointment</a>
           </div>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- ================= HERO SECTION ================= -->
-  <section class="hero-section text-center text-lg-start">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-8">
-          <span class="hero-badge mb-3"><i class="fa-solid fa-shield-halved text-info me-1"></i> WELCOME TO MAX HOSPITAL LTD.</span>
-          <h1 class="display-4 fw-bold mb-3 text-white" id="hero-title" data-bn="আধুনিক চিকিৎসা, মানবিক সেবার অঙ্গীকার" data-en="Advanced Healthcare. Compassionate Care.">আধুনিক চিকিৎসা, মানবিক সেবার অঙ্গীকার</h1>
-          <p class="lead mb-4 text-light opacity-90" data-bn="চকরিয়া ব্রাঞ্চে অভিজ্ঞ ডাক্তার ও আধুনিক ডায়াগনস্টিক সুবিধার সাথে মানসম্মত স্বাস্থ্যসেবা।" data-en="Trusted healthcare services with experienced doctors, skilled professionals and modern facilities in Chakaria.">চকরিয়া ব্রাঞ্চে অভিজ্ঞ ডাক্তার ও আধুনিক ডায়াগনস্টিক সুবিধার সাথে মানসম্মত স্বাস্থ্যসেবা।</p>
-          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-            <a href="appointment.html" class="btn btn-primary btn-lg rounded-pill px-4 fw-semibold shadow"><i class="fa-solid fa-calendar-check me-2"></i> Book Appointment</a>
-            <a href="doctors.html" class="btn btn-outline-light btn-lg rounded-pill px-4 fw-semibold"><i class="fa-solid fa-user-doctor me-2"></i> Find a Doctor</a>
-            <a href="tel:01729325489" class="btn btn-danger btn-lg rounded-pill px-4 fw-semibold pulse-btn"><i class="fa-solid fa-phone-volume me-2"></i> 24/7 Emergency</a>
+  <!-- HERO SLIDER SECTION -->
+  <section class="hero-slider swiper">
+    <div class="swiper-wrapper">
+      <!-- Slide 1 -->
+      <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');">
+        <div class="container hero-content">
+          <div class="row">
+            <div class="col-lg-8" data-aos="fade-right">
+              <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 fs-6"><i class="fa-solid fa-shield-halved me-1"></i> বিশ্বস্ত চিকিৎসা সেবা</span>
+              <h1 class="display-4 fw-bold mb-3" data-bn="আধুনিক প্রযুক্তি ও মানবিক সেবার সেরা সমন্বয়" data-en="Advanced Technology & Human-Centered Healthcare">আধুনিক প্রযুক্তি ও মানবিক সেবার সেরা সমন্বয়</h1>
+              <p class="fs-5 mb-4 opacity-90" data-bn="চকরিয়ায় সর্বোচ্চ মানের স্বাস্থ্যসেবা নিশ্চিত করতে আমরা সার্বক্ষণিক প্রস্তুত।" data-en="Providing top-notch healthcare services 24/7 in Chakaria with top specialists.">চকরিয়ায় সর্বোচ্চ মানের স্বাস্থ্যসেবা নিশ্চিত করতে আমরা সার্বক্ষণিক প্রস্তুত।</p>
+              <div class="d-flex flex-wrap gap-3">
+                <a href="appointment.html" class="btn btn-primary btn-lg rounded-pill px-4"><i class="fa-solid fa-calendar-check me-2"></i> অ্যাপয়েন্টমেন্ট নিন</a>
+                <a href="doctors.html" class="btn btn-outline-light btn-lg rounded-pill px-4"><i class="fa-solid fa-user-doctor me-2"></i> ডাক্তারগণ</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1920&q=80');">
+        <div class="container hero-content">
+          <div class="row">
+            <div class="col-lg-8" data-aos="fade-right">
+              <span class="badge bg-danger px-3 py-2 rounded-pill mb-3 fs-6"><i class="fa-solid fa-truck-medical me-1"></i> ২৪/৭ জরুরী বিভাগ</span>
+              <h1 class="display-4 fw-bold mb-3" data-bn="জরুরী মুহূর্তে আপনার বিশ্বস্ত ঠিকানা" data-en="Your Trusted Partner in Medical Emergencies">জরুরী মুহূর্তে আপনার বিশ্বস্ত ঠিকানা</h1>
+              <p class="fs-5 mb-4 opacity-90" data-bn="আধুনিক আইসিইউ, এ্যাম্বুলেন্স এবং দক্ষ ইমার্জেন্সি মেডিক্যাল টিম প্রস্তুত সবসময়।" data-en="Equipped ICU, Ambulance and highly dedicated Emergency Team available around the clock.">আধুনিক আইসিইউ, এ্যাম্বুলেন্স এবং দক্ষ ইমার্জেন্সি মেডিক্যাল টিম প্রস্তুত সবসময়।</p>
+              <div class="d-flex flex-wrap gap-3">
+                <a href="tel:01729325489" class="btn btn-danger btn-lg rounded-pill px-4"><i class="fa-solid fa-phone-volume me-2"></i> ইমার্জেন্সি কল করুন</a>
+                <a href="services.html" class="btn btn-outline-light btn-lg rounded-pill px-4"><i class="fa-solid fa-list-check me-2"></i> সকল সেবা</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="swiper-pagination"></div>
   </section>
 
-  <!-- ================= FLOATING QUICK ACCESS PANEL ================= -->
-  <div class="container floating-access-panel">
+  <!-- QUICK ACCESS FLOATING PANEL -->
+  <div class="container floating-access-panel" data-aos="fade-up">
     <div class="row g-3">
-      <div class="col-md-3 col-6">
+      <div class="col-6 col-lg-3">
         <div class="glass-card text-center">
-          <i class="fa-solid fa-truck-medical fa-2x text-danger mb-2"></i>
-          <h6 class="fw-bold m-0">24/7 Emergency</h6>
-          <small class="text-muted d-block mt-1">Immediate Care</small>
+          <div class="card-icon-box mx-auto mb-2 text-danger bg-danger-subtle"><i class="fa-solid fa-truck-medical"></i></div>
+          <h6 class="fw-bold mb-1">২৪/৭ ইমার্জেন্সি</h6>
+          <p class="text-muted small m-0 d-none d-sm-block">তাৎক্ষণিক চিকিৎসার সুবিধা</p>
         </div>
       </div>
-      <div class="col-md-3 col-6">
+      <div class="col-6 col-lg-3">
         <div class="glass-card text-center">
-          <i class="fa-solid fa-calendar-days fa-2x text-primary mb-2"></i>
-          <h6 class="fw-bold m-0">Appointment</h6>
-          <small class="text-muted d-block mt-1">Book Online</small>
+          <div class="card-icon-box mx-auto mb-2 text-primary bg-primary-subtle"><i class="fa-solid fa-calendar-check"></i></div>
+          <h6 class="fw-bold mb-1">অনলাইন বুকিং</h6>
+          <p class="text-muted small m-0 d-none d-sm-block">সহজ অ্যাপয়েন্টমেন্ট প্রসেস</p>
         </div>
       </div>
-      <div class="col-md-3 col-6">
+      <div class="col-6 col-lg-3">
         <div class="glass-card text-center">
-          <i class="fa-solid fa-user-doctor fa-2x text-info mb-2"></i>
-          <h6 class="fw-bold m-0">Find Doctor</h6>
-          <small class="text-muted d-block mt-1">Specialist Search</small>
+          <div class="card-icon-box mx-auto mb-2 text-info bg-info-subtle"><i class="fa-solid fa-user-doctor"></i></div>
+          <h6 class="fw-bold mb-1">বিশেষজ্ঞ ডাক্তার</h6>
+          <p class="text-muted small m-0 d-none d-sm-block">অভিজ্ঞ কনসালটেন্টবৃন্দ</p>
         </div>
       </div>
-      <div class="col-md-3 col-6">
+      <div class="col-6 col-lg-3">
         <div class="glass-card text-center">
-          <i class="fa-solid fa-ambulance fa-2x text-warning mb-2"></i>
-          <h6 class="fw-bold m-0">Ambulance</h6>
-          <small class="text-muted d-block mt-1">Call 01729325489</small>
+          <div class="card-icon-box mx-auto mb-2 text-warning bg-warning-subtle"><i class="fa-solid fa-microscope"></i></div>
+          <h6 class="fw-bold mb-1">ডিজিটাল ল্যাব</h6>
+          <p class="text-muted small m-0 d-none d-sm-block">সঠিক ও নিখুঁত প্যাথলজি রিপ্রোট</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ================= HOSPITAL INTRODUCTION ================= -->
+  <!-- ABOUT HOSPITAL SECTION -->
   <section class="section-padding">
     <div class="container">
       <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80" alt="Max Hospital Building" class="img-fluid rounded-4 shadow-lg">
-        </div>
-        <div class="col-lg-6">
-          <span class="section-subtitle">ABOUT OUR HOSPITAL</span>
-          <h2 class="section-title display-6">Welcome to Max Hospital Ltd. (Chakaria Branch)</h2>
-          <p class="text-muted">We provide patient-centered, high-quality medical services equipped with state-of-the-art diagnostic technology and led by highly certified medical specialists in Cox's Bazar region.</p>
-          <div class="row g-3 my-3">
-            <div class="col-6"><i class="fa-solid fa-circle-check text-primary me-2"></i> Experienced Doctors</div>
-            <div class="col-6"><i class="fa-solid fa-circle-check text-primary me-2"></i> Modern Diagnostic Services</div>
-            <div class="col-6"><i class="fa-solid fa-circle-check text-primary me-2"></i> 24/7 Emergency & ICU</div>
-            <div class="col-6"><i class="fa-solid fa-circle-check text-primary me-2"></i> Skilled Nursing Team</div>
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80" alt="Max Hospital Building" class="img-fluid rounded-4 shadow-lg">
+            <div class="position-absolute bottom-0 end-0 bg-primary text-white p-4 rounded-4 shadow me-3 mb-n3 d-none d-sm-block">
+              <h3 class="fw-bold m-0">১০+</h3>
+              <p class="m-0 small">বছরের ধারাবাহিক সুনাম</p>
+            </div>
           </div>
-          <a href="about.html" class="btn btn-outline-primary rounded-pill px-4 mt-2">Discover Our Hospital &rarr;</a>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <span class="section-subtitle">আমাদের কথা</span>
+          <h2 class="section-title">ম্যাক্স হাসপাতাল লিমিটেড (চকরিয়া শাখা)</h2>
+          <p class="lead text-primary fw-semibold">চকরিয়া ও কক্সবাজার এলাকার জনগণের জন্য একটি আধুনিক ও আন্তর্জাতিক মানের চিকিৎসাসেবা প্রতিষ্ঠান।</p>
+          <p class="text-muted">আমরা মানসম্মত এবং সাশ্রয়ী খরচে সর্বোচ্চ মানের স্বাস্থ্যসেবা প্রদানে প্রতিশ্রুতিবদ্ধ। আধুনিক ডায়াগনস্টিক ইকুইপমেন্ট, নিবেদিতপ্রাণ নার্সিং টিম এবং অভিজ্ঞ বিশেষজ্ঞ চিকিৎসকদের মাধ্যমে আমরা আপনার ও আপনার পরিবারের সুস্বাস্থ্য নিশ্চিত করি।</p>
+          
+          <div class="row g-3 my-3">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <i class="fa-solid fa-circle-check text-success fs-4"></i>
+                <span class="fw-bold">আধুনিক আইসিইউ ও ওটি</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <i class="fa-solid fa-circle-check text-success fs-4"></i>
+                <span class="fw-bold">ডিজিটাল এক্স-রে ও সিটি স্ক্যান</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <i class="fa-solid fa-circle-check text-success fs-4"></i>
+                <span class="fw-bold">২৪ ঘণ্টা ফার্মেসি সেবা</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-3">
+                <i class="fa-solid fa-circle-check text-success fs-4"></i>
+                <span class="fw-bold">জরুরী এ্যাম্বুলেন্স সার্ভিস</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="about.html" class="btn btn-primary rounded-pill px-4 mt-2">আরও জানুন &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= HOSPITAL STATISTICS ================= -->
-  <section class="stats-section">
+  <!-- SPECIALIZED SERVICES SECTION -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
+        <span class="section-subtitle">আমাদের সেবাসমূহ</span>
+        <h2 class="section-title">আপনার স্বাস্থ্য সুরক্ষায় বিশেষায়িত বিভাগসমূহ</h2>
+        <p class="text-muted">দক্ষ ও অভিজ্ঞ চিকিৎসকদের তত্ত্বাবধানে প্রতিনিয়ত প্রদান করা হচ্ছে বহুমুখী চিকিৎসা সেবা।</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card">
+            <div class="card-icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h5 class="fw-bold mb-2">কার্ডিওলজি (হৃদরোগ)</h5>
+            <p class="text-muted small">হৃদরোগ সম্পর্কিত সকল ধরণের পরীক্ষা ও বিশেষজ্ঞ চিকিৎসকদের দ্বারা নিবিড় যত্ন এবং পরামর্শ।</p>
+            <a href="cardiology.html" class="text-primary fw-semibold text-decoration-none">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card">
+            <div class="card-icon-box"><i class="fa-solid fa-person-pregnant"></i></div>
+            <h5 class="fw-bold mb-2">স্ত্রী ও প্রসূতি রোগ বিভাগ</h5>
+            <p class="text-muted small">গর্ভবতী মা ও নবজাতকের নিরাপদ মাতৃত্ব নিশ্চিত করতে সার্বক্ষণিক প্রসূতি সেবা ও অস্ত্রোপচার।</p>
+            <a href="gynecology.html" class="text-primary fw-semibold text-decoration-none">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-card">
+            <div class="card-icon-box"><i class="fa-solid fa-baby"></i></div>
+            <h5 class="fw-bold mb-2">শিশু ও নবজাতক রোগ</h5>
+            <p class="text-muted small">শিশুদের যে কোনো জটিল রোগের উন্নত চিকিৎসা এবং এনআইসিইউ (NICU) সুবিধা।</p>
+            <a href="pediatrics.html" class="text-primary fw-semibold text-decoration-none">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-card">
+            <div class="card-icon-box"><i class="fa-solid fa-bone"></i></div>
+            <h5 class="fw-bold mb-2">অর্ধোপেডিক্স ও ট্রমা</h5>
+            <p class="text-muted small">হাড় ভাঙা, হাড়ের ক্ষয় ও ট্রমা আক্রান্ত রোগীদের জন্য আধুনিক সার্জারি ও চিকিৎসা সুবিধা।</p>
+            <a href="orthopedics.html" class="text-primary fw-semibold text-decoration-none">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-card">
+            <div class="card-icon-box"><i class="fa-solid fa-scalpel"></i></div>
+            <h5 class="fw-bold mb-2">জনারেল ও ল্যাপারোস্কোপিক সার্জারি</h5>
+            <p class="text-muted small">আধুনিক যন্ত্রপাতির সাহায্যে কেটে-ছেঁড়ে ছাড়া বা সূক্ষ্ম ছিদ্রের মাধ্যমে উন্নত অপারেশনের সুবিধা।</p>
+            <a href="surgery.html" class="text-primary fw-semibold text-decoration-none">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-card">
+            <div class="card-icon-box"><i class="fa-solid fa-microscope"></i></div>
+            <h5 class="fw-bold mb-2">ডায়াগনস্টিক ও প্যাথলজি</h5>
+            <p class="text-muted small">সর্বাধুনিক অটো-অ্যানালাইজার মেশিনে সর্বোচ্চ নির্ভুলতায় সব ধরণের রক্ত ও ইমেজিং পরীক্ষা।</p>
+            <a href="laboratory.html" class="text-primary fw-semibold text-decoration-none">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED DOCTORS SECTION -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end mb-5" data-aos="fade-up">
+        <div>
+          <span class="section-subtitle">আমাদের স্পেশালিস্টগণ</span>
+          <h2 class="section-title m-0">বিশিষ্ট বিশেষজ্ঞ ডাক্তারগণ</h2>
+        </div>
+        <a href="doctors.html" class="btn btn-outline-primary rounded-pill px-4 mt-3 mt-md-0">সব ডাক্তার দেখুন <i class="fa-solid fa-arrow-right ms-1"></i></a>
+      </div>
+
+      <div class="row g-4">
+        <!-- Doctor 1 -->
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="doctor-card">
+            <div class="doctor-img-wrap">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Doctor Profile">
+            </div>
+            <div class="p-3 text-center">
+              <h6 class="fw-bold mb-1">ডঃ মোঃ আব্দুল্লাহ আল মামুন</h6>
+              <p class="text-primary small mb-2">মেডিসিন বিশেষজ্ঞ</p>
+              <p class="text-muted small mb-3">MBBS, FCPS (Medicine)</p>
+              <a href="appointment.html" class="btn btn-sm btn-soft-primary btn-outline-primary w-100 rounded-pill">সিরিয়াল নিন</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctor 2 -->
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="doctor-card">
+            <div class="doctor-img-wrap">
+              <img src="https://images.unsplash.com/photo-1594824813566-78853a817452?auto=format&fit=crop&w=600&q=80" alt="Doctor Profile">
+            </div>
+            <div class="p-3 text-center">
+              <h6 class="fw-bold mb-1">ডঃ ফাতেমা জোহরা</h6>
+              <p class="text-primary small mb-2">স্ত্রী ও প্রসূতি রোগ বিশেষজ্ঞ</p>
+              <p class="text-muted small mb-3">MBBS, MS (Gynae & Obs)</p>
+              <a href="appointment.html" class="btn btn-sm btn-soft-primary btn-outline-primary w-100 rounded-pill">সিরিয়াল নিন</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctor 3 -->
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="doctor-card">
+            <div class="doctor-img-wrap">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="Doctor Profile">
+            </div>
+            <div class="p-3 text-center">
+              <h6 class="fw-bold mb-1">ডঃ কামরুল হাসান</h6>
+              <p class="text-primary small mb-2">শিশু রোগ বিশেষজ্ঞ</p>
+              <p class="text-muted small mb-3">MBBS, DCH (Child Health)</p>
+              <a href="appointment.html" class="btn btn-sm btn-soft-primary btn-outline-primary w-100 rounded-pill">সিরিয়াল নিন</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctor 4 -->
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+          <div class="doctor-card">
+            <div class="doctor-img-wrap">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80" alt="Doctor Profile">
+            </div>
+            <div class="p-3 text-center">
+              <h6 class="fw-bold mb-1">ডঃ তারেক রহমান</h6>
+              <p class="text-primary small mb-2">অর্থোপেডিক সার্জন</p>
+              <p class="text-muted small mb-3">MBBS, MS (Ortho)</p>
+              <a href="appointment.html" class="btn btn-sm btn-soft-primary btn-outline-primary w-100 rounded-pill">সিরিয়াল নিন</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY BANNER -->
+  <section class="container my-4" data-aos="zoom-in">
+    <div class="emergency-banner">
+      <div class="row align-items-center text-center text-lg-start g-4">
+        <div class="col-lg-8">
+          <h3 class="fw-bold mb-2"><i class="fa-solid fa-headset me-2"></i> জরুরি চিকিৎসার প্রয়োজন?</h3>
+          <p class="m-0 lead opacity-90">আমাদের ২৪ ঘণ্টার ইমার্জেন্সি টিম ও এ্যাম্বুলেন্স সার্ভিস সর্বদা প্রস্তুত রয়েছে। যে কোনো জরুরী প্রয়োজনে সাথে সাথে কল করুন।</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="tel:01729325489" class="btn btn-light text-danger btn-lg rounded-pill px-4 fw-bold shadow"><i class="fa-solid fa-phone me-2"></i> ০১৭২৯৩২৫৪৮৯</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICS COUNTER SECTION -->
+  <section class="stats-section my-5">
     <div class="container">
       <div class="row g-4 text-center">
-        <div class="col-md-2 col-6">
-          <h2 class="display-5 fw-bold text-info counter" data-target="50">0</h2>
-          <p class="m-0 text-light opacity-75">Hospital Beds</p>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <h2 class="display-5 fw-bold text-info mb-1">৫০+</h2>
+          <p class="m-0 text-light opacity-75">শয্যা বিশিষ্ট বেড</p>
         </div>
-        <div class="col-md-2 col-6">
-          <h2 class="display-5 fw-bold text-info counter" data-target="100">0</h2>
-          <p class="m-0 text-light opacity-75">Healthcare Staff</p>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="display-5 fw-bold text-info mb-1">৩০+</h2>
+          <p class="m-0 text-light opacity-75">বিশেষজ্ঞ ডাক্তার</p>
         </div>
-        <div class="col-md-2 col-6">
-          <h2 class="display-5 fw-bold text-info counter" data-target="20">0</h2>
-          <p class="m-0 text-light opacity-75">Specialist Doctors</p>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+          <h2 class="display-5 fw-bold text-info mb-1">১০০+</h2>
+          <p class="m-0 text-light opacity-75">দক্ষ নার্স ও স্টাফ</p>
         </div>
-        <div class="col-md-2 col-6">
-          <h2 class="display-5 fw-bold text-info counter" data-target="15">0</h2>
-          <p class="m-0 text-light opacity-75">Departments</p>
-        </div>
-        <div class="col-md-2 col-6">
-          <h2 class="display-5 fw-bold text-info">24/7</h2>
-          <p class="m-0 text-light opacity-75">Emergency Service</p>
-        </div>
-        <div class="col-md-2 col-6">
-          <h2 class="display-5 fw-bold text-info counter" data-target="10000">0</h2>
-          <p class="m-0 text-light opacity-75">Patients Served</p>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+          <h2 class="display-5 fw-bold text-info mb-1">৫০,০০০+</h2>
+          <p class="m-0 text-light opacity-75">সন্তুষ্ট রোগী</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= EMERGENCY SECTION ================= -->
-  <section class="container my-5">
-    <div class="emergency-banner text-center text-md-start d-md-flex align-items-center justify-content-between">
-      <div>
-        <h3 class="fw-bold mb-2"><i class="fa-solid fa-truck-medical me-2"></i> 24/7 EMERGENCY MEDICAL SERVICE</h3>
-        <p class="mb-0 opacity-90">Immediate emergency assistance and prompt ambulance mobilization in Chakaria.</p>
-      </div>
-      <div class="mt-3 mt-md-0 d-flex gap-2 justify-content-center">
-        <a href="tel:01729325489" class="btn btn-light text-danger fw-bold rounded-pill px-4"><i class="fa-solid fa-phone me-1"></i> Call 01729325489</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= OUR SERVICES ================= -->
+  <!-- PATIENT TESTIMONIALS SECTION -->
   <section class="section-padding bg-white">
     <div class="container">
-      <div class="text-center mb-5">
-        <span class="section-subtitle">OUR MEDICAL SERVICES</span>
-        <h2 class="section-title">Comprehensive Healthcare Services</h2>
+      <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
+        <span class="section-subtitle">রোগীদের মতামত</span>
+        <h2 class="section-title">আমাদের সেবা নিয়ে রোগীরা যা বলছেন</h2>
       </div>
+
       <div class="row g-4">
-        <div class="col-md-3 col-sm-6">
-          <div class="feature-card">
-            <div class="card-icon-box"><i class="fa-solid fa-truck-medical"></i></div>
-            <h5 class="fw-bold">Emergency</h5>
-            <p class="text-muted small">24/7 round-the-clock emergency care facilities.</p>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="testimonial-card">
+            <div class="text-warning mb-3">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-muted small">"চকরিয়া ম্যাক্স হাসপাতালের সেবা অত্যন্ত চমৎকার। ডাক্তার এবং নার্সদের ব্যবহার এবং আইসিইউর পরিচ্ছন্নতা সত্যি প্রশংসনীয়।"</p>
+            <div class="d-flex align-items-center gap-3 mt-3">
+              <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">র</div>
+              <div>
+                <h6 class="fw-bold mb-0">রফিকুল ইসলাম</h6>
+                <small class="text-muted">চকরিয়া, কক্সবাজার</small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="feature-card">
-            <div class="card-icon-box"><i class="fa-solid fa-flask-vial"></i></div>
-            <h5 class="fw-bold">Laboratory</h5>
-            <p class="text-muted small">Accurate automated clinical biochemistry & pathology.</p>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-card">
+            <div class="text-warning mb-3">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-muted small">"আমার স্ত্রীর ডেলিভারির জন্য এখানে ভর্তি করেছিলাম। অভিজ্ঞ গাইনোকোলজিস্ট ও সিস্টারদের আন্তরিকতায় সম্পূর্ণ নিরাপদে বাচ্চার জন্ম হয়েছে।"</p>
+            <div class="d-flex align-items-center gap-3 mt-3">
+              <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">স</div>
+              <div>
+                <h6 class="fw-bold mb-0">সাইফুল আলম</h6>
+                <small class="text-muted">পেকুয়া, কক্সবাজার</small>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="feature-card">
-            <div class="card-icon-box"><i class="fa-solid fa-x-ray"></i></div>
-            <h5 class="fw-bold">X-Ray & USG</h5>
-            <p class="text-muted small">High-resolution digital X-Ray and 4D Ultrasonography.</p>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="feature-card">
-            <div class="card-icon-box"><i class="fa-solid fa-bed-pulse"></i></div>
-            <h5 class="fw-bold">ICU / NICU</h5>
-            <p class="text-muted small">Advanced intensive care unit for critical patients.</p>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="testimonial-card">
+            <div class="text-warning mb-3">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-muted small">"এখানে প্যাথলজিক্যাল টেস্ট রিপোর্ট খুব দ্রুত পাওয়া যায়। অনলাইন এ্যাপয়েন্টমেন্ট সিস্টেম থাকায় লাইনে দাঁড়িয়ে সময় নষ্ট করতে হয় না।"</p>
+            <div class="d-flex align-items-center gap-3 mt-3">
+              <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">ন</div>
+              <div>
+                <h6 class="fw-bold mb-0">নাসরিন আক্তার</h6>
+                <small class="text-muted">চকরিয়া, কক্সবাজার</small>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= FEATURED DOCTORS ================= -->
+  <!-- FAQ ACCORDION SECTION -->
   <section class="section-padding">
     <div class="container">
-      <div class="d-flex justify-content-between align-items-end mb-4">
-        <div>
-          <span class="section-subtitle">MEET OUR EXPERTS</span>
-          <h2 class="section-title m-0">Specialist Doctors</h2>
-        </div>
-        <a href="doctors.html" class="btn btn-outline-primary rounded-pill">View All Doctors &rarr;</a>
+      <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
+        <span class="section-subtitle">সাধারণ জিজ্ঞাসা</span>
+        <h2 class="section-title">সচরাচর জিজ্ঞাসিত প্রশ্নাবলী</h2>
       </div>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Doctor Photo">
-            <div class="card-body">
-              <span class="badge bg-primary-subtle text-primary mb-2">Medicine Specialist</span>
-              <h5 class="fw-bold card-title">Dr. Specialist Name</h5>
-              <p class="text-muted small mb-2">MBBS, FCPS (Medicine)</p>
-              <a href="appointment.html" class="btn btn-sm btn-primary w-100 rounded-pill mt-2">Book Appointment</a>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8" data-aos="fade-up">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item border-0 shadow-sm mb-3 rounded-3 overflow-hidden">
+              <h2 class="accordion-header">
+                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  অনলাইনে ডাক্তার দেখানোর জন্য কীভাবে অ্যাপয়েন্টমেন্ট নেবো?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  আমাদের ওয়েবসাইটের "Book Appointment" লিংকে গিয়ে সহজ ফরমটি পূরণ করে পছন্দের ডাক্তারের সিরিয়াল নিতে পারেন অথবা আমাদের হেল্পলাইন নম্বরে সরাসরি কল করতে পারেন।
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Doctor Photo">
-            <div class="card-body">
-              <span class="badge bg-primary-subtle text-primary mb-2">Gynecology</span>
-              <h5 class="fw-bold card-title">Dr. Female Specialist</h5>
-              <p class="text-muted small mb-2">MBBS, DGO, MCPS</p>
-              <a href="appointment.html" class="btn btn-sm btn-primary w-100 rounded-pill mt-2">Book Appointment</a>
+
+            <div class="accordion-item border-0 shadow-sm mb-3 rounded-3 overflow-hidden">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  জরুরী বিভাগ ও এ্যাম্বুলেন্স সার্ভিস কি সব সময় চালু থাকে?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  হ্যাঁ, আমাদের ২৫ ঘণ্টা ইমার্জেন্সি বিভাগ, আইসিইউ এবং সুসজ্জিত এ্যাম্বুলেন্স সেবা চালু থাকে।
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Doctor Photo">
-            <div class="card-body">
-              <span class="badge bg-primary-subtle text-primary mb-2">Cardiology</span>
-              <h5 class="fw-bold card-title">Dr. Cardiac Specialist</h5>
-              <p class="text-muted small mb-2">MBBS, MD (Cardiology)</p>
-              <a href="appointment.html" class="btn btn-sm btn-primary w-100 rounded-pill mt-2">Book Appointment</a>
+
+            <div class="accordion-item border-0 shadow-sm mb-3 rounded-3 overflow-hidden">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  রিপোর্ট সংগ্রহের সময়সূচী কী?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  প্রতিদিন সকাল ৮:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত আমাদের প্যাথলজি কাউন্টার থেকে যেকোনো পরীক্ষার রিপোর্ট সংগ্রহ করতে পারবেন।
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -681,162 +923,106 @@
     </div>
   </section>
 
-  <!-- ================= ONLINE APPOINTMENT FORM ================= -->
-  <section class="section-padding bg-white">
-    <div class="container max-w-900">
-      <div class="glass-card p-4 p-md-5">
-        <div class="text-center mb-4">
-          <span class="section-subtitle">BOOKING PORTAL</span>
-          <h2 class="section-title">Schedule Your Appointment</h2>
-        </div>
-        <form id="appointmentForm" onsubmit="handleAppointment(event)">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Patient Name</label>
-              <input type="text" class="form-control" required placeholder="Full Name">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Mobile Number</label>
-              <input type="tel" class="form-control" required placeholder="017XXXXXXXX">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Department</label>
-              <select class="form-select">
-                <option>General Medicine</option>
-                <option>Gynecology & Obstetrics</option>
-                <option>Cardiology</option>
-                <option>Pediatrics</option>
-                <option>Orthopedics</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Preferred Date</label>
-              <input type="date" class="form-control" required>
-            </div>
-            <div class="col-12 text-center mt-4">
-              <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 fw-semibold"><i class="fa-solid fa-paper-plane me-2"></i> Submit Booking Request</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= CONTACT SECTION ================= -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-5">
-          <span class="section-subtitle">REACH US</span>
-          <h2 class="section-title">Hospital Address & Contacts</h2>
-          <div class="mt-4">
-            <p><i class="fa-solid fa-location-dot text-primary me-2"></i> <strong>Parvez Tower, Thana Road Head, Chakaria, Cox’s Bazar, Bangladesh</strong></p>
-            <p><i class="fa-solid fa-phone text-primary me-2"></i> <strong>Hotline:</strong> 01729325489</p>
-            <p><i class="fa-brands fa-whatsapp text-success me-2"></i> <strong>WhatsApp:</strong> 01729325489</p>
-            <p><i class="fa-solid fa-clock text-primary me-2"></i> <strong>Emergency:</strong> Open 24 Hours / 7 Days</p>
-          </div>
-        </div>
-        <div class="col-lg-7">
-          <div class="rounded-4 overflow-hidden shadow-sm h-100 min-vh-300 bg-light d-flex align-items-center justify-content-center">
-            <iframe src="https://maps.google.com/maps?q=Chakaria,Bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FOOTER ================= -->
+  <!-- FOOTER SECTION -->
   <footer class="pt-5 pb-3">
     <div class="container">
-      <div class="row g-4 mb-5">
+      <div class="row g-4 mb-4">
         <div class="col-lg-4">
-          <h5 class="text-white fw-bold mb-3">MAX HOSPITAL LTD.</h5>
-          <p class="small text-muted">Chakaria Branch. Providing high standard modern private hospital services to the community with dedication and technical excellence.</p>
+          <h5 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-2 text-primary"></i>MAX HOSPITAL LTD.</h5>
+          <p class="small text-muted mb-3">চকরিয়া শাখা। আধুনিক প্রযুক্তি, দক্ষ চিকিৎসক ও সার্বক্ষণিক মানবিক সেবায় আমরা আপনার পাশে আছি।</p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
         </div>
-        <div class="col-lg-2 col-6">
-          <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="fw-bold mb-3">গুরুত্বপূর্ণ লিংক</h6>
           <ul class="list-unstyled small">
-            <li class="mb-2"><a href="about.html">About Us</a></li>
-            <li class="mb-2"><a href="doctors.html">Doctors</a></li>
-            <li class="mb-2"><a href="departments.html">Departments</a></li>
-            <li class="mb-2"><a href="services.html">Services</a></li>
+            <li class="mb-2"><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li class="mb-2"><a href="doctors.html">ডাক্তারদের তালিকা</a></li>
+            <li class="mb-2"><a href="services.html">সেবাসমূহ</a></li>
+            <li class="mb-2"><a href="news.html">সর্বশেষ সংবাদ</a></li>
           </ul>
         </div>
-        <div class="col-lg-3 col-6">
-          <h6 class="text-white fw-bold mb-3">Patient Care</h6>
+
+        <div class="col-6 col-lg-3">
+          <h6 class="fw-bold mb-3">রোগী পরিষেবা</h6>
           <ul class="list-unstyled small">
-            <li class="mb-2"><a href="appointment.html">Online Appointment</a></li>
-            <li class="mb-2"><a href="visiting-hours.html">Visiting Hours</a></li>
-            <li class="mb-2"><a href="patient-guide.html">Patient Rights</a></li>
-            <li class="mb-2"><a href="contact.html">Emergency Contacts</a></li>
+            <li class="mb-2"><a href="appointment.html">অনলাইন অ্যাপয়েন্টমেন্ট</a></li>
+            <li class="mb-2"><a href="patient-guide.html">রোগী নির্দেশিকা</a></li>
+            <li class="mb-2"><a href="visiting-hours.html">দর্শনার্থীদের সময়সূচী</a></li>
+            <li class="mb-2"><a href="contact.html">জরুরি যোগাযোগ</a></li>
           </ul>
         </div>
+
         <div class="col-lg-3">
-          <h6 class="text-white fw-bold mb-3">Hospital Hotline</h6>
-          <h4 class="text-info fw-bold">01729325489</h4>
-          <p class="small text-muted mb-0">Parvez Tower, Thana Road Head, Chakaria</p>
+          <h6 class="fw-bold mb-3">যোগাযোগ করুন</h6>
+          <p class="small mb-2"><i class="fa-solid fa-location-dot me-2 text-primary"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার</p>
+          <p class="small mb-2"><i class="fa-solid fa-phone me-2 text-success"></i> ০১৭২৯৩২৫৪৮৯</p>
+          <p class="small mb-0"><i class="fa-solid fa-envelope me-2 text-warning"></i> info@maxhospitalchakaria.com</p>
         </div>
       </div>
+
       <hr class="border-secondary">
-      <div class="text-center small pt-2">
-        &copy; 2026 Max Hospital Ltd. Chakaria Branch. All Rights Reserved.
+
+      <!-- COPYRIGHT & IT TEAM CREDIT -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small pt-2 gap-2 text-center text-md-start">
+        <div>
+          &copy; 2026 Max Hospital Ltd. All Rights Reserved.
+        </div>
+        <div class="text-info fw-semibold">
+          Designed & Maintained by: <span class="text-white">IT Team - MAX Hospital Ltd., Chakaria Branch</span>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ================= FLOATING ACTION BUTTONS ================= -->
+  <!-- FLOATING SIDEBAR ACTION BUTTONS -->
   <div class="floating-actions">
-    <a href="tel:01729325489" class="float-btn bg-danger" title="Emergency Call"><i class="fa-solid fa-phone"></i></a>
+    <a href="tel:01729325489" class="float-btn bg-danger" title="Call Emergency"><i class="fa-solid fa-phone"></i></a>
     <a href="https://wa.me/8801729325489" class="float-btn bg-success" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
     <a href="appointment.html" class="float-btn bg-primary" title="Book Appointment"><i class="fa-solid fa-calendar-check"></i></a>
   </div>
 
-  <!-- Mobile Bottom Sticky Bar -->
+  <!-- MOBILE BOTTOM STICKY BAR -->
   <div class="mobile-bottom-nav">
-    <a href="tel:01729325489" class="mobile-nav-item text-danger"><i class="fa-solid fa-phone"></i> Call</a>
-    <a href="https://wa.me/8801729325489" class="mobile-nav-item text-success"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-    <a href="appointment.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-calendar-check"></i> Appointment</a>
-    <a href="doctors.html" class="mobile-nav-item"><i class="fa-solid fa-user-doctor"></i> Doctors</a>
+    <a href="tel:01729325489" class="mobile-nav-item text-danger"><i class="fa-solid fa-phone"></i> কল করুন</a>
+    <a href="https://wa.me/8801729325489" class="mobile-nav-item text-success"><i class="fa-brands fa-whatsapp"></i> হোয়াটসঅ্যাপ</a>
+    <a href="appointment.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-calendar-check"></i> বুকিং</a>
+    <a href="doctors.html" class="mobile-nav-item"><i class="fa-solid fa-user-doctor"></i> ডাক্তারগণ</a>
   </div>
 
-  <!-- Scripts: Bootstrap 5 Bundle JS -->
+  <!-- Scripts: Bootstrap 5 JS, AOS Library, Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <script>
-    // Mobile Accordion-style Submenu Toggle JS logic
-    document.addEventListener('DOMContentLoaded', () => {
-      const dropdownToggles = document.querySelectorAll('.nav-item.dropdown .dropdown-toggle');
-      
-      dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function (e) {
-          if (window.innerWidth < 992) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const currentMenu = this.nextElementSibling;
-            const isOpen = currentMenu.classList.contains('show');
-
-            // Close all other submenus for clean accordion behaviour on mobile
-            document.querySelectorAll('.dropdown-menu.mega-menu').forEach(menu => {
-              menu.classList.remove('show');
-            });
-            document.querySelectorAll('.dropdown-toggle').forEach(btn => {
-              btn.setAttribute('aria-expanded', 'false');
-            });
-
-            if (!isOpen) {
-              currentMenu.classList.add('show');
-              this.setAttribute('aria-expanded', 'true');
-            }
-          }
-        });
-      });
+    // Initialize AOS Animation
+    AOS.init({
+      duration: 800,
+      once: true
     });
 
-    // Language Toggle Functionality
+    // Initialize Swiper Hero Slider
+    const swiper = new Swiper('.hero-slider', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+
+    // Language Switcher Functionality
     function switchLanguage(lang) {
-      document.getElementById('lang-bn')?.classList.toggle('active', lang === 'bn');
-      document.getElementById('lang-en')?.classList.toggle('active', lang === 'en');
+      document.querySelectorAll('.lang-bn-btn').forEach(b => b.classList.toggle('active', lang === 'bn'));
+      document.querySelectorAll('.lang-en-btn').forEach(b => b.classList.toggle('active', lang === 'en'));
       
       document.querySelectorAll('[data-bn]').forEach(el => {
         el.innerText = el.getAttribute(`data-${lang}`);
@@ -844,44 +1030,7 @@
       localStorage.setItem('pref_lang', lang);
     }
 
-    // Animated Counters
-    const counters = document.querySelectorAll('.counter');
-    const animateCounters = () => {
-      counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        let count = 0;
-        const speed = target / 50;
-        const updateCount = () => {
-          count += speed;
-          if (count < target) {
-            counter.innerText = Math.ceil(count) + '+';
-            setTimeout(updateCount, 30);
-          } else {
-            counter.innerText = target + '+';
-          }
-        };
-        updateCount();
-      });
-    };
-
-    let counterTriggered = false;
-    window.addEventListener('scroll', () => {
-      const statsSec = document.querySelector('.stats-section');
-      if (statsSec && !counterTriggered) {
-        const topPos = statsSec.getBoundingClientRect().top;
-        if (topPos < window.innerHeight) {
-          animateCounters();
-          counterTriggered = true;
-        }
-      }
-    });
-
-    function handleAppointment(e) {
-      e.preventDefault();
-      alert('ধন্যবাদ! আপনার অ্যাপয়েন্টমেন্টের আবেদন সফলভাবে গ্রহণ করা হয়েছে। আমাদের প্রতিনিধি শীঘ্রই যোগাযোগ করবেন।');
-      document.getElementById('appointmentForm').reset();
-    }
-
+    // Auto Load Saved Language Preference
     window.addEventListener('DOMContentLoaded', () => {
       const savedLang = localStorage.getItem('pref_lang') || 'bn';
       switchLanguage(savedLang);
