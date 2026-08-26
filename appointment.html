@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অনলাইন অ্যাপয়েন্টমেন্ট | Max Hospital Ltd. - Chakaria Branch</title>
+  
+  <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts, AOS Animation -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --secondary: #0f172a;
+      --accent: #0ea5e9;
+      --bg-light: #f8fafc;
+      --text-main: #334155;
+      --glass-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-light);
+      overflow-x: hidden;
+    }
+
+    /* Top Info Bar */
+    .top-info-bar {
+      background: var(--secondary);
+      color: #94a3b8;
+      font-size: 0.85rem;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .top-info-bar a { color: #e2e8f0; text-decoration: none; }
+    .top-info-bar a:hover { color: #38bdf8; }
+
+    /* Sticky Header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .brand-logo-text { font-weight: 800; line-height: 1.1; color: var(--secondary); }
+    .brand-sub { font-size: 0.75rem; color: var(--primary); letter-spacing: 1px; font-weight: 700; }
+
+    .nav-link {
+      font-weight: 600;
+      color: var(--secondary) !important;
+      font-size: 0.95rem;
+      padding: 12px 16px !important;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-item.dropdown:hover > .nav-link { color: var(--primary) !important; }
+
+    /* Desktop Mega Menu */
+    @media (min-width: 992px) {
+      .nav-link { padding: 20px 12px !important; }
+      .dropdown-menu.mega-menu {
+        width: 100vw;
+        max-width: 1140px;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(10px);
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        padding: 24px;
+        background: #ffffff;
+        opacity: 0;
+        visibility: hidden;
+        display: block;
+        transition: all 0.3s ease;
+      }
+      .nav-item.dropdown:hover .dropdown-menu.mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      .mobile-bottom-nav { display: none; }
+    }
+
+    /* Mobile Responsive Navigation */
+    @media (max-width: 991.98px) {
+      .floating-actions { display: none; }
+      
+      .navbar-collapse {
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 15px 10px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        margin-top: 10px;
+      }
+
+      .dropdown-menu.mega-menu {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 10px 15px !important;
+        margin-top: 5px;
+      }
+
+      .nav-item.dropdown .dropdown-toggle::after {
+        float: right;
+        margin-top: 8px;
+      }
+
+      .mobile-lang-switcher {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .mega-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .mega-menu-item:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+    .mega-menu-item i { width: 20px; color: var(--primary); text-align: center; }
+
+    /* Page Banner Section */
+    .page-banner {
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(2, 132, 199, 0.85) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 70px 0;
+      color: #ffffff;
+    }
+
+    .section-padding { padding: 60px 0; }
+
+    /* Appointment Form Card */
+    .appointment-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: 35px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .form-control, .form-select {
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Side Info Card */
+    .info-sidebar-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .feature-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    /* Floating Action Buttons */
+    .floating-actions {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1020;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .float-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .float-btn:hover { transform: scale(1.1); color: #fff; }
+
+    /* Footer Styling */
+    footer { background: var(--secondary); color: #94a3b8; font-size: 0.9rem; }
+    footer h5, footer h6 { color: #ffffff; }
+    footer a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #38bdf8; }
+
+    /* Mobile Bottom Sticky Bar */
+    .mobile-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1030;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    }
+    .mobile-nav-item { text-align: center; color: var(--text-main); font-size: 0.75rem; text-decoration: none; font-weight: 600; }
+    .mobile-nav-item i { font-size: 1.2rem; display: block; margin-bottom: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP INFORMATION BAR -->
+  <div class="top-info-bar d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fa-solid fa-location-dot me-1 text-info"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="tel:01729325489"><i class="fa-solid fa-phone me-1 text-success"></i> ০১৭২৯৩২৫৪৮ ৯</a>
+        <a href="https://wa.me/8801729325489"><i class="fa-brands fa-whatsapp me-1 text-success"></i> WhatsApp</a>
+        <span class="badge bg-primary"><i class="fa-solid fa-heart-pulse me-1"></i> বিশ্বস্ত স্বাস্থ্যসেবা</span>
+        
+        <!-- Language Switcher -->
+        <div class="btn-group btn-group-sm">
+          <button class="btn btn-outline-light py-0 px-2 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+          <button class="btn btn-outline-light py-0 px-2 lang-en-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER & RESPONSIVE NAVBAR -->
+  <header class="sticky-header">
+    <nav class="navbar navbar-expand-lg py-2">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
+          <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+            <i class="fa-solid fa-hospital fa-lg"></i>
+          </div>
+          <div>
+            <div class="brand-logo-text">MAX HOSPITAL LTD.</div>
+            <div class="brand-sub">CHAKARIA BRANCH</div>
+          </div>
+        </a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars fa-xl text-primary"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <div class="mobile-lang-switcher d-lg-none">
+            <span class="fw-semibold text-secondary">Language / ভাষা</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-primary py-1 px-3 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+              <button class="btn btn-outline-primary py-1 px-3 lang-en-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+          </div>
+
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html" data-bn="হোম" data-en="Home">হোম</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="aboutDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="about.html"><i class="fa-solid fa-hospital-user"></i> About Hospital</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="chairman.html"><i class="fa-solid fa-user-tie"></i> Chairman Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="managing-director.html"><i class="fa-solid fa-user-gear"></i> MD Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="management.html"><i class="fa-solid fa-users"></i> Hospital Management</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="mission-vision.html"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="facilities.html"><i class="fa-solid fa-building-circle-check"></i> Facilities</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="awards.html"><i class="fa-solid fa-award"></i> Awards</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="accreditation.html"><i class="fa-solid fa-certificate"></i> Accreditation</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="doctorsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="ডাক্তার ও স্টাফ" data-en="Doctors & Staff">ডাক্তার ও স্টাফ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="doctorsDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctors.html"><i class="fa-solid fa-user-doctor"></i> All Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="specialist-doctors.html"><i class="fa-solid fa-stethoscope"></i> Specialist Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctor-schedule.html"><i class="fa-solid fa-calendar-days"></i> Doctor Schedule</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="find-doctor.html"><i class="fa-solid fa-magnifying-glass"></i> Find a Doctor</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="staff.html"><i class="fa-solid fa-users-gear"></i> Staff List</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="nursing-team.html"><i class="fa-solid fa-user-nurse"></i> Nursing Team</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="administrative-staff.html"><i class="fa-solid fa-briefcase"></i> Admin Staff</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="deptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="বিভাগসমূহ" data-en="Departments">বিভাগসমূহ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="deptDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="medicine.html"><i class="fa-solid fa-capsules"></i> Medicine</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="surgery.html"><i class="fa-solid fa-scissors"></i> Surgery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="cardiology.html"><i class="fa-solid fa-heart-pulse"></i> Cardiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gynecology.html"><i class="fa-solid fa-person-pregnant"></i> Gynecology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="pediatrics.html"><i class="fa-solid fa-baby"></i> Pediatrics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="orthopedics.html"><i class="fa-solid fa-bone"></i> Orthopedics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ent.html"><i class="fa-solid fa-ear-listen"></i> ENT</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="departments.html"><i class="fa-solid fa-ellipsis"></i> All Departments</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="সেবাসমূহ" data-en="Services">সেবাসমূহ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="emergency.html"><i class="fa-solid fa-truck-medical"></i> Emergency</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="laboratory.html"><i class="fa-solid fa-microscope"></i> Laboratory</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-x-ray"></i> Imaging / Radiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-bed"></i> ICU & NICU</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-pills"></i> Pharmacy</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ambulance.html"><i class="fa-solid fa-ambulance"></i> Ambulance</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="patientDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="পেশেন্ট কেয়ার" data-en="Patient Care">পেশেন্ট কেয়ার</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="patientDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="appointment.html"><i class="fa-solid fa-calendar-check"></i> Online Appointment</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="admission.html"><i class="fa-solid fa-hospital-user"></i> Admission Info</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="patient-guide.html"><i class="fa-solid fa-book-medical"></i> Patient Guide</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="visiting-hours.html"><i class="fa-solid fa-clock"></i> Visiting Hours</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="স্বাস্থ্য ও মিডিয়া" data-en="Health & Media">স্বাস্থ্য ও মিডিয়া</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="mediaDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="health-tips.html"><i class="fa-solid fa-lightbulb"></i> Health Tips</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="news.html"><i class="fa-solid fa-newspaper"></i> Hospital News</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gallery.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="events.html"><i class="fa-solid fa-calendar-events"></i> Events</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+            <a href="appointment.html" class="btn btn-primary w-100 w-lg-auto rounded-pill px-3 py-2 fw-semibold btn-sm text-center shadow-sm"><i class="fa-solid fa-calendar-plus me-1"></i> Book Appointment</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- PAGE HEADER BANNER -->
+  <section class="page-banner text-center">
+    <div class="container" data-aos="fade-up">
+      <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 fw-bold"><i class="fa-solid fa-clock me-1"></i> Quick & Easy Booking</span>
+      <h1 class="display-5 fw-bold mb-2" data-bn="অনলাইন অ্যাপয়েন্টমেন্ট" data-en="Online Appointment">অনলাইন অ্যাপয়েন্টমেন্ট</h1>
+      <p class="lead opacity-90 mb-3" data-bn="ঘরে বসেই আপনার পছন্দের বিশেষজ্ঞ ডাক্তারের সিরিয়াল বুক করুন সহজ কয়েকটি ধাপে" data-en="Book serial for your specialist doctor easily from home in a few simple steps">ঘরে বসেই আপনার পছন্দের বিশেষজ্ঞ ডাক্তারের সিরিয়াল বুক করুন সহজ কয়েকটি ধাপে</p>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center m-0">
+          <li class="breadcrumb-item"><a href="home.html" class="text-white text-decoration-none">হোম</a></li>
+          <li class="breadcrumb-item active text-info" aria-current="page">অ্যাপয়েন্টমেন্ট</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- MAIN APPOINTMENT FORM & INFO SECTION -->
+  <section class="section-padding bg-light">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Left Column: Appointment Form -->
+        <div class="col-lg-8" data-aos="fade-right">
+          <div class="appointment-card">
+            <div class="d-flex align-items-center gap-3 mb-4 border-bottom pb-3">
+              <div class="bg-primary-subtle text-primary p-3 rounded-circle fs-4">
+                <i class="fa-solid fa-file-signature"></i>
+              </div>
+              <div>
+                <h4 class="fw-bold text-secondary mb-1" data-bn="অ্যাপয়েন্টমেন্ট ফরম পূরণ করুন" data-en="Fill Appointment Form">অ্যাপয়েন্টমেন্ট ফরম পূরণ করুন</h4>
+                <p class="text-muted small mb-0" data-bn="সবগুলো সঠিক তথ্য দিয়ে নিচের ফরমটি পূরণ করুন" data-en="Please fill out the form below with accurate information">সবগুলো সঠিক তথ্য দিয়ে নিচের ফরমটি পূরণ করুন</p>
+              </div>
+            </div>
+
+            <form id="appointmentForm" onsubmit="submitAppointment(event)">
+              <div class="row g-3">
+                <!-- Patient Name -->
+                <div class="col-md-6">
+                  <label for="patientName" class="form-label" data-bn="রোগীর নাম *" data-en="Patient Name *">রোগীর নাম *</label>
+                  <input type="text" class="form-control" id="patientName" placeholder="পূর্ণ নাম লিখুন" required>
+                </div>
+
+                <!-- Contact Mobile Number -->
+                <div class="col-md-6">
+                  <label for="patientPhone" class="form-label" data-bn="মোবাইল নম্বর *" data-en="Mobile Number *">মোবাইল নম্বর *</label>
+                  <input type="tel" class="form-control" id="patientPhone" placeholder="০১৭xxxxxxxx" required>
+                </div>
+
+                <!-- Age & Gender -->
+                <div class="col-md-6">
+                  <label for="patientAge" class="form-label" data-bn="বয়স *" data-en="Age *">বয়স *</label>
+                  <input type="number" class="form-control" id="patientAge" placeholder="যেমন: ২৫" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="patientGender" class="form-label" data-bn="লিঙ্গ *" data-en="Gender *">লিঙ্গ *</label>
+                  <select class="form-select" id="patientGender" required>
+                    <option value="" selected disabled>নির্বাচন করুন</option>
+                    <option value="Male">পুরুষ (Male)</option>
+                    <option value="Female">মহিলা (Female)</option>
+                    <option value="Other">অন্যান্য (Other)</option>
+                  </select>
+                </div>
+
+                <!-- Department Selection -->
+                <div class="col-md-6">
+                  <label for="departmentSelect" class="form-label" data-bn="বিভাগ নির্বাচন করুন *" data-en="Select Department *">বিভাগ নির্বাচন করুন *</label>
+                  <select class="form-select" id="departmentSelect" onchange="updateDoctorsList()" required>
+                    <option value="" selected disabled>বিভাগ বেছে নিন</option>
+                    <option value="medicine">মেডিসিন বিভাগ (Medicine)</option>
+                    <option value="gynecology">স্ত্রী ও প্রসূতি রোগ (Gynecology)</option>
+                    <option value="pediatrics">শিশু রোগ বিভাগ (Pediatrics)</option>
+                    <option value="surgery">সার্জারি বিভাগ (Surgery)</option>
+                    <option value="cardiology">হৃদরোগ বিভাগ (Cardiology)</option>
+                    <option value="orthopedics">অস্থি ও অর্থোপেডিকস (Orthopedics)</option>
+                  </select>
+                </div>
+
+                <!-- Doctor Selection -->
+                <div class="col-md-6">
+                  <label for="doctorSelect" class="form-label" data-bn="ডাক্তার নির্বাচন করুন *" data-en="Select Doctor *">ডাক্তার নির্বাচন করুন *</label>
+                  <select class="form-select" id="doctorSelect" required>
+                    <option value="" selected disabled>প্রথমে বিভাগ বেছে নিন</option>
+                  </select>
+                </div>
+
+                <!-- Appointment Date -->
+                <div class="col-md-6">
+                  <label for="appointmentDate" class="form-label" data-bn="অ্যাপয়েন্টমেন্ট এর তারিখ *" data-en="Appointment Date *">অ্যাপয়েন্টমেন্ট এর তারিখ *</label>
+                  <input type="date" class="form-control" id="appointmentDate" required>
+                </div>
+
+                <!-- Patient Type -->
+                <div class="col-md-6">
+                  <label for="patientType" class="form-label" data-bn="রোগীর ধরন *" data-en="Patient Type *">রোগীর ধরন *</label>
+                  <select class="form-select" id="patientType" required>
+                    <option value="New">নতুন রোগী (New Patient)</option>
+                    <option value="Old">পুরাতন/রিপোর্ট দেখাতে (Old Patient / Report)</option>
+                  </select>
+                </div>
+
+                <!-- Message / Health Problem -->
+                <div class="col-12">
+                  <label for="healthProblem" class="form-label" data-bn="সমস্যা / বিস্তারিত (ঐচ্ছিক)" data-en="Problem / Note (Optional)">সমস্যা / বিস্তারিত (ঐচ্ছিক)</label>
+                  <textarea class="form-control" id="healthProblem" rows="3" placeholder="রোগীর প্রধান স্বাস্থ্য সমস্যা সংক্ষেপে লিখুন..."></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm py-3">
+                    <i class="fa-solid fa-paper-plane me-2"></i> বুকিং কনফার্ম করুন
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Column: Emergency Contacts & Guidance -->
+        <div class="col-lg-4" data-aos="fade-left">
+          <div class="d-flex flex-column gap-4">
+            
+            <!-- Quick Call Support -->
+            <div class="info-sidebar-card bg-primary text-white border-0">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="feature-icon-box bg-white text-primary">
+                  <i class="fa-solid fa-headset"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold mb-0">হটলাইন সহায়তা</h5>
+                  <span class="small opacity-75">সার্বক্ষণিক হেল্পডেস্ক</span>
+                </div>
+              </div>
+              <p class="small opacity-90 mb-3">অনলাইনে ফর্ম পূরণে সমস্যা হলে অথবা জরুরি সিরিয়ালের জন্য সরাসরি আমাদের হটলাইনে ফোন দিন।</p>
+              <a href="tel:01729325489" class="btn btn-light rounded-pill w-100 fw-bold text-primary shadow-sm"><i class="fa-solid fa-phone me-1"></i> ০১৭২৯৩২৫৪৮৯</a>
+            </div>
+
+            <!-- Booking Rules & Info -->
+            <div class="info-sidebar-card">
+              <h5 class="fw-bold text-secondary mb-3 border-bottom pb-2"><i class="fa-solid fa-circle-info text-primary me-2"></i>জরুরি নির্দেশাবলী</h5>
+              
+              <div class="d-flex gap-3 mb-3">
+                <div class="feature-icon-box fs-5"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div>
+                  <h6 class="fw-bold mb-1">সিরিয়াল সময়সূচী</h6>
+                  <p class="small text-muted mb-0">বুকিং কনফার্ম হওয়ার পর আমাদের টিম থেকে কল/এসএমএস করে নির্দিষ্ট সময় জানিয়ে দেওয়া হবে।</p>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3 mb-3">
+                <div class="feature-icon-box fs-5"><i class="fa-solid fa-receipt"></i></div>
+                <div>
+                  <h6 class="fw-bold mb-1">কাউন্টারে উপস্থিতি</h6>
+                  <p class="small text-muted mb-0">ডাক্তার দেখার নির্ধারিত সময়ের কমপক্ষে ১৫ মিনিট পূর্বে হাসপাতালের রিসেপশনে উপস্থিত হোন।</p>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3">
+                <div class="feature-icon-box fs-5"><i class="fa-solid fa-kit-medical"></i></div>
+                <div>
+                  <h6 class="fw-bold mb-1">জরুরি রোগী</h6>
+                  <p class="small text-muted mb-0">জরুরি রোগীদের জন্য অ্যাপয়েন্টমেন্ট ছাড়াই সরাসরি ২৪/৭ ইমার্জেন্সি বিভাগে চলে আসুন।</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location Note Card -->
+            <div class="info-sidebar-card bg-light border">
+              <h6 class="fw-bold text-secondary mb-2"><i class="fa-solid fa-location-dot text-danger me-2"></i>হাসপাতালের ঠিকানা</h6>
+              <p class="small text-muted mb-0">পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার।</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER SECTION -->
+  <footer class="pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h5 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-2 text-primary"></i>MAX HOSPITAL LTD.</h5>
+          <p class="small text-muted mb-3">চকরিয়া শাখা। আধুনিক প্রযুক্তি, দক্ষ চিকিৎসক ও সার্বক্ষণিক মানবিক সেবায় আমরা আপনার পাশে আছি।</p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="fw-bold mb-3">গুরুত্বপূর্ণ লিংক</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li class="mb-2"><a href="doctors.html">ডাক্তারদের তালিকা</a></li>
+            <li class="mb-2"><a href="services.html">সেবাসমূহ</a></li>
+            <li class="mb-2"><a href="news.html">সর্বশেষ সংবাদ</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <h6 class="fw-bold mb-3">রোগী পরিষেবা</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="appointment.html">অনলাইন অ্যাপয়েন্টমেন্ট</a></li>
+            <li class="mb-2"><a href="admission.html">রোগী ভর্তি তথ্য</a></li>
+            <li class="mb-2"><a href="patient-guide.html">রোগী নির্দেশিকা</a></li>
+            <li class="mb-2"><a href="visiting-hours.html">দর্শনার্থীদের সময়সূচী</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <h6 class="fw-bold mb-3">যোগাযোগ করুন</h6>
+          <p class="small mb-2"><i class="fa-solid fa-location-dot me-2 text-primary"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার</p>
+          <p class="small mb-2"><i class="fa-solid fa-phone me-2 text-success"></i> ০১৭২৯৩২৫৪৮ ৯</p>
+          <p class="small mb-0"><i class="fa-solid fa-envelope me-2 text-warning"></i> info@maxhospitalchakaria.com</p>
+        </div>
+      </div>
+
+      <hr class="border-secondary">
+
+      <!-- COPYRIGHT & IT TEAM CREDIT -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small pt-2 gap-2 text-center text-md-start">
+        <div>
+          &copy; 2026 Max Hospital Ltd. All Rights Reserved.
+        </div>
+        <div class="text-info fw-semibold">
+          Designed & Maintained by: <span class="text-white">IT Team - MAX Hospital Ltd., Chakaria Branch</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING SIDEBAR ACTION BUTTONS -->
+  <div class="floating-actions">
+    <a href="tel:01729325489" class="float-btn bg-danger" title="Call Emergency"><i class="fa-solid fa-phone"></i></a>
+    <a href="https://wa.me/8801729325489" class="float-btn bg-success" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="appointment.html" class="float-btn bg-primary" title="Book Appointment"><i class="fa-solid fa-calendar-check"></i></a>
+  </div>
+
+  <!-- MOBILE BOTTOM STICKY BAR -->
+  <div class="mobile-bottom-nav">
+    <a href="tel:01729325489" class="mobile-nav-item text-danger"><i class="fa-solid fa-phone"></i> কল করুন</a>
+    <a href="https://wa.me/8801729325489" class="mobile-nav-item text-success"><i class="fa-brands fa-whatsapp"></i> হোয়াটসঅ্যাপ</a>
+    <a href="appointment.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-calendar-check"></i> বুকিং</a>
+    <a href="doctors.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-user-doctor"></i> ডাক্তারগণ</a>
+  </div>
+
+  <!-- Scripts: Bootstrap 5 JS, AOS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // Initialize AOS Animation
+    AOS.init({ duration: 800, once: true });
+
+    // Dynamic Doctors Data by Department
+    const doctorsData = {
+      medicine: [
+        "ডাঃ আবদুল্লাহ আল মামুন - মেডিসিন বিশেষজ্ঞ",
+        "ডাঃ পারভেজ রহমান - এফসিপিএস (মেডিসিন)"
+      ],
+      gynecology: [
+        "ডাঃ ফাতেমা জোহরা - স্ত্রী ও প্রসূতি রোগ বিশেষজ্ঞ",
+        "ডাঃ নুসরাত জাহান - গাইনোকোলজিস্ট"
+      ],
+      pediatrics: [
+        "ডাঃ তানভীর আহমেদ - শিশু রোগ বিশেষজ্ঞ",
+        "ডাঃ সাকিব হোসেন - নবজাতক ও শিশু বিশেষজ্ঞ"
+      ],
+      surgery: [
+        "ডাঃ কামরুল হাসান - জেনারেল ও লেপারোস্কোপিক সার্জন",
+        "ডাঃ রফিকুল ইসলাম - সিনিয়র সার্জারি কনসালট্যান্ট"
+      ],
+      cardiology: [
+        "ডাঃ মাশরাফি বিন তৌহিদ - কার্ডিওলজিস্ট ও হৃদরোগ বিশেষজ্ঞ"
+      ],
+      orthopedics: [
+        "ডাঃ সাইফ মাহমুদ - অর্থোপেডিক ও ট্রমা সার্জন"
+      ]
+    };
+
+    // Update Doctors Dropdown on Department Select
+    function updateDoctorsList() {
+      const deptSelect = document.getElementById('departmentSelect');
+      const doctorSelect = document.getElementById('doctorSelect');
+      const selectedDept = deptSelect.value;
+
+      doctorSelect.innerHTML = '<option value="" selected disabled>ডাক্তার বেছে নিন</option>';
+
+      if (doctorsData[selectedDept]) {
+        doctorsData[selectedDept].forEach(doc => {
+          const option = document.createElement('option');
+          option.value = doc;
+          option.textContent = doc;
+          doctorSelect.appendChild(option);
+        });
+      }
+    }
+
+    // Set Minimum Date for Appointment Input to Today
+    document.addEventListener('DOMContentLoaded', () => {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('appointmentDate').setAttribute('min', today);
+    });
+
+    // Handle Appointment Form Submission
+    function submitAppointment(e) {
+      e.preventDefault();
+      const name = document.getElementById('patientName').value;
+      const phone = document.getElementById('patientPhone').value;
+      const doctor = document.getElementById('doctorSelect').value;
+      const date = document.getElementById('appointmentDate').value;
+
+      alert(`ধন্যবাদ ${name}!\n\nআপনার অ্যাপয়েন্টমেন্ট বুকিং অনুরোধ সফলভাবে গৃহীত হয়েছে।\n\nডাক্তার: ${doctor}\nতারিখ: ${date}\nফোন: ${phone}\n\nখুব শীঘ্রই আমাদের প্রতিনিধি আপনাকে কল করে সিরিয়াল কনফার্ম করবেন।`);
+      
+      document.getElementById('appointmentForm').reset();
+    }
+
+    // Language Switcher Functionality
+    function switchLanguage(lang) {
+      document.querySelectorAll('.lang-bn-btn').forEach(b => b.classList.toggle('active', lang === 'bn'));
+      document.querySelectorAll('.lang-en-btn').forEach(b => b.classList.toggle('active', lang === 'en'));
+      
+      document.querySelectorAll('[data-bn]').forEach(el => {
+        el.innerText = el.getAttribute(`data-${lang}`);
+      });
+      localStorage.setItem('pref_lang', lang);
+    }
+
+    // Auto Load Saved Language Preference
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('pref_lang') || 'bn';
+      switchLanguage(savedLang);
+    });
+  </script>
+</body>
+</html>
