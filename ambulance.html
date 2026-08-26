@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24/7 Emergency Ambulance Service</title>
+    <style>
+        :root {
+            --primary-red: #d9534f;
+            --dark-red: #c9302c;
+            --navy-blue: #1a252f;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Emergency Header Banner */
+        .emergency-banner {
+            background-color: var(--primary-red);
+            color: var(--white);
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .emergency-banner a {
+            color: var(--white);
+            text-decoration: underline;
+            margin-left: 8px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--navy-blue);
+            color: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        nav .call-btn {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Info Card */
+        .info-box {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .info-box h1 {
+            color: var(--navy-blue);
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Fleet/Services List */
+        .service-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .service-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-list li::before {
+            content: "🚑";
+            margin-right: 10px;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-red);
+        }
+
+        .booking-form h2 {
+            margin-bottom: 20px;
+            color: var(--navy-blue);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--primary-red);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark-red);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Emergency Banner -->
+    <div class="emergency-banner">
+        🚨 Immediate Emergency? Call Now: <a href="tel:999">999</a> / <a href="tel:+8801234567890">+880 1234-567890</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Medical Emergency Services</a>
+        <a href="tel:+8801234567890" class="call-btn">Call Dispatch</a>
+    </nav>
+
+    <div class="container">
+        <div class="hero-grid">
+            
+            <!-- Left Column: Information -->
+            <div class="info-box">
+                <h1>24/7 Fast & Reliable Ambulance Response</h1>
+                <p>We provide rapid critical care patient transfer with standard support equipment, trained paramedics, and oxygen setup on demand.</p>
+                
+                <ul class="service-list">
+                    <li><strong>Basic Life Support (BLS):</strong> Standard transport with medical attendant.</li>
+                    <li><strong>Advanced Life Support (ALS):</strong> ICU setup equipped for critical patients.</li>
+                    <li><strong>Freezer Ambulance:</strong> Temperature-controlled mortuary transport.</li>
+                    <li><strong>Air Ambulance:</strong> Long-distance emergency transfers.</li>
+                </ul>
+
+                <p><strong>Coverage Areas:</strong> Citywide & Highway Inter-district Patient Transfers.</p>
+            </div>
+
+            <!-- Right Column: Booking Request Form -->
+            <div class="booking-form">
+                <h2>Request an Ambulance</h2>
+                <form id="ambulanceForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="patientName">Patient / Contact Name</label>
+                        <input type="text" id="patientName" required placeholder="Enter full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="Enter active mobile number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ambulanceType">Ambulance Type</label>
+                        <select id="ambulanceType" required>
+                            <option value="">Select Service Type</option>
+                            <option value="AC / Non-AC Standard">Standard (AC / Non-AC)</option>
+                            <option value="ICU / ALS">ICU / Advanced Life Support</option>
+                            <option value="Freezer Van">Freezer Ambulance</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pickup">Pickup Location</label>
+                        <input type="text" id="pickup" required placeholder="House, Road, Area, or Hospital name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destination">Destination Hospital/Address</label>
+                        <input type="text" id="destination" required placeholder="Destination address">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Dispatch Ambulance</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Ambulance Emergency Services. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('patientName').value;
+            const phone = document.getElementById('phone').value;
+            const type = document.getElementById('ambulanceType').value;
+            const pickup = document.getElementById('pickup').value;
+
+            alert(`Request Submitted!\n\nPatient: ${name}\nPhone: ${phone}\nType: ${type}\nPickup: ${pickup}\n\nOur dispatch team will call you back within 2 minutes.`);
+            
+            document.getElementById('ambulanceForm').reset();
+        }
+    </script>
+</body>
+</html>
