@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>২৪/৭ অ্যাম্বুলেন্স সার্ভিস | Max Hospital Ltd. - Chakaria Branch</title>
+  <title>২৪/৭ জরুরি অ্যাম্বুলেন্স সেবা | Max Hospital Ltd. - Chakaria Branch</title>
   
   <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts, AOS Animation -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,8 +16,7 @@
       --primary: #0284c7;
       --primary-dark: #0369a1;
       --secondary: #0f172a;
-      --accent: #0ea5e9;
-      --danger-red: #dc2626;
+      --accent: #dc2626;
       --bg-light: #f8fafc;
       --text-main: #334155;
       --glass-bg: rgba(255, 255, 255, 0.95);
@@ -29,16 +28,6 @@
       background-color: var(--bg-light);
       overflow-x: hidden;
     }
-
-    /* Emergency Alert Bar */
-    .emergency-alert-bar {
-      background: var(--danger-red);
-      color: #ffffff;
-      font-size: 0.95rem;
-      padding: 8px 0;
-      font-weight: 700;
-    }
-    .emergency-alert-bar a { color: #ffffff; text-decoration: underline; }
 
     /* Top Info Bar */
     .top-info-bar {
@@ -164,70 +153,73 @@
       background: linear-gradient(90deg, rgba(15, 23, 42, 0.92) 0%, rgba(220, 38, 38, 0.85) 100%), url('https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=1920&q=80');
       background-size: cover;
       background-position: center;
-      padding: 70px 0;
+      padding: 80px 0;
       color: #ffffff;
     }
 
-    .section-padding { padding: 60px 0; }
+    .section-padding { padding: 70px 0; }
 
-    /* Ambulance Card */
-    .ambulance-card {
+    /* Emergency Quick Hotkey Card */
+    .emergency-hot-card {
       background: #ffffff;
       border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      padding: 30px;
-      height: 100%;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .ambulance-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      border-left: 5px solid var(--accent);
+      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.08);
+      padding: 24px;
     }
 
-    .icon-box {
-      width: 60px;
-      height: 60px;
+    /* Ambulance Fleet Cards */
+    .feature-card {
+      background: #ffffff;
       border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+      border-color: var(--accent);
+    }
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
       background: rgba(220, 38, 38, 0.1);
-      color: var(--danger-red);
+      color: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.75rem;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
     }
 
-    /* Booking Form Card */
-    .booking-card {
+    /* Ambulance Booking Form Styling */
+    .booking-form-card {
       background: #ffffff;
       border-radius: 16px;
+      padding: 30px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      padding: 35px;
-      border-top: 5px solid var(--danger-red);
     }
-
     .form-label {
       font-weight: 600;
       color: var(--secondary);
       font-size: 0.9rem;
-      margin-bottom: 6px;
     }
-
     .form-control, .form-select {
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
-      font-size: 0.95rem;
     }
-
     .form-control:focus, .form-select:focus {
-      border-color: var(--danger-red);
+      border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
     }
 
-    /* Floating Action Buttons */
+    /* Floating Sidebar Action Buttons */
     .floating-actions {
       position: fixed;
       right: 20px;
@@ -278,16 +270,6 @@
 </head>
 <body>
 
-  <!-- EMERGENCY TOP DISPATCH BAR -->
-  <div class="emergency-alert-bar text-center">
-    <div class="container d-flex justify-content-center align-items-center gap-2">
-      <i class="fa-solid fa-truck-medical fa-beat"></i>
-      <span data-bn="জরুরি অ্যাম্বুলেন্স সাপোর্ট call করুন:" data-en="Emergency Ambulance Hotline:">জরুরি অ্যাম্বুলেন্স সাপোর্ট:</span>
-      <a href="tel:01729325489">০১৭২৯৩২৫৪৮৯</a>
-      <span class="d-none d-md-inline">| ২৪ ঘণ্টা দ্রুত সাড়া প্রদান</span>
-    </div>
-  </div>
-
   <!-- TOP INFORMATION BAR -->
   <div class="top-info-bar d-none d-lg-block">
     <div class="container d-flex justify-content-between align-items-center">
@@ -297,7 +279,7 @@
       <div class="d-flex align-items-center gap-3">
         <a href="tel:01729325489"><i class="fa-solid fa-phone me-1 text-success"></i> ০১৭২৯৩২৫৪৮ ৯</a>
         <a href="https://wa.me/8801729325489"><i class="fa-brands fa-whatsapp me-1 text-success"></i> WhatsApp</a>
-        <span class="badge bg-primary"><i class="fa-solid fa-heart-pulse me-1"></i> বিশ্বস্ত স্বাস্থ্যসেবা</span>
+        <span class="badge bg-danger"><i class="fa-solid fa-truck-medical me-1"></i> ২৪/৭ অ্যাম্বুলেন্স সেবা</span>
         
         <!-- Language Switcher -->
         <div class="btn-group btn-group-sm">
@@ -396,7 +378,7 @@
                   <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-x-ray"></i> Imaging / Radiology</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-bed"></i> ICU & NICU</a></div>
                   <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-pills"></i> Pharmacy</a></div>
-                  <div class="col-lg-3"><a class="mega-menu-item" href="ambulance.html"><i class="fa-solid fa-ambulance text-primary fw-bold"></i> Ambulance</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ambulance.html"><i class="fa-solid fa-ambulance text-danger fw-bold"></i> Ambulance</a></div>
                 </div>
               </div>
             </li>
@@ -439,184 +421,205 @@
   </header>
 
   <!-- PAGE HEADER BANNER -->
-  <section class="page-banner text-center">
-    <div class="container" data-aos="fade-up">
-      <span class="badge bg-danger px-3 py-2 rounded-pill mb-3 fw-bold"><i class="fa-solid fa-bolt me-1"></i> Emergency Response Service</span>
-      <h1 class="display-5 fw-bold mb-2" data-bn="২৪/৭ অ্যাম্বুলেন্স সার্ভিস" data-en="24/7 Ambulance Service">২৪/৭ অ্যাম্বুলেন্স সার্ভিস</h1>
-      <p class="lead opacity-90 mb-3" data-bn="জরুরি প্রয়োজনে চকরিয়া সহ সারাদেশে দ্রুত ও নিরাপদ রোগী স্থানান্তরের নিশ্চয়তা" data-en="Fast & safe patient transport across Chakaria and nationwide during emergencies">জরুরি প্রয়োজনে চকরিয়া সহ সারাদেশে দ্রুত ও নিরাপদ রোগী স্থানান্তরের নিশ্চয়তা</p>
+  <section class="page-banner">
+    <div class="container text-center" data-aos="fade-up">
+      <span class="badge bg-danger px-3 py-2 rounded-pill mb-3 fw-bold"><i class="fa-solid fa-truck-medical me-1"></i> 24/7 Ambulance Express Dispatch</span>
+      <h1 class="display-5 fw-bold mb-2" data-bn="জরুরি অ্যাম্বুলেন্স সেবা" data-en="24/7 Ambulance Service">জরুরি অ্যাম্বুলেন্স সেবা</h1>
+      <p class="lead opacity-90 mb-3" data-bn="চকরিয়া সহ সারাদেশে দ্রুত, নিরাপদ ও উন্নত লাইফ সাপোর্ট সংবলিত রোগী পরিবহন" data-en="Rapid, safe and advanced life-support patient transportation in Chakaria and nationwide">চকরিয়া সহ সারাদেশে দ্রুত, নিরাপদ ও উন্নত লাইফ সাপোর্ট সংবলিত রোগী পরিবহন</p>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb justify-content-center m-0">
           <li class="breadcrumb-item"><a href="home.html" class="text-white text-decoration-none">হোম</a></li>
           <li class="breadcrumb-item"><a href="services.html" class="text-white text-decoration-none">সেবাসমূহ</a></li>
-          <li class="breadcrumb-item active text-info" aria-current="page">অ্যাম্বুলেন্স</li>
+          <li class="breadcrumb-item active text-danger" aria-current="page">অ্যাম্বুলেন্স</li>
         </ol>
       </nav>
     </div>
   </section>
 
-  <!-- AMBULANCE TYPES / FLEET SECTION -->
-  <section class="section-padding">
+  <!-- EMERGENCY HOTLINE HERO STRIP -->
+  <section class="py-4 bg-white border-bottom">
     <div class="container">
-      <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
-        <h6 class="text-danger fw-bold text-uppercase tracking-wider">আমাদের অ্যাম্বুলেন্স বহর</h6>
-        <h2 class="fw-bold text-secondary" data-bn="আধুনিক সুবিধা সংবলিত অ্যাম্বুলেন্সসমূহ" data-en="Modern Well-Equipped Ambulance Fleet">আধুনিক সুবিধা সংবলিত অ্যাম্বুলেন্সসমূহ</h2>
-        <p class="text-muted" data-bn="রোগীর অবস্থা ও প্রয়োজন অনুযায়ী আমাদের রয়েছে বিভিন্ন ক্যাটাগরির সুসজ্জিত অ্যাম্বুলেন্স" data-en="We offer various categories of ambulances tailored to patient conditions and needs">রোগীর অবস্থা ও প্রয়োজন অনুযায়ী আমাদের রয়েছে বিভিন্ন ক্যাটাগরির সুসজ্জিত অ্যাম্বুলেন্স</p>
+      <div class="emergency-hot-card d-flex flex-column flex-md-row align-items-center justify-content-between gap-3" data-aos="fade-up">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 54px; height: 54px;">
+            <i class="fa-solid fa-phone-volume fa-xl"></i>
+          </div>
+          <div>
+            <h5 class="fw-bold text-secondary mb-1">অ্যাম্বুলেন্স কল সেন্টার (২৪ ঘণ্টা খোলা)</h5>
+            <p class="text-muted small mb-0">তাৎক্ষণিক ডিসপ্যাচ ও জরুরি স্থানান্তরের জন্য কল করুন</p>
+          </div>
+        </div>
+        <div class="d-flex gap-2 w-100 w-md-auto justify-content-center">
+          <a href="tel:01729325489" class="btn btn-danger rounded-pill px-4 py-2 fw-bold"><i class="fa-solid fa-phone me-1"></i> ০১৭২৯৩২৫৪৮৯</a>
+          <a href="https://wa.me/8801729325489" class="btn btn-success rounded-pill px-4 py-2 fw-bold"><i class="fa-brands fa-whatsapp me-1"></i> WhatsApp</a>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="row g-4">
-        <!-- Basic Life Support / AC Ambulance -->
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="ambulance-card">
-            <div class="icon-box">
-              <i class="fa-solid fa-truck-medical"></i>
+  <!-- ABOUT AMBULANCE SERVICES SECTION -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2 rounded-pill mb-3 fw-bold">Fast & Reliable Dispatch</span>
+          <h2 class="fw-bold text-secondary mb-4">যেকোনো সংকটে দ্রুততম সময়ে পেশাদার অ্যাম্বুলেন্স সেবা</h2>
+          <p class="text-muted leading-relaxed mb-3">
+            ম্যাক্স হাসপাতাল লিমিটেড, চকরিয়া শাখার জরুরি অ্যাম্বুলেন্স বহর ২৪ ঘণ্টা সচল থাকে। স্থানীয় রোগী স্থানান্তর থেকে শুরু করে চট্টগ্রাম, ঢাকা বা দেশের যেকোনো প্রান্তে ক্রিটিক্যাল রোগীদের নিরাপদে পৌঁছাতে আমাদের বিশেষায়িত পরিবহন ব্যবস্থা রয়েছে।
+          </p>
+          <p class="text-muted leading-relaxed mb-4">
+            আমাদের অ্যাম্বুলেন্সগুলোতে প্রাথমিক চিকিৎসাসামগ্রী ছাড়াও অভিজ্ঞ ড্রাইভার এবং মেডিকেল এটেনডেন্ট সার্বক্ষণিক নিয়োজিত থাকেন, যা রোগীর জীবন রক্ষায় গুরুত্বপূর্ণ ভূমিকা পালন করে।
+          </p>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2 text-secondary fw-bold">
+                <i class="fa-solid fa-circle-check text-danger"></i> এসি ও নন-এসি টাইপ অ্যাম্বুলেন্স
+              </div>
             </div>
-            <h4 class="fw-bold text-secondary mb-2" data-bn="এসি / নন-এসি অ্যাম্বুলেন্স" data-en="AC / Non-AC Ambulance">এসি / নন-এসি অ্যাম্বুলেন্স</h4>
-            <p class="text-muted small mb-3">সাধারণ ও স্থিতিশীল রোগীদের দ্রুত এক স্থান থেকে অন্য স্থানে স্থানান্তরের জন্য স্ট্যান্ডার্ড ইমার্জেন্সি সাপোর্ট।</p>
-            <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-4">
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> অক্সিজেন সিলিন্ডার সিস্টেম</li>
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> ফোল্ডিং স্ট্রেচার ও প্রাথমিক কিট</li>
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> দক্ষ চালক ও ফার্স্ট এইড এটেনডেন্ট</li>
-            </ul>
-            <a href="tel:01729325489" class="btn btn-outline-danger w-100 rounded-pill fw-bold"><i class="fa-solid fa-phone me-1"></i> বুক করতে কল করুন</a>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2 text-secondary fw-bold">
+                <i class="fa-solid fa-circle-check text-danger"></i> অ্যাডভান্সড আইসিইউ লাইফ সাপোর্ট
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2 text-secondary fw-bold">
+                <i class="fa-solid fa-circle-check text-danger"></i> আধুনিক ফ্রিজার ভ্যান সার্ভিস
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2 text-secondary fw-bold">
+                <i class="fa-solid fa-circle-check text-danger"></i> সেন্ট্রাল অক্সিজেন ও মনিটরিং
+              </div>
+            </div>
           </div>
         </div>
-
-        <!-- Advanced ICU Ambulance -->
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="ambulance-card border-danger">
-            <div class="icon-box bg-danger text-white">
-              <i class="fa-solid fa-heart-pulse"></i>
-            </div>
-            <div class="badge bg-danger mb-2">ক্রিটিক্যাল কেয়ার</div>
-            <h4 class="fw-bold text-secondary mb-2" data-bn="আইসিইউ / আইসিইউ অ্যাম্বুলেন্স" data-en="ICU / ALS Ambulance">আইসিইউ / লাইফ সাপোর্ট অ্যাম্বুলেন্স</h4>
-            <p class="text-muted small mb-3">মুমূর্ষু ও অতিসংকটপূর্ণ রোগীদের উন্নত চিকিৎসার জন্য চলমান আইসিইউ সুবিধাযুক্ত বিশেষ অ্যাম্বুলেন্স।</p>
-            <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-4">
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> ভেন্টিলেটর ও কার্ডিয়াক মনিটর</li>
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> সাকশন পাম্প ও সিরিঞ্জ পাম্প</li>
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> অভিজ্ঞতা সম্পন্ন ডাক্তার/নার্স ব্যাকআপ</li>
-            </ul>
-            <a href="tel:01729325489" class="btn btn-danger w-100 rounded-pill fw-bold text-white"><i class="fa-solid fa-phone me-1"></i> অন-কল আইসিইউ অ্যাম্বুলেন্স</a>
-          </div>
-        </div>
-
-        <!-- Freezer Ambulance -->
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-          <div class="ambulance-card">
-            <div class="icon-box">
-              <i class="fa-solid fa-snowflake"></i>
-            </div>
-            <h4 class="fw-bold text-secondary mb-2" data-bn="ফ্রিজার অ্যাম্বুলেন্স" data-en="Freezer Ambulance">ফ্রিজার অ্যাম্বুলেন্স</h4>
-            <p class="text-muted small mb-3">মৃতদেহ বহু দূর দূরান্তে নিরাপদে ও দীর্ঘ সময় সংরক্ষণের সুবিধাসম্পন্ন হিমাগার যুক্ত ফ্রিজার ভ্যান।</p>
-            <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-4">
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> তাপমাত্রা নিয়ন্ত্রণকারী আধুনিক ফ্রিজার</li>
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> দূরপাল্লার যাতায়াতের সুব্যবস্থা</li>
-              <li><i class="fa-solid fa-circle-check text-success me-2"></i> ২৪/৭ দ্রুত ডিসপ্যাচ সুবিধা</li>
-            </ul>
-            <a href="tel:01729325489" class="btn btn-outline-danger w-100 rounded-pill fw-bold"><i class="fa-solid fa-phone me-1"></i> বুক করতে কল করুন</a>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=800&q=80" alt="Ambulance Service" class="img-fluid rounded-4 shadow-lg">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- AMBULANCE BOOKING & DISPATCH FORM SECTION -->
+  <!-- AMBULANCE FLEET / TYPES SECTION -->
   <section class="section-padding bg-light">
     <div class="container">
-      <div class="row g-4 align-items-center">
-        
-        <!-- Booking Request Form -->
-        <div class="col-lg-7" data-aos="fade-right">
-          <div class="booking-card">
-            <div class="d-flex align-items-center gap-3 mb-4 border-bottom pb-3">
-              <div class="bg-danger-subtle text-danger p-3 rounded-circle fs-4">
-                <i class="fa-solid fa-truck-fast"></i>
-              </div>
-              <div>
-                <h4 class="fw-bold text-secondary mb-1" data-bn="অনলাইন অ্যাম্বুলেন্স রিকুয়েস্ট" data-en="Online Ambulance Request">অনলাইন অ্যাম্বুলেন্স রিকুয়েস্ট</h4>
-                <p class="text-muted small mb-0" data-bn="নিচের ফর্মটি পূরণ করুন, আমাদের কন্ট্রোল রুম থেকে ২ মিনিটের মধ্যে কল করা হবে" data-en="Fill out the form below, our control room will call you within 2 minutes">নিচের ফর্মটি পূরণ করুন, আমাদের কন্ট্রোল রুম থেকে ২ মিনিটের মধ্যে কল করা হবে</p>
-              </div>
+      <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
+        <h2 class="fw-bold text-secondary">আমাদের অ্যাম্বুলেন্স বহর</h2>
+        <p class="text-muted">রোগীর শারীরিক অবস্থা ও প্রয়োজনীয়তা অনুযায়ী আমাদের রয়েছে বিভিন্ন ধরনের সুসজ্জিত সেবা</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Type 1 -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-truck-medical"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">স্ট্যান্ডার্ড এসি / নন-এসি অ্যাম্বুলেন্স</h5>
+            <p class="text-muted small mb-3">সাধারণ ও স্থিতিশীল রোগীদের দ্রুত ও আরামদায়ক পরিবহনের জন্য উপযুক্ত।</p>
+            <ul class="list-unstyled small text-secondary mb-0">
+              <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i> হাই-প্রেসার অক্সিজেন সিলিন্ডার</li>
+              <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i> ফোল্ডিং ট্রলি স্ট্রেচার</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> অভিজ্ঞ ড্রাইভার ও হেলপার</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Type 2 -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">ক্রিটিক্যাল আইসিইউ (ICU) অ্যাম্বুলেন্স</h5>
+            <p class="text-muted small mb-3">মুমূর্ষু ও অতিসংকটপূর্ণ রোগীদের দূরপাল্লার স্থানান্তরে চাকাযুক্ত মোবাইল আইসিইউ।</p>
+            <ul class="list-unstyled small text-secondary mb-0">
+              <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i> পোর্টেবল ভেন্টিলেটর ও কার্ডিয়াক মনিটর</li>
+              <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i> সিরিঞ্জ ও সাকশন পাম্প</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> প্রশিক্ষণপ্রাপ্ত নার্স/ডাক্তার ব্যাকআপ</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Type 3 -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-snowflake"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">ফ্রিজার অ্যাম্বুলেন্স ভ্যান</h5>
+            <p class="text-muted small mb-3">মৃতদেহ বহুদূর স্থানান্তরে দীর্ঘ সময় সুরক্ষিত রাখার জন্য আধুনিক তাপমাত্রা নিয়ন্ত্রিত ব্যবস্থা।</p>
+            <ul class="list-unstyled small text-secondary mb-0">
+              <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i> কুলিং টেম্পারেচার কন্ট্রোল</li>
+              <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i> দীর্ঘ পথ চলাচলের উপযোগী</li>
+              <li><i class="fa-solid fa-check text-success me-2"></i> ২৪/৭ তাৎক্ষণিক সার্ভিস</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMBULANCE BOOKING REQUEST FORM SECTION -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8" data-aos="fade-up">
+          <div class="booking-form-card">
+            <div class="text-center mb-4">
+              <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill fw-bold mb-2">Quick Booking</span>
+              <h3 class="fw-bold text-secondary">অনলাইন অ্যাম্বুলেন্স রিকুয়েস্ট</h3>
+              <p class="text-muted small mb-0">ফর্মটি পূরণ করুন, ২ মিনিটের মধ্যে কন্ট্রোল রুম থেকে কল করা হবে</p>
             </div>
 
-            <form id="ambulanceForm" onsubmit="submitAmbulanceBooking(event)">
+            <form id="ambulanceReqForm" onsubmit="handleAmbulanceSubmit(event)">
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label for="contactName" class="form-label" data-bn="যোগাযোগকারীর নাম *" data-en="Contact Name *">যোগাযোগকারীর নাম *</label>
-                  <input type="text" class="form-control" id="contactName" placeholder="আপনার পূর্ণ নাম লিখুন" required>
+                  <label for="callerName" class="form-label">আপনার নাম *</label>
+                  <input type="text" class="form-control" id="callerName" placeholder="আপনার পূর্ণ নাম" required>
                 </div>
-
                 <div class="col-md-6">
-                  <label for="contactPhone" class="form-label" data-bn="মোবাইল নম্বর *" data-en="Mobile Number *">মোবাইল নম্বর *</label>
-                  <input type="tel" class="form-control" id="contactPhone" placeholder="০১৭xxxxxxxx" required>
+                  <label for="callerPhone" class="form-label">মোবাইল নম্বর *</label>
+                  <input type="tel" class="form-control" id="callerPhone" placeholder="০১৭xxxxxxxx" required>
                 </div>
-
                 <div class="col-md-6">
-                  <label for="ambulanceType" class="form-label" data-bn="অ্যাম্বুলেন্সের ধরন *" data-en="Ambulance Type *">অ্যাম্বুলেন্সের ধরন *</label>
-                  <select class="form-select" id="ambulanceType" required>
-                    <option value="" selected disabled>ধরন নির্বাচন করুন</option>
-                    <option value="AC Ambulance">এসি অ্যাম্বুলেন্স (Standard AC)</option>
-                    <option value="Non-AC Ambulance">নন-এসি অ্যাম্বুলেন্স (Non-AC)</option>
-                    <option value="ICU Ambulance">আইসিইউ অ্যাম্বুলেন্স (ICU / ALS)</option>
-                    <option value="Freezer Ambulance">ফ্রিজার অ্যাম্বুলেন্স (Freezer Van)</option>
+                  <label for="ambType" class="form-label">অ্যাম্বুলেন্সের ধরন *</label>
+                  <select class="form-select" id="ambType" required>
+                    <option value="" selected disabled>নির্বাচন করুন</option>
+                    <option value="AC Ambulance">এসি অ্যাম্বুলেন্স</option>
+                    <option value="Non-AC Ambulance">নন-এসি অ্যাম্বুলেন্স</option>
+                    <option value="ICU Life Support">আইসিইউ (ICU) লাইফ সাপোর্ট</option>
+                    <option value="Freezer Ambulance">ফ্রিজার ভ্যান</option>
                   </select>
                 </div>
-
                 <div class="col-md-6">
-                  <label for="pickupLocation" class="form-label" data-bn="পিকআপ লোকেশন *" data-en="Pickup Location *">পিকআপ লোকেশন *</label>
-                  <input type="text" class="form-control" id="pickupLocation" placeholder="গ্রাম/পাড়া, ইউনিয়ন, চকরিয়া" required>
+                  <label for="pickupAddr" class="form-label">পিকআপ ঠিকানা *</label>
+                  <input type="text" class="form-control" id="pickupAddr" placeholder="গ্রাম/মহল্লা, ইউনিয়ন, চকরিয়া" required>
                 </div>
-
-                <div class="col-md-12">
-                  <label for="dropLocation" class="form-label" data-bn="গন্তব্য স্থান (হাসপাতাল/ঠিকানা) *" data-en="Destination Address *">গন্তব্য স্থান (হাসপাতাল/ঠিকানা) *</label>
-                  <input type="text" class="form-control" id="dropLocation" placeholder="যেমন: ম্যাক্স হাসপাতাল, চকরিয়া অথবা চট্টগ্রাম" required>
-                </div>
-
                 <div class="col-12">
-                  <label for="patientCondition" class="form-label" data-bn="রোগীর বর্তমান অবস্থা সংক্ষেপে (ঐচ্ছিক)" data-en="Patient Condition Note (Optional)">রোগীর বর্তমান অবস্থা সংক্ষেপে (ঐচ্ছিক)</label>
-                  <textarea class="form-control" id="patientCondition" rows="2" placeholder="অক্সিজেন লাগবে কি না বা রোগীর স্বাস্থ্যগত বিষয় সংক্ষেপে লিখুন..."></textarea>
+                  <label for="destAddr" class="form-label">গন্তব্য (হাসপাতাল বা শহরের নাম) *</label>
+                  <input type="text" class="form-control" id="destAddr" placeholder="যেমন: ম্যাক্স হাসপাতাল, চকরিয়া অথবা চট্টগ্রাম" required>
                 </div>
-
-                <div class="col-12 mt-4">
-                  <button type="submit" class="btn btn-danger btn-lg w-100 rounded-pill fw-bold shadow-sm py-3">
-                    <i class="fa-solid fa-paper-plane me-2"></i> অ্যাম্বুলেন্স পাঠান / ডিসপ্যাচ করুন
-                  </button>
+                <div class="col-12">
+                  <label for="patientNotes" class="form-label">রোগীর বর্তমান শারীরিক অবস্থা (সংক্ষেপে)</label>
+                  <textarea class="form-control" id="patientNotes" rows="2" placeholder="অক্সিজেন বা অন্য কোনো বিশেষ সহায়তা লাগবে কি না উল্লেখ করুন..."></textarea>
+                </div>
+                <div class="col-12 mt-4 text-center">
+                  <button type="submit" class="btn btn-danger btn-lg rounded-pill px-5 fw-bold w-100 shadow-sm"><i class="fa-solid fa-paper-plane me-2"></i> রিকুয়েস্ট পাঠান</button>
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-
-        <!-- Call Action Sidebar & Service Coverage -->
-        <div class="col-lg-5" data-aos="fade-left">
-          <div class="d-flex flex-column gap-4">
-            
-            <div class="card bg-danger text-white border-0 shadow-sm p-4 rounded-4">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="bg-white text-danger p-3 rounded-circle fs-3">
-                  <i class="fa-solid fa-headset"></i>
-                </div>
-                <div>
-                  <h4 class="fw-bold mb-0">জরুরি ডিসপ্যাচ রুম</h4>
-                  <p class="mb-0 small opacity-90">২৪ ঘণ্টা হটলাইন খোলা থাকে</p>
-                </div>
-              </div>
-              <p class="small opacity-90 mb-3">যেকোনো মুহূর্তে অ্যাম্বুলেন্স পেতে সরাসরি কন্ট্রোল রুমে ডায়াল করুন। আমাদের টিম দ্রুততম সময়ে আপনার ঠিকানায় গাড়ি পৌঁছে দেবে।</p>
-              <a href="tel:01729325489" class="btn btn-light text-danger btn-lg rounded-pill fw-bold shadow-sm"><i class="fa-solid fa-phone me-2"></i> ০১৭২৯৩২৫৪৮৯</a>
-            </div>
-
-            <div class="card bg-white border-0 shadow-sm p-4 rounded-4">
-              <h5 class="fw-bold text-secondary mb-3"><i class="fa-solid fa-map-location-dot text-primary me-2"></i>কভারেজ এলাকা</h5>
-              <p class="small text-muted mb-3">ম্যাক্স হাসপাতাল লিমিটেড চকরিয়া শাখা থেকে সার্ভিসটি পরিচালনা করা হয়।</p>
-              
-              <ul class="list-unstyled small d-flex flex-column gap-2 text-secondary">
-                <li><i class="fa-solid fa-location-arrow text-danger me-2"></i> চকরিয়া পৌরসভা ও সংলগ্ন ইউনিয়নসমূহ</li>
-                <li><i class="fa-solid fa-location-arrow text-danger me-2"></i> পেকুয়া, কুতুবদিয়া, চকরিয়া মহাসড়ক এলাকা</li>
-                <li><i class="fa-solid fa-location-arrow text-danger me-2"></i> কক্সবাজার সদর, চট্টগ্রাম ও ঢাকা ইন্টার-সিটি ট্রান্সফার</li>
-              </ul>
-            </div>
 
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- CTA APPOINTMENT SECTION -->
+  <section class="py-5 bg-danger text-white">
+    <div class="container text-center" data-aos="zoom-in">
+      <h3 class="fw-bold mb-3"><i class="fa-solid fa-truck-medical me-2"></i> জরুরি প্রয়োজনে তাৎক্ষণিক অ্যাম্বুলেন্স পান</h3>
+      <p class="lead opacity-90 mb-4 max-w-700 mx-auto">দেরি না করে সরাসরি ডিসপ্যাচ হটলাইনে কল করুন। আমাদের অ্যাম্বুলেন্স দ্রুততম সময়ে পৌঁছে যাবে।</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="tel:01729325489" class="btn btn-light rounded-pill px-4 py-2 fw-bold text-danger shadow-sm"><i class="fa-solid fa-phone me-1"></i> কল করুন: ০১৭২৯৩২৫৪৮৯</a>
+        <a href="https://wa.me/8801729325489" class="btn btn-outline-light rounded-pill px-4 py-2 fw-bold"><i class="fa-brands fa-whatsapp me-1"></i> WhatsApp মেসেজ</a>
       </div>
     </div>
   </section>
@@ -649,9 +652,9 @@
           <h6 class="fw-bold mb-3">রোগী পরিষেবা</h6>
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="appointment.html">অনলাইন অ্যাপয়েন্টমেন্ট</a></li>
-            <li class="mb-2"><a href="admission.html">রোগী ভর্তি তথ্য</a></li>
             <li class="mb-2"><a href="patient-guide.html">রোগী নির্দেশিকা</a></li>
             <li class="mb-2"><a href="visiting-hours.html">দর্শনার্থীদের সময়সূচী</a></li>
+            <li class="mb-2"><a href="contact.html">জরুরি যোগাযোগ</a></li>
           </ul>
         </div>
 
@@ -679,7 +682,7 @@
 
   <!-- FLOATING SIDEBAR ACTION BUTTONS -->
   <div class="floating-actions">
-    <a href="tel:01729325489" class="float-btn bg-danger" title="Call Emergency Ambulance"><i class="fa-solid fa-truck-medical"></i></a>
+    <a href="tel:01729325489" class="float-btn bg-danger" title="Call Ambulance"><i class="fa-solid fa-truck-medical"></i></a>
     <a href="https://wa.me/8801729325489" class="float-btn bg-success" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
     <a href="appointment.html" class="float-btn bg-primary" title="Book Appointment"><i class="fa-solid fa-calendar-check"></i></a>
   </div>
@@ -698,20 +701,10 @@
 
   <script>
     // Initialize AOS Animation
-    AOS.init({ duration: 800, once: true });
-
-    // Handle Ambulance Form Submission
-    function submitAmbulanceBooking(e) {
-      e.preventDefault();
-      const name = document.getElementById('contactName').value;
-      const phone = document.getElementById('contactPhone').value;
-      const type = document.getElementById('ambulanceType').value;
-      const pickup = document.getElementById('pickupLocation').value;
-
-      alert(`ধন্যবাদ ${name}!\n\nআপনার অ্যাম্বুলেন্সের অনুরোধটি গ্রহণ করা হয়েছে।\n\nধরন: ${type}\nপিকআপ: ${pickup}\nফোন: ${phone}\n\nআমাদের ডিসপ্যাচ টিম আগামী ২ মিনিটের মধ্যে আপনার সংগে যোগাযোগ করছে।`);
-      
-      document.getElementById('ambulanceForm').reset();
-    }
+    AOS.init({
+      duration: 800,
+      once: true
+    });
 
     // Language Switcher Functionality
     function switchLanguage(lang) {
@@ -722,6 +715,18 @@
         el.innerText = el.getAttribute(`data-${lang}`);
       });
       localStorage.setItem('pref_lang', lang);
+    }
+
+    // Ambulance Form Submission Handling
+    function handleAmbulanceSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('callerName').value;
+      const phone = document.getElementById('callerPhone').value;
+      const type = document.getElementById('ambType').value;
+      const pickup = document.getElementById('pickupAddr').value;
+
+      alert(`ধন্যবাদ ${name}!\n\nআপনার অ্যাম্বুলেন্সের অনুরোধটি সফলভাবে জমা হয়েছে।\n\nধরন: ${type}\nপিকআপ: ${pickup}\nফোন: ${phone}\n\nআমাদের কন্ট্রোল রুম থেকে ২ মিনিটের মধ্যে কল করা হচ্ছে।`);
+      document.getElementById('ambulanceReqForm').reset();
     }
 
     // Auto Load Saved Language Preference
