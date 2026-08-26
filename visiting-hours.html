@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>দর্শনার্থীদের সময়সূচী | Max Hospital Ltd. - Chakaria Branch</title>
+  
+  <!-- CDNs: Bootstrap 5, FontAwesome 6, Google Fonts, AOS Animation -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --secondary: #0f172a;
+      --accent: #dc2626;
+      --bg-light: #f8fafc;
+      --text-main: #334155;
+      --glass-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-light);
+      overflow-x: hidden;
+    }
+
+    /* Top Info Bar */
+    .top-info-bar {
+      background: var(--secondary);
+      color: #94a3b8;
+      font-size: 0.85rem;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .top-info-bar a { color: #e2e8f0; text-decoration: none; }
+    .top-info-bar a:hover { color: #38bdf8; }
+
+    /* Sticky Header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .brand-logo-text { font-weight: 800; line-height: 1.1; color: var(--secondary); }
+    .brand-sub { font-size: 0.75rem; color: var(--primary); letter-spacing: 1px; font-weight: 700; }
+
+    .nav-link {
+      font-weight: 600;
+      color: var(--secondary) !important;
+      font-size: 0.95rem;
+      padding: 12px 16px !important;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-item.dropdown:hover > .nav-link { color: var(--primary) !important; }
+
+    /* Desktop Mega Menu */
+    @media (min-width: 992px) {
+      .nav-link { padding: 20px 12px !important; }
+      .dropdown-menu.mega-menu {
+        width: 100vw;
+        max-width: 1140px;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(10px);
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        padding: 24px;
+        background: #ffffff;
+        opacity: 0;
+        visibility: hidden;
+        display: block;
+        transition: all 0.3s ease;
+      }
+      .nav-item.dropdown:hover .dropdown-menu.mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+      .mobile-bottom-nav { display: none; }
+    }
+
+    /* Mobile Responsive Navigation */
+    @media (max-width: 991.98px) {
+      .floating-actions { display: none; }
+      
+      .navbar-collapse {
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 15px 10px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        margin-top: 10px;
+      }
+
+      .dropdown-menu.mega-menu {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 10px 15px !important;
+        margin-top: 5px;
+      }
+
+      .nav-item.dropdown .dropdown-toggle::after {
+        float: right;
+        margin-top: 8px;
+      }
+
+      .mobile-lang-switcher {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .mega-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .mega-menu-item:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+    .mega-menu-item i { width: 20px; color: var(--primary); text-align: center; }
+
+    /* Page Banner Section */
+    .page-banner {
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.92) 0%, rgba(2, 132, 199, 0.85) 100%), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 80px 0;
+      color: #ffffff;
+    }
+
+    .section-padding { padding: 70px 0; }
+
+    /* Timing Cards */
+    .time-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      height: 100%;
+      text-center;
+    }
+    .time-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      border-color: var(--primary);
+    }
+    .time-badge-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px auto;
+    }
+
+    .time-slot {
+      background: #f0f9ff;
+      border: 1px dashed var(--primary);
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 15px;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    /* Rules Alert Box */
+    .rules-box {
+      background: #fff;
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    /* Floating Sidebar Action Buttons */
+    .floating-actions {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1020;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .float-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .float-btn:hover { transform: scale(1.1); color: #fff; }
+
+    /* Footer Styling */
+    footer { background: var(--secondary); color: #94a3b8; font-size: 0.9rem; }
+    footer h5, footer h6 { color: #ffffff; }
+    footer a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #38bdf8; }
+
+    /* Mobile Bottom Sticky Bar */
+    .mobile-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1030;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    }
+    .mobile-nav-item { text-align: center; color: var(--text-main); font-size: 0.75rem; text-decoration: none; font-weight: 600; }
+    .mobile-nav-item i { font-size: 1.2rem; display: block; margin-bottom: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP INFORMATION BAR -->
+  <div class="top-info-bar d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fa-solid fa-location-dot me-1 text-info"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="tel:01729325489"><i class="fa-solid fa-phone me-1 text-success"></i> ০১৭২৯৩২৫৪৮ ৯</a>
+        <a href="https://wa.me/8801729325489"><i class="fa-brands fa-whatsapp me-1 text-success"></i> WhatsApp</a>
+        <span class="badge bg-primary"><i class="fa-solid fa-clock me-1"></i> দর্শনার্থী সময়সূচী</span>
+        
+        <!-- Language Switcher -->
+        <div class="btn-group btn-group-sm">
+          <button class="btn btn-outline-light py-0 px-2 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+          <button class="btn btn-outline-light py-0 px-2 lang-en-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER & RESPONSIVE NAVBAR -->
+  <header class="sticky-header">
+    <nav class="navbar navbar-expand-lg py-2">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
+          <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+            <i class="fa-solid fa-hospital fa-lg"></i>
+          </div>
+          <div>
+            <div class="brand-logo-text">MAX HOSPITAL LTD.</div>
+            <div class="brand-sub">CHAKARIA BRANCH</div>
+          </div>
+        </a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars fa-xl text-primary"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <div class="mobile-lang-switcher d-lg-none">
+            <span class="fw-semibold text-secondary">Language / ভাষা</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-primary py-1 px-3 active lang-bn-btn" onclick="switchLanguage('bn')">বাংলা</button>
+              <button class="btn btn-outline-primary py-1 px-3 lang-en-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+          </div>
+
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html" data-bn="হোম" data-en="Home">হোম</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="আমাদের সম্পর্কে" data-en="About Us">আমাদের সম্পর্কে</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="aboutDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="about.html"><i class="fa-solid fa-hospital-user"></i> About Hospital</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="chairman.html"><i class="fa-solid fa-user-tie"></i> Chairman Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="managing-director.html"><i class="fa-solid fa-user-gear"></i> MD Message</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="management.html"><i class="fa-solid fa-users"></i> Hospital Management</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="mission-vision.html"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="facilities.html"><i class="fa-solid fa-building-circle-check"></i> Facilities</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="awards.html"><i class="fa-solid fa-award"></i> Awards</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="accreditation.html"><i class="fa-solid fa-certificate"></i> Accreditation</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="doctorsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="ডাক্তার ও স্টাফ" data-en="Doctors & Staff">ডাক্তার ও স্টাফ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="doctorsDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctors.html"><i class="fa-solid fa-user-doctor"></i> All Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="specialist-doctors.html"><i class="fa-solid fa-stethoscope"></i> Specialist Doctors</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="doctor-schedule.html"><i class="fa-solid fa-calendar-days"></i> Doctor Schedule</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="find-doctor.html"><i class="fa-solid fa-magnifying-glass"></i> Find a Doctor</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="staff.html"><i class="fa-solid fa-users-gear"></i> Staff List</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="nursing-team.html"><i class="fa-solid fa-user-nurse"></i> Nursing Team</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="administrative-staff.html"><i class="fa-solid fa-briefcase"></i> Admin Staff</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="deptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="বিভাগসমূহ" data-en="Departments">বিভাগসমূহ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="deptDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="medicine.html"><i class="fa-solid fa-capsules"></i> Medicine</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="surgery.html"><i class="fa-solid fa-scissors"></i> Surgery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="cardiology.html"><i class="fa-solid fa-heart-pulse"></i> Cardiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gynecology.html"><i class="fa-solid fa-person-pregnant"></i> Gynecology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="pediatrics.html"><i class="fa-solid fa-baby"></i> Pediatrics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="orthopedics.html"><i class="fa-solid fa-bone"></i> Orthopedics</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ent.html"><i class="fa-solid fa-ear-listen"></i> ENT</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="departments.html"><i class="fa-solid fa-ellipsis"></i> All Departments</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="সেবাসমূহ" data-en="Services">সেবাসমূহ</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="servicesDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="emergency.html"><i class="fa-solid fa-truck-medical"></i> Emergency</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="laboratory.html"><i class="fa-solid fa-microscope"></i> Laboratory</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-x-ray"></i> Imaging / Radiology</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-bed"></i> ICU & NICU</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="services.html"><i class="fa-solid fa-pills"></i> Pharmacy</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="ambulance.html"><i class="fa-solid fa-ambulance"></i> Ambulance</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="patientDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="পেশেন্ট কেয়ার" data-en="Patient Care">পেশেন্ট কেয়ার</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="patientDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="appointment.html"><i class="fa-solid fa-calendar-check"></i> Online Appointment</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="admission.html"><i class="fa-solid fa-hospital-user"></i> Admission Info</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="patient-guide.html"><i class="fa-solid fa-book-medical"></i> Patient Guide</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="visiting-hours.html"><i class="fa-solid fa-clock text-primary fw-bold"></i> Visiting Hours</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bn="স্বাস্থ্য ও মিডিয়া" data-en="Health & Media">স্বাস্থ্য ও মিডিয়া</a>
+              <div class="dropdown-menu mega-menu" aria-labelledby="mediaDropdown">
+                <div class="row g-1">
+                  <div class="col-lg-3"><a class="mega-menu-item" href="health-tips.html"><i class="fa-solid fa-lightbulb"></i> Health Tips</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="news.html"><i class="fa-solid fa-newspaper"></i> Hospital News</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="gallery.html"><i class="fa-solid fa-images"></i> Photo Gallery</a></div>
+                  <div class="col-lg-3"><a class="mega-menu-item" href="events.html"><i class="fa-solid fa-calendar-events"></i> Events</a></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+            <a href="appointment.html" class="btn btn-primary w-100 w-lg-auto rounded-pill px-3 py-2 fw-semibold btn-sm text-center shadow-sm"><i class="fa-solid fa-calendar-plus me-1"></i> Book Appointment</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- PAGE HEADER BANNER -->
+  <section class="page-banner">
+    <div class="container text-center" data-aos="fade-up">
+      <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 fw-bold"><i class="fa-regular fa-clock me-1"></i> Hospital Hours & Visitor Policy</span>
+      <h1 class="display-5 fw-bold mb-2" data-bn="দর্শনার্থীদের সময়সূচী" data-en="Visiting Hours & Schedule">দর্শনার্থীদের সময়সূচী</h1>
+      <p class="lead opacity-90 mb-3" data-bn="রোগীদের পর্যাপ্ত বিশ্রাম ও সংক্রমণ সুরক্ষায় নির্ধারিত সময়সূচী অনুসরণ করুন" data-en="Please adhere to our schedule for patient rest and safety">রোগীদের পর্যাপ্ত বিশ্রাম ও সংক্রমণ সুরক্ষায় নির্ধারিত সময়সূচী অনুসরণ করুন</p>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center m-0">
+          <li class="breadcrumb-item"><a href="home.html" class="text-white text-decoration-none">হোম</a></li>
+          <li class="breadcrumb-item"><a href="#" class="text-white text-decoration-none">পেশেন্ট কেয়ার</a></li>
+          <li class="breadcrumb-item active text-info" aria-current="page">দর্শনার্থীদের সময়সূচী</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- SCHEDULE SECTION -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-2 fw-bold">Department Wise Schedule</span>
+        <h2 class="fw-bold text-secondary">বিভাগভিত্তিক দর্শনার্থীর সময়সূচী</h2>
+        <p class="text-muted">রোগীর সুস্বাস্থ্য ও চিকিৎসার পরিবেশ সুসংহত রাখতে নির্দিষ্ট সময়ে সাক্ষাতের অনুরোধ করা হচ্ছে</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- General Wards -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="time-card">
+            <div class="time-badge-icon"><i class="fa-solid fa-bed"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">সাধারণ ওয়ার্ড (General Wards)</h5>
+            <p class="small text-muted mb-3">সাধারণ কেবিন ও পেয়িং ওয়ার্ডের রোগীদের ক্ষেত্রে প্রযোজ্য</p>
+            <div class="time-slot">
+              <i class="fa-regular fa-clock me-1 text-primary"></i> দুপুর ১২:০০ - ২:০০ টা<br>
+              <i class="fa-regular fa-clock me-1 text-primary"></i> বিকাল ৫:০০ - সন্ধ্যা ৭:৩০ টা
+            </div>
+          </div>
+        </div>
+
+        <!-- Cabin & Deluxe Suite -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="time-card">
+            <div class="time-badge-icon"><i class="fa-solid fa-door-closed"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">প্রাইভেট কেবিন ও স্যুইট</h5>
+            <p class="small text-muted mb-3">একক ও দ্বৈত ভিআইপি কেবিনে চিকিৎসাধীন রোগী</p>
+            <div class="time-slot">
+              <i class="fa-regular fa-clock me-1 text-primary"></i> সকাল ১১:০০ - দুপুর ২:০০ টা<br>
+              <i class="fa-regular fa-clock me-1 text-primary"></i> বিকাল ৪:৩০ - রাত ৮:০০ টা
+            </div>
+          </div>
+        </div>
+
+        <!-- ICU & Critical Care -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="time-card">
+            <div class="time-badge-icon"><i class="fa-solid fa-heart-pulse text-danger"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">আইসিইউ ও সিসিইউ (ICU/CCU)</h5>
+            <p class="small text-muted mb-3">জরুরি ও সংকটপূর্ণ রোগীদের আইসোলেশন এলাকা</p>
+            <div class="time-slot border-danger bg-danger-subtle text-danger">
+              <i class="fa-regular fa-clock me-1"></i> দুপুর ১২:৩০ - ১:৩০ টা<br>
+              <i class="fa-regular fa-clock me-1"></i> বিকাল ৫:৩০ - সন্ধ্যা ৬:৩০ টা
+            </div>
+          </div>
+        </div>
+
+        <!-- NICU & PICU -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="time-card">
+            <div class="time-badge-icon"><i class="fa-solid fa-baby"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">এনআইসিইউ ও পিআইসিইউ (NICU)</h5>
+            <p class="small text-muted mb-3">নবজাতক ও শিশু নিবিড় পরিচর্যা কেন্দ্র</p>
+            <div class="time-slot">
+              <i class="fa-regular fa-clock me-1 text-primary"></i> দুপুর ১:০০ - ২:০০ টা (শুধুমাত্র মা)<br>
+              <i class="fa-regular fa-clock me-1 text-primary"></i> বিকাল ৫:০০ - ৬:০০ টা (অভিভাবক)
+            </div>
+          </div>
+        </div>
+
+        <!-- OPD & Consultation -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="time-card">
+            <div class="time-badge-icon"><i class="fa-solid fa-user-doctor"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">বহিঃর্বিভাগ (OPD) ডাক্তারের ভিজিট</h5>
+            <p class="small text-muted mb-3">বিশেষজ্ঞ চিকিৎসকদের চেম্বার ও পরামর্শ সময়</p>
+            <div class="time-slot">
+              <i class="fa-regular fa-clock me-1 text-primary"></i> সকাল ৯:০০ - দুপুর ২:০০ টা<br>
+              <i class="fa-regular fa-clock me-1 text-primary"></i> বিকাল ৪:০০ - রাত ৯:০০ টা
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency & Pharmacy -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+          <div class="time-card">
+            <div class="time-badge-icon"><i class="fa-solid fa-truck-medical text-success"></i></div>
+            <h5 class="fw-bold text-secondary mb-2">জরুরি বিভাগ ও ফার্মেসি</h5>
+            <p class="small text-muted mb-3">জরুরি রোগী ভর্তি, ট্রমা ও ওষুধ সরবরাহ</p>
+            <div class="time-slot border-success bg-success-subtle text-success">
+              <i class="fa-solid fa-bolt me-1"></i> ২৪ ঘণ্টা খোলা (প্রতিদিন)
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VISITOR RULES & GUIDELINES -->
+  <section class="section-padding bg-light">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-2 fw-bold">Visitor Rules</span>
+          <h2 class="fw-bold text-secondary mb-3">দর্শনার্থীদের জন্য আবশ্যকীয় নিয়মাবলী</h2>
+          <p class="text-muted mb-4">হাসপাতালের শান্ত পরিবেশ ও সংক্রমণ প্রতিরোধে নিম্নোক্ত নিয়মগুলো সকল দর্শনার্থীকে কঠোরভাবে মেনে চলার জন্য নির্দেশ প্রদান করা হচ্ছে।</p>
+          
+          <div class="rules-box mb-3">
+            <h6 class="fw-bold text-secondary mb-2"><i class="fa-solid fa-id-card text-primary me-2"></i>১. ভিসিটর পাস প্রদর্শন</h6>
+            <p class="small text-muted mb-0">হাসপাতালে প্রবেশের সময় সিকিউরিটি ডেস্ক থেকে ভিসিটর পাস গ্রহণ করুন এবং ওয়ার্ড বা কেবিনে প্রবেশের সময় তা প্রদর্শন করুন।</p>
+          </div>
+
+          <div class="rules-box mb-3">
+            <h6 class="fw-bold text-secondary mb-2"><i class="fa-solid fa-users-slash text-warning me-2"></i>২. দর্শনার্থীর সংখ্যা সীমাবদ্ধতা</h6>
+            <p class="small text-muted mb-0">প্রতি রোগীর সাথে একই সময়ে সর্বোচ্চ ২ জন দর্শনার্থী দেখা করতে পারবেন। অতিরিক্ত ভিড় রোগীর স্বাস্থ্যের জন্য ক্ষতিকর।</p>
+          </div>
+
+          <div class="rules-box">
+            <h6 class="fw-bold text-secondary mb-2"><i class="fa-solid fa-ban text-danger me-2"></i>৩. শিশু প্রবেশে নিষেধাজ্ঞা</h6>
+            <p class="small text-muted mb-0">সংক্রমণ ঝুঁকির কারণে ১২ বছরের কম বয়সী শিশুদের বিশেষ অনুমতি ছাড়া ইনডোর রোগী ও আইসিইউ বিভাগে আনা সম্পূর্ণ নিষেধ।</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+            <h5 class="fw-bold text-secondary mb-3 border-bottom pb-2"><i class="fa-solid fa-circle-exclamation text-danger me-2"></i>জরুরি স্বাস্থ্যবিধি নির্দেশিকা</h5>
+            <ul class="list-unstyled text-muted small lh-lg mb-0">
+              <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i>রোগীর রুমে প্রবেশের পূর্বে ও বের হওয়ার পর হ্যান্ড স্যানিটাইজার ব্যবহার করুন।</li>
+              <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i>সর্দি, কাশি, জ্বর বা কোনো সংক্রামক রোগ থাকলে রোগী দেখা থেকে বিরত থাকুন।</li>
+              <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i>রোগীর বেডে বসা বা রোগীর ব্যবহৃত চিকিৎসাসামগ্রী স্পর্শ করা যাবে না।</li>
+              <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i>হাসপাতাল প্রাঙ্গণে অতিরিক্ত কোলাহল এড়িয়ে চলুন ও মোবাইল সাইলেন্ট রাখুন।</li>
+              <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i>বাইরের রান্না করা ভারী খাবার বা খোসাযুক্ত ফলমূল হাসপাতালে আনা নিষেধ।</li>
+              <li><i class="fa-solid fa-check-circle text-success me-2"></i>হাসপাতাল চত্বর ও ভবন সম্পূর্ণ ধূমপানমুক্ত এলাকা।</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA HELP DESK SECTION -->
+  <section class="py-5 bg-primary text-white">
+    <div class="container text-center" data-aos="zoom-in">
+      <h3 class="fw-bold mb-3"><i class="fa-solid fa-headset me-2"></i> কোনো বিষেশ অনুমতি বা তথ্যের প্রয়োজন?</h3>
+      <p class="lead opacity-90 mb-4 max-w-700 mx-auto">জরুরি কেস বা বিশেষ প্রয়োজনে দর্শনার্থীর পাসের তথ্য জানতে আমাদের ইনফরমেশন ডেস্কে কল করুন</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="tel:01729325489" class="btn btn-light rounded-pill px-4 py-2 fw-bold text-primary shadow-sm"><i class="fa-solid fa-phone me-1"></i> ইনফরমেশন ডেস্ক: ০১৭২৯৩২৫৪৮৯</a>
+        <a href="https://wa.me/8801729325489" class="btn btn-outline-light rounded-pill px-4 py-2 fw-bold"><i class="fa-brands fa-whatsapp me-1"></i> WhatsApp সাপোর্ট</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER SECTION -->
+  <footer class="pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h5 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-2 text-primary"></i>MAX HOSPITAL LTD.</h5>
+          <p class="small text-muted mb-3">চকরিয়া শাখা। আধুনিক প্রযুক্তি, দক্ষ চিকিৎসক ও সার্বক্ষণিক মানবিক সেবায় আমরা আপনার পাশে আছি।</p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="fw-bold mb-3">গুরুত্বপূর্ণ লিংক</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="about.html">আমাদের সম্পর্কে</a></li>
+            <li class="mb-2"><a href="doctors.html">ডাক্তারদের তালিকা</a></li>
+            <li class="mb-2"><a href="services.html">সেবাসমূহ</a></li>
+            <li class="mb-2"><a href="news.html">সর্বশেষ সংবাদ</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <h6 class="fw-bold mb-3">রোগী পরিষেবা</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="appointment.html">অনলাইন অ্যাপয়েন্টমেন্ট</a></li>
+            <li class="mb-2"><a href="patient-guide.html">রোগী নির্দেশিকা</a></li>
+            <li class="mb-2"><a href="visiting-hours.html">দর্শনার্থীদের সময়সূচী</a></li>
+            <li class="mb-2"><a href="contact.html">জরুরি যোগাযোগ</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <h6 class="fw-bold mb-3">যোগাযোগ করুন</h6>
+          <p class="small mb-2"><i class="fa-solid fa-location-dot me-2 text-primary"></i> পারভেজ টাওয়ার, থানা রোড মাথা, চকরিয়া, কক্সবাজার</p>
+          <p class="small mb-2"><i class="fa-solid fa-phone me-2 text-success"></i> ০১৭২৯৩২৫৪৮ ৯</p>
+          <p class="small mb-0"><i class="fa-solid fa-envelope me-2 text-warning"></i> info@maxhospitalchakaria.com</p>
+        </div>
+      </div>
+
+      <hr class="border-secondary">
+
+      <!-- COPYRIGHT & IT TEAM CREDIT -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small pt-2 gap-2 text-center text-md-start">
+        <div>
+          &copy; 2026 Max Hospital Ltd. All Rights Reserved.
+        </div>
+        <div class="text-info fw-semibold">
+          Designed & Maintained by: <span class="text-white">IT Team - MAX Hospital Ltd., Chakaria Branch</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING SIDEBAR ACTION BUTTONS -->
+  <div class="floating-actions">
+    <a href="tel:01729325489" class="float-btn bg-danger" title="Call Emergency"><i class="fa-solid fa-phone"></i></a>
+    <a href="https://wa.me/8801729325489" class="float-btn bg-success" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="appointment.html" class="float-btn bg-primary" title="Book Appointment"><i class="fa-solid fa-calendar-check"></i></a>
+  </div>
+
+  <!-- MOBILE BOTTOM STICKY BAR -->
+  <div class="mobile-bottom-nav">
+    <a href="tel:01729325489" class="mobile-nav-item text-danger"><i class="fa-solid fa-phone"></i> কল করুন</a>
+    <a href="https://wa.me/8801729325489" class="mobile-nav-item text-success"><i class="fa-brands fa-whatsapp"></i> হোয়াটসঅ্যাপ</a>
+    <a href="appointment.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-calendar-check"></i> বুকিং</a>
+    <a href="doctors.html" class="mobile-nav-item text-primary"><i class="fa-solid fa-user-doctor"></i> ডাক্তারগণ</a>
+  </div>
+
+  <!-- Scripts: Bootstrap 5 JS, AOS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // Initialize AOS Animation
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Language Switcher Functionality
+    function switchLanguage(lang) {
+      document.querySelectorAll('.lang-bn-btn').forEach(b => b.classList.toggle('active', lang === 'bn'));
+      document.querySelectorAll('.lang-en-btn').forEach(b => b.classList.toggle('active', lang === 'en'));
+      
+      document.querySelectorAll('[data-bn]').forEach(el => {
+        el.innerText = el.getAttribute(`data-${lang}`);
+      });
+      localStorage.setItem('pref_lang', lang);
+    }
+
+    // Auto Load Saved Language Preference
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('pref_lang') || 'bn';
+      switchLanguage(savedLang);
+    });
+  </script>
+</body>
+</html>
